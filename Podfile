@@ -1,0 +1,8 @@
+platform:ios,'6.0'
+pod 'AFNetworking','~>2.5.4'
+pod 'JSONModel'
+pod 'Toast'
+pod 'MJRefresh'
+pod 'JPush-iOS-SDK', '~> 1.8.3.1'
+pod 'TSMessages'
+pod 'MBProgressHUD'

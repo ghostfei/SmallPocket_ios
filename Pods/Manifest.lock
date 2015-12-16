@@ -1,0 +1,51 @@
+PODS:
+  - AFNetworking (2.5.4):
+    - AFNetworking/NSURLConnection (= 2.5.4)
+    - AFNetworking/NSURLSession (= 2.5.4)
+    - AFNetworking/Reachability (= 2.5.4)
+    - AFNetworking/Security (= 2.5.4)
+    - AFNetworking/Serialization (= 2.5.4)
+    - AFNetworking/UIKit (= 2.5.4)
+  - AFNetworking/NSURLConnection (2.5.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.4)
+  - AFNetworking/Security (2.5.4)
+  - AFNetworking/Serialization (2.5.4)
+  - AFNetworking/UIKit (2.5.4):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - HexColors (2.2.1)
+  - JPush-iOS-SDK (1.8.3.1)
+  - JSONModel (1.1.0)
+  - MBProgressHUD (0.9.1)
+  - MJRefresh (2.4.11)
+  - Toast (2.4)
+  - TSMessages (0.9.12):
+    - HexColors (~> 2.2.0)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.5.4)
+  - JPush-iOS-SDK (~> 1.8.3.1)
+  - JSONModel
+  - MBProgressHUD
+  - MJRefresh
+  - Toast
+  - TSMessages
+
+SPEC CHECKSUMS:
+  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  HexColors: abfd172e329dab59888614ccba6f216cec59289d
+  JPush-iOS-SDK: 994140dcda740b46eb4f9442e7d352e66bbc6f8b
+  JSONModel: ec77e9865236a7a09d9cf7668df6b4b328d9ec1d
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  MJRefresh: b327947f35ab3eb16ca42646b26f7347e6aa7186
+  Toast: 0773b8fc0e97352ca6054517bec7ebdd4110029d
+  TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
+
+COCOAPODS: 0.39.0
