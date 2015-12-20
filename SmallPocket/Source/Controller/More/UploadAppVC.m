@@ -36,12 +36,17 @@
     _iconImg.userInteractionEnabled = YES;
     [_iconImg addGestureRecognizer:tap];
     
+    UITapGestureRecognizer *tapEnd = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(endEdit)];
+    self.view.userInteractionEnabled = YES;
+    [self.view addGestureRecognizer:tapEnd];
+    
     UIBarButtonItem *barBack = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = barBack;
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(choseType:) name:@"select_type_noti" object:nil];
 }
 -(void)choseType:(NSNotificationCenter *)noti{
+    [self endEdit];
     NSDictionary *dic = [noti valueForKey:@"object"];
     _type.text = dic[@"name"];
     _typeId = dic[@"id"];
@@ -59,6 +64,7 @@
 }
 #pragma mark
 - (void)choseIcon {
+    [self endEdit];
     UIActionSheet *as = [[UIActionSheet alloc]initWithTitle:@"照片选取" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"从照相机选取" otherButtonTitles:@"从图库选取", nil];
     [as showInView:self.view];
 }
@@ -97,6 +103,7 @@
 }
 
 -(void)saveAc{
+    [self endEdit];
     NSDictionary *dic = @{@"name":_name.text,
                           @"desc":_desc.text,
                           @"url":_url.text,
@@ -122,5 +129,7 @@
         }
     }];
 }
-
+-(void)endEdit{
+    [self.view endEditing:YES];
+}
 @end

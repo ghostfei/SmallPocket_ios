@@ -19,6 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad]; 
 //    [self.navigationController setNavigationBarHidden:YES];
+    self.navigationItem.title = _param[@"name"];
+    
     [self loadData];
 //    [_closeBtn addTarget:self action:@selector(backAc) forControlEvents:UIControlEventTouchUpInside];
     _closeBtn.hidden = YES;
