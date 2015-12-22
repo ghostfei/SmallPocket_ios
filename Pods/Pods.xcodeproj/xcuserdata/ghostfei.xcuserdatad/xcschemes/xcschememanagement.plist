@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ObjectiveSugar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,102 +62,57 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>09FA060F1A0492FB25232F489AC4E573</key>
+		<key>0577DB618534D02F9126C68381001393</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>230CC6ECF57BDEC6CDFBF803249E812A</key>
+		<key>0AC0BDE7F658FF3BDD03637A0F0C949F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>24D05E2CC2D05E86C4D5E1B661139FBB</key>
+		<key>12D0BC4159E13BD114397AED67885308</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2602F3D0DAC534568B6AD7EEA0DD1959</key>
+		<key>33F2696BF207732C8958C8B63369DBD0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3256538456C1F565FEAFF369A38B9B1F</key>
+		<key>7C3FA49348208FB48B66AB1004FAF788</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>45B06670155CDEB66C63A6852CB381AB</key>
+		<key>84E22C5D7A291F5C0EA0B135CCC1BBF7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>57A6C5A08BB2F2D4777271472CB108AC</key>
+		<key>890CB60C857F3D7EEC39EC15247D4ABE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5D37BF78CDF8571B74E71179F3D1ADB6</key>
+		<key>A8B6768EE8DA14812782D37317527B24</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6C04AC87D899B5ADDCF3720CAF00035C</key>
+		<key>AE7226924BBD814FD3142A1EF144D5B6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6F501486D2651F2AE9147CDD841C7805</key>
+		<key>DB4A2BAF86CEF5577D139D41BF515787</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8DB2390945B57378E3C03362D6B490BD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8F74D9EA91F4C43190670066BAC37D44</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>912EAEBB8859FBFD01CA7EC574502C9F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B5ED049253C5BC70D0E365A16046AC40</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B9E30C143E07614A13B1A26264CF613F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E7A7BCB08603DD03C4ABF458A3D3448F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E9EF397B95762DDB254C71DDCB4B1381</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F23758C554CF0BCCABAB1D666BD37501</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FC37699A7F9CCC8FDBDD39D3E5D03283</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FE2F1D7B9D9FCEA148517E4657B243F4</key>
+		<key>F1F66844633A0E04EC7B760ACBAA9A19</key>
 		<dict>
 			<key>primary</key>
 			<true/>

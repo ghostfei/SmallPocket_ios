@@ -40,7 +40,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
  
-    NSDictionary *dic = _dataArray[indexPath.row];
+//    NSDictionary *dic = _dataArray[indexPath.row];
 //    NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[Util getAPIUrl:dic[@"image"]]]];
 //    UIImage *img = [UIImage imageWithData:imgData];
 

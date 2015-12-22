@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '9B116EA556F73784FBAFD80B'
+               BlueprintIdentifier = '145F66029C1E14AD2777074A'
                BlueprintName = 'JPush-iOS-SDK-JPush-iOS-SDK'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'JPush-iOS-SDK.bundle'>

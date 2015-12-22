@@ -25,6 +25,7 @@ PODS:
   - JSONModel (1.1.0)
   - MBProgressHUD (0.9.1)
   - MJRefresh (2.4.11)
+  - ObjectiveSugar (1.1.0)
   - Toast (2.4)
   - TSMessages (0.9.12):
     - HexColors (~> 2.2.0)
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - JSONModel
   - MBProgressHUD
   - MJRefresh
+  - ObjectiveSugar
   - Toast
   - TSMessages
 
@@ -45,7 +47,8 @@ SPEC CHECKSUMS:
   JSONModel: ec77e9865236a7a09d9cf7668df6b4b328d9ec1d
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MJRefresh: b327947f35ab3eb16ca42646b26f7347e6aa7186
+  ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
   Toast: 0773b8fc0e97352ca6054517bec7ebdd4110029d
   TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
 
-COCOAPODS: 0.39.0
+COCOAPODS: 0.39.0.beta.4
