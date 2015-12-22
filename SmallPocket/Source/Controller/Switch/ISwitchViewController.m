@@ -7,6 +7,7 @@
 //
 
 #import "ISwitchViewController.h"
+#import "OpenApps.h"
 
 @interface ISwitchViewController ()
 
@@ -20,21 +21,15 @@
     self.navigationItem.title = @"切换";
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    NSArray *array = [OpenApps where:@{}];
+    [array enumerateObjectsUsingBlock:^(OpenApps *app, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSLog(@"app.name=%@ and app.id=%@",app.name,app.id);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

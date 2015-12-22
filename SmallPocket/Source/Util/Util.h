@@ -14,6 +14,7 @@
 #import <MBProgressHUD.h>
 #import <UIView+Toast.h>
 #import "MJRefresh.h"
+#import "CoreDataManager.h"
 
 #import "Api.h"
 

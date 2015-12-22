@@ -10,6 +10,7 @@
 #import "LikeItemCollectionCell.h"
 #import "SearchVC.h"
 #import "OpenWebAppVC.h"
+#import "OpenApps.h"
 
 #import "Util.h"
 
@@ -88,12 +89,15 @@ static NSString * const reuseIdentifier = @"LikeCell";
     OpenWebAppVC *webview = [Util createVCFromStoryboard:@"OpenWebAppVC"];
     NSDictionary *dic =dataArray[indexPath.row];
     NSLog(@"dic=%@",dic);
+    OpenApps *app = [OpenApps findOrCreate:dic];
+    [app save];
+    
     NSDictionary *param = @{@"name":dic[@"name"],@"url":dic[@"url"]};
     webview.param = param;
     [self.navigationController pushViewController:webview animated:YES];
 } 
 -(void)loadData{
-    NSDictionary *bdic = @{@"udid":@"asdasdad",@"type":_type};
+    NSDictionary *bdic = @{@"udid":@"12",@"type":_type};
 //    _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [Util startActiciView:self.view];
     [Api post:API_LIKE_LIST parameters:bdic completion:^(id data, NSError *err) {
