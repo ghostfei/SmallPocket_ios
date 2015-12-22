@@ -46,7 +46,6 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(choseType:) name:@"select_type_noti" object:nil];
 }
 -(void)choseType:(NSNotificationCenter *)noti{
-    [self endEdit];
     NSDictionary *dic = [noti valueForKey:@"object"];
     _type.text = dic[@"name"];
     _typeId = dic[@"id"];
@@ -121,7 +120,7 @@
     } completion:^(id data, NSError *err) {
         [_hud hide:YES];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"dic=%@",dic);
+        NSLog(@"dic=%@",dic[@"msg"]);
         if ([dic[@"status"]intValue] == 200) {
             [self.navigationController popViewControllerAnimated:YES];
         }else{
