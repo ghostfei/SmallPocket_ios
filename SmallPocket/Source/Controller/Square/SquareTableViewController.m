@@ -168,6 +168,7 @@
 }
 -(void)searchAc{
     SearchVC *searchVc = [Util createVCFromStoryboard:@"SearchVC"];
+    self.navigationItem.backBarButtonItem = nil;
     [self.navigationController pushViewController:searchVc animated:YES];
 }
 @end

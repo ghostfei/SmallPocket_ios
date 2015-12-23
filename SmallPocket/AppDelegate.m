@@ -94,7 +94,7 @@ fetchCompletionHandler:
 }
 #pragma mark 定制UI
 -(void)_initUI{
-    UIColor *navColor = [UIColor blackColor]; // THEME_COLOR;
+    UIColor *navColor = [UIColor whiteColor]; // THEME_COLOR;
     [UINavigationBar appearance].tintColor = navColor; 
     
     NSMutableDictionary *titleBarAttributes = [NSMutableDictionary
@@ -104,7 +104,15 @@ fetchCompletionHandler:
     // HelveticaNeue-CondensedBlack
     [titleBarAttributes setValue:navColor forKey:NSForegroundColorAttributeName];
     [[UINavigationBar appearance] setTitleTextAttributes:titleBarAttributes];
-//    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"black_bg"] forBarMetrics:UIBarMetricsDefault];
+    CGRect rect = CGRectMake(0, 0, SCREENWIDTH, 1);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context,[UIColor colorWithRed:138/255.0 green:138/255.0 blue:138/255.0 alpha:1].CGColor);
+    CGContextFillRect(context, rect);
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [[UINavigationBar appearance]setShadowImage:img];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"black_bg"] forBarMetrics:UIBarMetricsDefault];
     //设置导航条
     if ([UINavigationBar conformsToProtocol:@protocol(UIAppearanceContainer)]) {
 //        [[UINavigationBar appearance] setBarTintColor:KEY_BGCOLOR_BLACK]; //修改导航条背景色
@@ -125,7 +133,8 @@ fetchCompletionHandler:
     self.tabbarVC.viewControllers = @[adv,iswitch,like,square,more];
     
     UITabBar *tabbar = self.tabbarVC.tabBar;
-//    [tabbar setBackgroundImage:[UIImage imageNamed:@"black_bg"]];
+    [tabbar setShadowImage:img];
+    [tabbar setBackgroundImage:[UIImage imageNamed:@"black_bg"]];
     [tabbar setBarTintColor:[UIColor groupTableViewBackgroundColor]];
     [tabbar setTintColor:[UIColor colorWithRed:73/255.0 green:194/255.0 blue:34/255.0 alpha:1]];
     //    [[UITabBarItem appearance] setTitleTextAttributes:@{
@@ -138,18 +147,18 @@ fetchCompletionHandler:
     NSArray *tabicon = @[@"tabbar_adv",@"tabbar_switch",@"tabbar_like",@"tabbar_square",@"tabbar_more"];
     NSArray *tabtitle = @[@"精选",@"切换",@"喜欢",@"广场",@"更多"];
     //    int offset = 10;
-    //    UIEdgeInsets imageInsets = UIEdgeInsetsMake(offset, 0, -5, 0);
+        UIEdgeInsets imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
     
     [tabicon enumerateObjectsUsingBlock:^(NSString *item, NSUInteger idx, BOOL * _Nonnull stop) {
         UITabBarItem *tabbarItem = [tabbar.items objectAtIndex:idx];
         
-        //        tabbarItem.imageInsets = imageInsets;
+                tabbarItem.imageInsets = imageInsets;
         
         tabbarItem.image = [[UIImage imageNamed:item]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
         tabbarItem.selectedImage = [[UIImage imageNamed:[NSString stringWithFormat:@"%@_select",item]]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
-        tabbarItem.title = tabtitle[idx];
+//        tabbarItem.title = tabtitle[idx];
     }];
     
     self.tabbarVC.selectedViewController = [self.tabbarVC.viewControllers objectAtIndex:2];//默认选中中间的tabbar

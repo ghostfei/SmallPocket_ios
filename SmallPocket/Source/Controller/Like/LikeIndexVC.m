@@ -113,6 +113,7 @@
             la.frame = CGRectMake(0, vi.frame.size.height-5, W/4-10, 30);
         }
         la.text = dic[@"name"];
+        la.textColor = [UIColor whiteColor];
         la.textAlignment = NSTextAlignmentCenter;
         [vi addSubview:la];
         
