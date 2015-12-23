@@ -13,7 +13,7 @@
 @interface AdvTableViewController (){
     MBProgressHUD *_hud;
     
-    NSMutableArray *_dataArray;
+    NSArray *_dataArray;
 }
 
 @end
@@ -27,7 +27,9 @@
     UIBarButtonItem *backBtn = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backBtn;
     
-    _dataArray = [[NSMutableArray alloc]init];
+    self.tableView.backgroundColor = KEY_BGCOLOR_BLACK;
+    self.tableView.header = [Util getMJHeaderTarget:self action:@selector(loadData)];
+    self.tableView.tableFooterView = [[UIView alloc]init];
     
     [self loadData];
 }
@@ -39,23 +41,23 @@
     return _dataArray.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
- 
-//    NSDictionary *dic = _dataArray[indexPath.row];
-//    NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[Util getAPIUrl:dic[@"image"]]]];
-//    UIImage *img = [UIImage imageWithData:imgData];
-
-//    return (img.size.height*self.view.frame.size.width/img.size.width)/2;
     return 100;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    for (UIView *la in self.tableView.subviews) {
+        if ([la isKindOfClass:[UILabel class]]) {
+            [la removeFromSuperview];
+        }
+    }
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"advlist"];
     for (UIView *vi in cell.contentView.subviews) {
         [vi removeFromSuperview];
     }
     
     NSDictionary *dic = _dataArray[indexPath.row];
-    UIImageView *imgv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)];
-    imgv.contentMode = UIViewContentModeScaleAspectFill;
+    UIImageView *imgv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width,100)];
     imgv.clipsToBounds = YES;
     [imgv setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:dic[@"image"]]] placeholderImage:[UIImage imageNamed:@"btn_back"]];
     [cell.contentView addSubview:imgv];
@@ -73,13 +75,22 @@
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [Api post:API_ADV_LIST parameters:@{@"type":@"1"} completion:^(id data, NSError *err) {
         [_hud hide:YES];
+        [self.tableView.header endRefreshing];
         if (err) {
             return ;
         }
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         YLog(@"json=%@",json);
         _dataArray = json[@"data"];
+        if (_dataArray.count==0) {
+            UILabel *la = [[UILabel alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 200)];
+            la.text = @"这里将显示为您精选的应用";
+            la.textColor = [UIColor grayColor];
+            la.textAlignment = NSTextAlignmentCenter;
+            [self.tableView addSubview:la];
+        }
         [self.tableView reloadData];
+        
     }];
 }
 @end

@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '598246831B9B853AFFD9AB16'
-               BlueprintName = 'JPush-iOS-SDK-JPush-iOS-SDK'
+               BlueprintIdentifier = '79EC32F5E0564C41BD20F34B'
+               BlueprintName = 'ObjectiveSugar'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'JPush-iOS-SDK.bundle'>
+               BuildableName = 'libObjectiveSugar.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

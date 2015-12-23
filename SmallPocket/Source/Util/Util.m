@@ -113,4 +113,30 @@
     
     return searchBar;
 }
+
+//设置日期格式化对象
++ (NSDateFormatter *)getDateFormatter{
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+
+    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    return df;
+}
+
+//将日期转化成字符串
++ (NSString *)dateToString:(NSDate *)date{
+    NSString *dateStr = @"";
+    if (date) {
+        dateStr = [[Util getDateFormatter] stringFromDate:date];
+    }
+    
+    return dateStr;
+}
+
+//将字符串转化成日期
++ (NSDate *)stringToDate:(NSString *)date{
+    return [[Util getDateFormatter] dateFromString:date];
+}
+
+
 @end
