@@ -119,6 +119,7 @@
 -(void)goWeb:(UITapGestureRecognizer *)tap{
     NSInteger tag = [tap view].tag;
     OpenWebAppVC *webview = [Util createVCFromStoryboard:@"OpenWebAppVC"];
+    
     OpenApps *app = [_opens objectAtIndex:tag];
     app.openTime = [[NSDate new]timeIntervalSinceReferenceDate];
     [app save];
