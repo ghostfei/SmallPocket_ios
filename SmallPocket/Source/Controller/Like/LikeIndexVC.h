@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LikeIndexVC : UIViewController
+@interface LikeIndexVC : UITableViewController
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scorllView;
 @end

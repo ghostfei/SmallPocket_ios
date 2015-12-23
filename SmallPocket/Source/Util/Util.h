@@ -30,8 +30,8 @@ typedef NS_ENUM(NSInteger,viewType){
 #define YLog(...);
 #endif
 
-#define DEFAULT_API_URL @"http://120.24.159.129/SmallPocket/"
-//#define DEFAULT_API_URL @"http://127.0.0.1:8888/SmallPocket/"
+//#define DEFAULT_API_URL @"http://120.24.159.129/SmallPocket/"
+#define DEFAULT_API_URL @"http://127.0.0.1:8888/SmallPocket/"
 #define REQUEST_TIME_OUT 20 //网络请求 超时时间
 
 #define K_DeviceToken @"K_DeviceToken"
@@ -49,6 +49,11 @@ typedef NS_ENUM(NSInteger,viewType){
 #define API_UPLOADAPP_ACTION @"api.php/Apps/upApp" //长传应用
 #define API_SEARCH_ACTION @"api.php/Apps/search" //搜索
 #define API_DELACTION @"api.php/Apps/delApp" //删除应用
+
+
+#define KEY_BGCOLOR_BLACK [UIColor groupTableViewBackgroundColor]
+#define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
 
 @interface Util : NSObject
 + (id)createVCFromStoryboard:(NSString *)identifier;
@@ -68,4 +73,13 @@ typedef NS_ENUM(NSInteger,viewType){
 
 + (UISearchBar *)createSearchBar:(CGRect)frame delegate:(id)delegate
                      placeholder:(NSString *)placeholder;
+
+#pragma mark date
++ (NSDateFormatter *)getDateFormatter;
+
+//将日期转化成字符串
++ (NSString *)dateToString:(NSDate *)date;
+
+//将字符串转化成日期
++ (NSDate *)stringToDate:(NSString *)date;
 @end

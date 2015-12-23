@@ -15,7 +15,7 @@
 #import "Util.h"
 
 @interface LikeIndexCollVC (){
-    NSArray *dataArray;
+    NSArray *_dataArray;
     
     MBProgressHUD *_hud; 
     
@@ -33,9 +33,9 @@ static NSString * const reuseIdentifier = @"LikeCell";
     [super viewDidLoad];
 
     self.navigationItem.title = @"喜欢";
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    self.collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+
+    self.collectionView.backgroundColor = KEY_BGCOLOR_BLACK;
+    self.collectionView.pagingEnabled = YES;
     
     UIBarButtonItem *backBtn = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backBtn;
@@ -47,7 +47,6 @@ static NSString * const reuseIdentifier = @"LikeCell";
     self.navigationItem.rightBarButtonItem = rbi;
     
     _type = @"0";
-    
     _leftVc.delegate = self;
     
     [self loadData];
@@ -60,26 +59,36 @@ static NSString * const reuseIdentifier = @"LikeCell";
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     NSInteger num=0;
-    if (dataArray.count%3!=0) {
-        num = dataArray.count/3+1;
+    if (_dataArray.count%4 == 0) {
+        num = _dataArray.count/4;
     }else{
-        num = dataArray.count/3;
+        num = _dataArray.count/4+1;
     }
+    NSLog(@"num=%ld",num);
     return num;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (dataArray.count>=3) {
-        return 3;
-    }
-    return dataArray.count;
+//    if (_dataArray.count>3) {
+//        return 4;
+//    }else{
+        return _dataArray.count;
+//    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    LikeItemCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    NSDictionary *dic =dataArray[indexPath.row];
+    for (UIView *la in self.collectionView.subviews) {
+        if ([la isKindOfClass:[UILabel class]]) {
+            [la removeFromSuperview];
+        }
+    }
+    
+    LikeItemCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LikeCell" forIndexPath:indexPath];
+    NSDictionary *dic =_dataArray[indexPath.row];
+    cell.imgView.clipsToBounds = YES;
+    cell.imgView.contentMode = UIViewContentModeScaleAspectFill;
     [cell.imgView setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:dic[@"icon"]]] placeholderImage:[UIImage imageNamed:@"default_app"]];
     cell.name.text  = dic[@"name"];
     
@@ -87,9 +96,10 @@ static NSString * const reuseIdentifier = @"LikeCell";
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     OpenWebAppVC *webview = [Util createVCFromStoryboard:@"OpenWebAppVC"];
-    NSDictionary *dic =dataArray[indexPath.row];
+    NSDictionary *dic =_dataArray[indexPath.row];
     NSLog(@"dic=%@",dic);
     OpenApps *app = [OpenApps findOrCreate:dic];
+    app.openTime = [[NSDate new]timeIntervalSinceReferenceDate];
     [app save];
     
     NSDictionary *param = @{@"name":dic[@"name"],@"url":dic[@"url"]};
@@ -98,22 +108,27 @@ static NSString * const reuseIdentifier = @"LikeCell";
 } 
 -(void)loadData{
     NSDictionary *bdic = @{@"udid":@"12",@"type":_type};
-//    _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
     [Util startActiciView:self.view];
     [Api post:API_LIKE_LIST parameters:bdic completion:^(id data, NSError *err) {
-//        [_hud hide:YES];
+
         [Util stopActiciView:self.view];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-//                YLog(@"json=%@",dic);
-        if ([dic[@"status"]intValue] == 200) {
-            dataArray = dic[@"data"];
-            //            YLog(@"array=%@",dataArray);
-            [self.collectionView reloadData];
+
+            _dataArray = dic[@"data"];
+        if (_dataArray.count==0) {
+            UILabel *la = [[UILabel alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 200)];
+            la.text = @"这里将展示您已选为喜欢的应用";
+            la.textColor = [UIColor grayColor];
+            la.textAlignment = NSTextAlignmentCenter;
+            [self.collectionView addSubview:la];
         }
+            [self.collectionView reloadData];
     }];
 }
 -(void)giveMeLikeType:(NSString *)type{
     _type = type;
+    [self loadData];
     NSLog(@"_type=%@",_type);
 }
 -(void)showLeft{

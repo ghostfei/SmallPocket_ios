@@ -17,6 +17,7 @@
 @dynamic name;
 @dynamic desc;
 @dynamic icon;
+@dynamic openTime;
 
 + (NSString *)primaryKey {
     return @"id";

@@ -30,7 +30,6 @@
 		AD46D2A91BF775F9002E71D2 /* tabbar_square@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD46D29E1BF775F9002E71D2 /* tabbar_square@3x.png */; };
 		AD46D2AA1BF775F9002E71D2 /* tabbar_switch_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD46D29F1BF775F9002E71D2 /* tabbar_switch_select@3x.png */; };
 		AD46D2AB1BF775F9002E71D2 /* tabbar_switch@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD46D2A01BF775F9002E71D2 /* tabbar_switch@3x.png */; };
-		AD47299C1C29ABFC00F50EB8 /* SmallPocket.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD47299A1C29ABFC00F50EB8 /* SmallPocket.xcdatamodeld */; };
 		AD4729ED1C29AD5100F50EB8 /* AdvTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729BD1C29AD5100F50EB8 /* AdvTableViewController.m */; };
 		AD4729EE1C29AD5100F50EB8 /* LeftVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729C01C29AD5100F50EB8 /* LeftVC.m */; };
 		AD4729EF1C29AD5100F50EB8 /* LikeIndexCollVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729C21C29AD5100F50EB8 /* LikeIndexCollVC.m */; };
@@ -55,7 +54,11 @@
 		AD472A0B1C29AD8000F50EB8 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AD472A051C29AD8000F50EB8 /* CoreDataManager.m */; };
 		AD472A0C1C29AD8000F50EB8 /* NSManagedObject+ActiveRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = AD472A071C29AD8000F50EB8 /* NSManagedObject+ActiveRecord.m */; };
 		AD472A0D1C29AD8000F50EB8 /* NSManagedObject+Mappings.m in Sources */ = {isa = PBXBuildFile; fileRef = AD472A091C29AD8000F50EB8 /* NSManagedObject+Mappings.m */; };
-		AD472A101C29AE0800F50EB8 /* LikeIndexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD472A0F1C29AE0800F50EB8 /* LikeIndexVC.m */; };
+		AD49B8271C2ABD0F00B3D75F /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD49B8251C2ABD0F00B3D75F /* delete@2x.png */; };
+		AD49B8281C2ABD0F00B3D75F /* delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD49B8261C2ABD0F00B3D75F /* delete@3x.png */; };
+		AD49B82B1C2ABF7F00B3D75F /* delApp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD49B8291C2ABF7F00B3D75F /* delApp@2x.png */; };
+		AD49B82C1C2ABF7F00B3D75F /* delApp@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD49B82A1C2ABF7F00B3D75F /* delApp@3x.png */; };
+		AD49B82F1C2ABFD000B3D75F /* LikeIndexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD49B82E1C2ABFD000B3D75F /* LikeIndexVC.m */; };
 		AD59DC781BFCDA960027602A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD59DC771BFCDA960027602A /* UIKit.framework */; };
 		AD59DC7A1BFCDA9D0027602A /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD59DC791BFCDA9D0027602A /* CoreFoundation.framework */; };
 		AD59DC7C1BFCDAA50027602A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD59DC7B1BFCDAA50027602A /* Foundation.framework */; };
@@ -64,6 +67,8 @@
 		AD9EDFC21C0AEE7900814ABD /* btn_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD9EDFC01C0AEE7900814ABD /* btn_search@2x.png */; };
 		ADA64AE31BF72DC600FAA433 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = ADA64AE21BF72DC600FAA433 /* Podfile */; };
 		ADD2440F1C09DC95001EAC3E /* left_type@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADD2440E1C09DC95001EAC3E /* left_type@2x.png */; };
+		AF8A72A71C2A34DF003FA50F /* black_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8A72A51C2A34DF003FA50F /* black_bg@2x.png */; };
+		AF8A72A81C2A34DF003FA50F /* black_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8A72A61C2A34DF003FA50F /* black_bg@3x.png */; };
 		AFD9BD331C21597500CB5C01 /* s_down_ed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD9BD2F1C21597500CB5C01 /* s_down_ed@2x.png */; };
 		AFD9BD341C21597500CB5C01 /* s_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD9BD301C21597500CB5C01 /* s_down@2x.png */; };
 		AFD9BD351C21597500CB5C01 /* s_like_ed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD9BD311C21597500CB5C01 /* s_like_ed@2x.png */; };
@@ -111,7 +116,6 @@
 		AD46D29E1BF775F9002E71D2 /* tabbar_square@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_square@3x.png"; sourceTree = "<group>"; };
 		AD46D29F1BF775F9002E71D2 /* tabbar_switch_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_switch_select@3x.png"; sourceTree = "<group>"; };
 		AD46D2A01BF775F9002E71D2 /* tabbar_switch@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_switch@3x.png"; sourceTree = "<group>"; };
-		AD47299B1C29ABFC00F50EB8 /* SmallPocket.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SmallPocket.xcdatamodel; sourceTree = "<group>"; };
 		AD4729BC1C29AD5100F50EB8 /* AdvTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvTableViewController.h; sourceTree = "<group>"; };
 		AD4729BD1C29AD5100F50EB8 /* AdvTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvTableViewController.m; sourceTree = "<group>"; };
 		AD4729BF1C29AD5100F50EB8 /* LeftVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftVC.h; sourceTree = "<group>"; };
@@ -160,8 +164,12 @@
 		AD472A081C29AD8000F50EB8 /* NSManagedObject+Mappings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+Mappings.h"; sourceTree = "<group>"; };
 		AD472A091C29AD8000F50EB8 /* NSManagedObject+Mappings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+Mappings.m"; sourceTree = "<group>"; };
 		AD472A0A1C29AD8000F50EB8 /* ObjectiveRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveRecord.h; sourceTree = "<group>"; };
-		AD472A0E1C29AE0800F50EB8 /* LikeIndexVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeIndexVC.h; sourceTree = "<group>"; };
-		AD472A0F1C29AE0800F50EB8 /* LikeIndexVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeIndexVC.m; sourceTree = "<group>"; };
+		AD49B8251C2ABD0F00B3D75F /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
+		AD49B8261C2ABD0F00B3D75F /* delete@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@3x.png"; sourceTree = "<group>"; };
+		AD49B8291C2ABF7F00B3D75F /* delApp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delApp@2x.png"; sourceTree = "<group>"; };
+		AD49B82A1C2ABF7F00B3D75F /* delApp@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delApp@3x.png"; sourceTree = "<group>"; };
+		AD49B82D1C2ABFD000B3D75F /* LikeIndexVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeIndexVC.h; sourceTree = "<group>"; };
+		AD49B82E1C2ABFD000B3D75F /* LikeIndexVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeIndexVC.m; sourceTree = "<group>"; };
 		AD59DC771BFCDA960027602A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AD59DC791BFCDA9D0027602A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		AD59DC7B1BFCDAA50027602A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -170,6 +178,8 @@
 		AD9EDFC01C0AEE7900814ABD /* btn_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_search@2x.png"; sourceTree = "<group>"; };
 		ADA64AE21BF72DC600FAA433 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		ADD2440E1C09DC95001EAC3E /* left_type@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_type@2x.png"; sourceTree = "<group>"; };
+		AF8A72A51C2A34DF003FA50F /* black_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black_bg@2x.png"; sourceTree = "<group>"; };
+		AF8A72A61C2A34DF003FA50F /* black_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black_bg@3x.png"; sourceTree = "<group>"; };
 		AFD9BD2F1C21597500CB5C01 /* s_down_ed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "s_down_ed@2x.png"; sourceTree = "<group>"; };
 		AFD9BD301C21597500CB5C01 /* s_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "s_down@2x.png"; sourceTree = "<group>"; };
 		AFD9BD311C21597500CB5C01 /* s_like_ed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "s_like_ed@2x.png"; sourceTree = "<group>"; };
@@ -214,7 +224,6 @@
 		AD1D04CC1BE8E82E00290AD5 = {
 			isa = PBXGroup;
 			children = (
-				AD47299A1C29ABFC00F50EB8 /* SmallPocket.xcdatamodeld */,
 				ADA64AE21BF72DC600FAA433 /* Podfile */,
 				AD1D04D71BE8E82E00290AD5 /* SmallPocket */,
 				AD1D04F11BE8E82E00290AD5 /* SmallPocketTests */,
@@ -300,8 +309,8 @@
 			children = (
 				AD4729BF1C29AD5100F50EB8 /* LeftVC.h */,
 				AD4729C01C29AD5100F50EB8 /* LeftVC.m */,
-				AD472A0E1C29AE0800F50EB8 /* LikeIndexVC.h */,
-				AD472A0F1C29AE0800F50EB8 /* LikeIndexVC.m */,
+				AD49B82D1C2ABFD000B3D75F /* LikeIndexVC.h */,
+				AD49B82E1C2ABFD000B3D75F /* LikeIndexVC.m */,
 				AD4729C11C29AD5100F50EB8 /* LikeIndexCollVC.h */,
 				AD4729C21C29AD5100F50EB8 /* LikeIndexCollVC.m */,
 				AD4729C31C29AD5100F50EB8 /* LikeItemCollectionCell.h */,
@@ -332,12 +341,12 @@
 		AD4729D21C29AD5100F50EB8 /* Square */ = {
 			isa = PBXGroup;
 			children = (
-				AD4729D31C29AD5100F50EB8 /* SquareListCell.h */,
-				AD4729D41C29AD5100F50EB8 /* SquareListCell.m */,
-				AD4729D51C29AD5100F50EB8 /* SquareListHeaderCell.h */,
-				AD4729D61C29AD5100F50EB8 /* SquareListHeaderCell.m */,
 				AD4729D71C29AD5100F50EB8 /* SquareTableViewController.h */,
 				AD4729D81C29AD5100F50EB8 /* SquareTableViewController.m */,
+				AD4729D51C29AD5100F50EB8 /* SquareListHeaderCell.h */,
+				AD4729D61C29AD5100F50EB8 /* SquareListHeaderCell.m */,
+				AD4729D31C29AD5100F50EB8 /* SquareListCell.h */,
+				AD4729D41C29AD5100F50EB8 /* SquareListCell.m */,
 			);
 			path = Square;
 			sourceTree = "<group>";
@@ -418,6 +427,12 @@
 		ADA64AE51BF7343B00FAA433 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				AD49B8291C2ABF7F00B3D75F /* delApp@2x.png */,
+				AD49B82A1C2ABF7F00B3D75F /* delApp@3x.png */,
+				AD49B8251C2ABD0F00B3D75F /* delete@2x.png */,
+				AD49B8261C2ABD0F00B3D75F /* delete@3x.png */,
+				AF8A72A51C2A34DF003FA50F /* black_bg@2x.png */,
+				AF8A72A61C2A34DF003FA50F /* black_bg@3x.png */,
 				AD0154AC1C21A9BE00760FF0 /* us@2x.png */,
 				AD0154AD1C21A9BE00760FF0 /* us@3x.png */,
 				AD0154A81C21A5E700760FF0 /* addIcon@2x.png */,
@@ -557,14 +572,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD49B82B1C2ABF7F00B3D75F /* delApp@2x.png in Resources */,
 				AFD9BD361C21597500CB5C01 /* s_like@2x.png in Resources */,
 				AD1D04E81BE8E82E00290AD5 /* LaunchScreen.storyboard in Resources */,
 				AD0154AE1C21A9BE00760FF0 /* us@2x.png in Resources */,
+				AD49B82C1C2ABF7F00B3D75F /* delApp@3x.png in Resources */,
 				AD1D04E51BE8E82E00290AD5 /* Assets.xcassets in Resources */,
 				AD46D2A81BF775F9002E71D2 /* tabbar_square_select@3x.png in Resources */,
 				AD46D2A71BF775F9002E71D2 /* tabbar_more@3x.png in Resources */,
 				AD0154AA1C21A5E700760FF0 /* addIcon@2x.png in Resources */,
 				AD46D2A61BF775F9002E71D2 /* tabbar_more_select@3x.png in Resources */,
+				AF8A72A81C2A34DF003FA50F /* black_bg@3x.png in Resources */,
 				AFD9BD341C21597500CB5C01 /* s_down@2x.png in Resources */,
 				ADA64AE31BF72DC600FAA433 /* Podfile in Resources */,
 				AD46D2A41BF775F9002E71D2 /* tabbar_like_select@3x.png in Resources */,
@@ -577,12 +595,15 @@
 				AFD9BD351C21597500CB5C01 /* s_like_ed@2x.png in Resources */,
 				AD1D04E31BE8E82E00290AD5 /* Main.storyboard in Resources */,
 				AD46D2A11BF775F9002E71D2 /* .DS_Store in Resources */,
+				AD49B8281C2ABD0F00B3D75F /* delete@3x.png in Resources */,
 				AD46D2A31BF775F9002E71D2 /* tabbar_adv@3x.png in Resources */,
+				AF8A72A71C2A34DF003FA50F /* black_bg@2x.png in Resources */,
 				AD0154AB1C21A5E700760FF0 /* addIcon@3x.png in Resources */,
 				AD46D2A21BF775F9002E71D2 /* tabbar_adv_select@3x.png in Resources */,
 				AD46D2811BF749E6002E71D2 /* btn_back@3x.png in Resources */,
 				AD0154AF1C21A9BE00760FF0 /* us@3x.png in Resources */,
 				AD9EDFC21C0AEE7900814ABD /* btn_search@2x.png in Resources */,
+				AD49B8271C2ABD0F00B3D75F /* delete@2x.png in Resources */,
 				AD46D2AB1BF775F9002E71D2 /* tabbar_switch@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -654,6 +675,7 @@
 				AD472A0B1C29AD8000F50EB8 /* CoreDataManager.m in Sources */,
 				AD4729F81C29AD5100F50EB8 /* SquareListHeaderCell.m in Sources */,
 				AD472A011C29AD5100F50EB8 /* OpenWebAppVC.m in Sources */,
+				AD49B82F1C2ABFD000B3D75F /* LikeIndexVC.m in Sources */,
 				AD4729FB1C29AD5100F50EB8 /* AppsModel.m in Sources */,
 				AD472A001C29AD5100F50EB8 /* Util.m in Sources */,
 				AD4729F61C29AD5100F50EB8 /* UploadAppVC.m in Sources */,
@@ -663,7 +685,6 @@
 				AD472A0D1C29AD8000F50EB8 /* NSManagedObject+Mappings.m in Sources */,
 				AD4729F71C29AD5100F50EB8 /* SquareListCell.m in Sources */,
 				AD4729FE1C29AD5100F50EB8 /* Api.m in Sources */,
-				AD47299C1C29ABFC00F50EB8 /* SmallPocket.xcdatamodeld in Sources */,
 				AD472A0C1C29AD8000F50EB8 /* NSManagedObject+ActiveRecord.m in Sources */,
 				AD4729FF1C29AD5100F50EB8 /* SmallPocket.xcdatamodeld in Sources */,
 				AD4729F11C29AD5100F50EB8 /* SearchVC.m in Sources */,
@@ -675,7 +696,6 @@
 				AD4729FA1C29AD5100F50EB8 /* ISwitchViewController.m in Sources */,
 				AD4729FC1C29AD5100F50EB8 /* BaseModel.m in Sources */,
 				AD1D04DA1BE8E82E00290AD5 /* main.m in Sources */,
-				AD472A101C29AE0800F50EB8 /* LikeIndexVC.m in Sources */,
 				AD4729FD1C29AD5100F50EB8 /* OpenApps.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -883,16 +903,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		AD47299A1C29ABFC00F50EB8 /* SmallPocket.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				AD47299B1C29ABFC00F50EB8 /* SmallPocket.xcdatamodel */,
-			);
-			currentVersion = AD47299B1C29ABFC00F50EB8 /* SmallPocket.xcdatamodel */;
-			path = SmallPocket.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
 		AD4729E61C29AD5100F50EB8 /* SmallPocket.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

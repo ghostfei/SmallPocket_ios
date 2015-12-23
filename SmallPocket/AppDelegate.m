@@ -12,6 +12,7 @@
 #import "AdvTableViewController.h"
 #import "ISwitchViewController.h"
 #import "LikeIndexCollVC.h"
+#import "LikeIndexVC.h"
 #import "SquareTableViewController.h"
 #import "MoreViewController.h"
 #import "LeftVC.h"
@@ -25,8 +26,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [self _initUI];
-    
+    [self _initUI]; 
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     [self.window setRootViewController:self.tabbarVC];
     [self.window setBackgroundColor:[UIColor whiteColor]];
@@ -95,7 +95,7 @@ fetchCompletionHandler:
 #pragma mark 定制UI
 -(void)_initUI{
     UIColor *navColor = [UIColor blackColor]; // THEME_COLOR;
-    [UINavigationBar appearance].tintColor = navColor;
+    [UINavigationBar appearance].tintColor = navColor; 
     
     NSMutableDictionary *titleBarAttributes = [NSMutableDictionary
                                                dictionaryWithDictionary:[[UINavigationBar appearance] titleTextAttributes]];
@@ -104,9 +104,10 @@ fetchCompletionHandler:
     // HelveticaNeue-CondensedBlack
     [titleBarAttributes setValue:navColor forKey:NSForegroundColorAttributeName];
     [[UINavigationBar appearance] setTitleTextAttributes:titleBarAttributes];
+//    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"black_bg"] forBarMetrics:UIBarMetricsDefault];
     //设置导航条
     if ([UINavigationBar conformsToProtocol:@protocol(UIAppearanceContainer)]) {
-        //        [[UINavigationBar appearance] setBarTintColor:[UIColor yellowColor]]; //修改导航条背景色
+//        [[UINavigationBar appearance] setBarTintColor:KEY_BGCOLOR_BLACK]; //修改导航条背景色
         //设置返回图标
         UIImage *backBtnIcon = [UIImage imageNamed:@"btn_back.png"];
         [UINavigationBar appearance].backIndicatorImage = backBtnIcon;
@@ -116,7 +117,7 @@ fetchCompletionHandler:
     //定制navigation和tabbar
     UINavigationController *adv = [[UINavigationController alloc]initWithRootViewController:[Util createVCFromStoryboard:@"AdvTableViewController"]];
     UINavigationController *iswitch = [[UINavigationController alloc]initWithRootViewController:[Util createVCFromStoryboard:@"ISwitchViewController"]];
-    UINavigationController *like =  [[UINavigationController alloc]initWithRootViewController: [Util createVCFromStoryboard:@"LikeIndexCollVC"]];
+    UINavigationController *like =  [[UINavigationController alloc]initWithRootViewController: [Util createVCFromStoryboard:@"LikeIndexVC"]];//]@"LikeIndexCollVC"]];
     UINavigationController *square = [[UINavigationController alloc]initWithRootViewController: [Util createVCFromStoryboard:@"SquareTableViewController"]];
     UINavigationController *more = [[UINavigationController alloc]initWithRootViewController:[Util createVCFromStoryboard:@"MoreViewController"]];
     
@@ -124,6 +125,7 @@ fetchCompletionHandler:
     self.tabbarVC.viewControllers = @[adv,iswitch,like,square,more];
     
     UITabBar *tabbar = self.tabbarVC.tabBar;
+//    [tabbar setBackgroundImage:[UIImage imageNamed:@"black_bg"]];
     [tabbar setBarTintColor:[UIColor groupTableViewBackgroundColor]];
     [tabbar setTintColor:[UIColor colorWithRed:73/255.0 green:194/255.0 blue:34/255.0 alpha:1]];
     //    [[UITabBarItem appearance] setTitleTextAttributes:@{

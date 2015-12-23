@@ -147,7 +147,7 @@
 - (NSURL *)sqliteStoreURL {
     NSURL *directory = [self isOSX] ? self.applicationSupportDirectory : self.applicationDocumentsDirectory;
     NSURL *databaseDir = [directory URLByAppendingPathComponent:[self databaseName]];
-
+    NSLog(@"sqlite url=%@",databaseDir);
     [self createApplicationSupportDirIfNeeded:directory];
     return databaseDir;
 }

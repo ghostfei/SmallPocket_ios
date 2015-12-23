@@ -8,6 +8,7 @@
 
 #import "SquareListCell.h"
 #import "AppsModel.h"
+#import "Util.h"
 
 @implementation SquareListCell
 
@@ -20,11 +21,16 @@
 
     // Configure the view for the selected state
 }
--(void)setContent:(NSDictionary *)dic{ 
+-(void)setContent:(NSDictionary *)dic{
     
     AppsModel *apps = [[AppsModel alloc]initWithDictionary:dic error:nil];
     self.name.text = apps.name;
+    CGRect frame = self.desc.frame;
     self.desc.text = apps.desc;
+    CGSize size = CGSizeMake(self.frame.size.width-80, 1000);
+    CGSize infoSize = [apps.desc sizeWithFont:[UIFont systemFontOfSize:16] constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
+    self.desc.frame = CGRectMake(frame.origin.x, frame.origin.y, infoSize.width, infoSize.height);
+    
     [self.zanBtn setTitle:apps.likenum forState:UIControlStateNormal];
     [self.downBtn setTitle:apps.downnum forState:UIControlStateNormal];
     

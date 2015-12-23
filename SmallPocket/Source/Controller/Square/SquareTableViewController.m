@@ -34,15 +34,18 @@
     
     _dataArray = [[NSMutableArray alloc]init];
     _sliderArray = [[NSMutableArray alloc]init];
+    _page = 1;
+    _limit = 20;
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self loadData];
-    self.tableView.tableFooterView = [[UIView alloc]init];
     self.tableView.header = [Util getMJHeaderTarget:self action:@selector(loadNewData)];
     self.tableView.footer = [Util getMJFooterTarget:self action:@selector(loadMoreData)];
     
     UIBarButtonItem *rbi = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"btn_search_select"] style:UIBarButtonItemStylePlain target:self action:@selector(searchAc)];
     self.navigationItem.rightBarButtonItem = rbi;
+    
+    [self loadSlider];
 }
 - (void)loadNewData {
     _page = 1;
@@ -69,9 +72,13 @@
         NSDictionary *dic = _dataArray[indexPath.row-1];
         cell = [tableView  dequeueReusableCellWithIdentifier:@"SquareListCell"];
         
-        cell.tag = cell.zanBtn.tag = cell.downBtn.tag = indexPath.row;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        cell.zanBtn.tag = cell.downBtn.tag = indexPath.row-1;
         
         [cell setContent:dic];
+        [cell.zanBtn addTarget:self action:@selector(zanAc:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.downBtn addTarget:self action:@selector(downAc:) forControlEvents:UIControlEventTouchUpInside];
         
         return cell;
     }
@@ -81,7 +88,12 @@
     if (indexPath.row == 0) {
         return 100;
     }else{
-        return 66;
+        NSDictionary *dic = _dataArray[indexPath.row-1];
+        NSString *desc = dic[@"desc"];
+        CGSize size = CGSizeMake(self.view.frame.size.width-80, 1000);
+        CGSize infoSize = [desc sizeWithFont:[UIFont systemFontOfSize:16] constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
+        
+        return 44+infoSize.height;
     }
 }
 
@@ -91,21 +103,24 @@
 
 
 -(void)loadData{
-    [self loadSlider];
     
-    NSDictionary *bdic = @{@"udid":@"asdasdad",@"page":[NSString stringWithFormat:@"%ld",_page]};
+    NSDictionary *bdic = @{@"udid":@"12",@"page":[NSString stringWithFormat:@"%ld",_page]};
     [Api post:API_APPS_LIST parameters:bdic completion:^(id data, NSError *err) {
         [self.tableView.header endRefreshing];
         [self.tableView.footer endRefreshing];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        if ([dic[@"status"]intValue] == 200) {
+        YLog(@"dic=%@",dic);
+        if ([dic[@"status"]intValue] == 200 || [dic[@"status"]intValue] == 201) {
             NSArray *results = dic[@"data"];
+            
+            if (results.count < _limit) {
+                [self.tableView.footer noticeNoMoreData];
+            } 
             
             if (_page == 1) {
                 [_dataArray removeAllObjects];
             }
             [_dataArray addObjectsFromArray:results];
-            //            YLog(@"array=%@",_dataArray);
             [self.tableView reloadData];
         }
     }];
@@ -127,7 +142,7 @@
         like = @0;
     }
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [Api post:API_LIKE_ACTION parameters:@{@"udid":@"asdasdad",@"aid":dic[@"id"],@"like":like} completion:^(id data, NSError *err) {
+    [Api post:API_LIKE_ACTION parameters:@{@"udid":@"12",@"aid":dic[@"id"],@"like":like} completion:^(id data, NSError *err) {
         [_hud hide:YES];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         if ([dic[@"status"]integerValue] == 200) {
@@ -140,9 +155,10 @@
 -(void)downAc:(UIButton *)btn{
     NSDictionary *dic = _dataArray[btn.tag];
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [Api post:API_DOWN_ACTION parameters:@{@"udid":@"asdasdad",@"aid":dic[@"id"]} completion:^(id data, NSError *err) {
+    [Api post:API_DOWN_ACTION parameters:@{@"udid":@"12",@"aid":dic[@"id"]} completion:^(id data, NSError *err) {
         [_hud hide:YES];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"dic=%@",dic);
         if ([dic[@"status"]integerValue] == 200) {
             [TSMessage showNotificationWithTitle:dic[@"msg"] subtitle:nil type:TSMessageNotificationTypeSuccess];
             [self loadData];
