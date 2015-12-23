@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OpenApps : NSManagedObject
 
-@property (nullable, nonatomic, retain) NSNumber *id;
-@property (nullable, nonatomic, retain) NSDate *createTime;
+@property (nullable, nonatomic, retain) NSNumber *aid;
+@property (nullable, nonatomic, retain) NSDate *createtime;
 @property (nullable, nonatomic, retain) NSString *url;
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSString *desc;

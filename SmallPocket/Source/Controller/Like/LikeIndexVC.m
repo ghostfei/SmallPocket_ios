@@ -42,6 +42,13 @@
     [self loadData];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadData) name:@"downapp_noti" object:nil];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideDel)];
+    [self.tableView addGestureRecognizer:tap];
+    
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self hideDel];
 }
 -(void)initUI{
     for (UIView *vi in _scrollView.subviews) {
@@ -81,10 +88,14 @@
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goWeb:)];
         
+        UILongPressGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(showDel:)];
+        longTap.minimumPressDuration = 1.0;
+        
         UIView *vi = [[UIView alloc]initWithFrame:CGRectMake(tempW*(W-20)/4+13+totalW, tempH*H/5+10, (W-50)/4, (H-60)/5)];
         vi.backgroundColor = [UIColor clearColor];
         vi.userInteractionEnabled = YES;
         [vi addGestureRecognizer:tap];
+        [vi addGestureRecognizer:longTap];
         vi.tag = idx;
         
         UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(vi.frame.size.width/2-25, 9, 50, 50)];
@@ -107,13 +118,12 @@
         
         UIButton *delBtn = [[UIButton alloc]initWithFrame:CGRectMake(vi.frame.size.width-30, 0, 30, 30)];
         //        delBtn.backgroundColor = [UIColor redColor];
-        delBtn.tag = idx;
-        //        [delBtn setTitle:@"删除" forState:UIControlStateNormal];
-        //        [delBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        delBtn.tag = idx-10000;
+        delBtn.hidden = YES;
         [delBtn setImage:[UIImage imageNamed:@"delApp"] forState:UIControlStateNormal];
         [delBtn addTarget:self action:@selector(delAc:) forControlEvents:UIControlEventTouchUpInside];
-        //        [vi addSubview:delBtn];
-        //        [vi bringSubviewToFront:delBtn];
+        [vi addSubview:delBtn];
+        [vi bringSubviewToFront:delBtn];
         
         [_scrollView addSubview:vi];
         tempW ++;
@@ -157,10 +167,41 @@
         
     }];
 }
+-(void)hideDel{
+    for (int i=0; i<_dataArray.count; i++) {
+        UIButton *btn = [self.view viewWithTag:i-10000];
+        btn.hidden = YES;
+    }
+}
+-(void)showDel:(UILongPressGestureRecognizer *)longtap{
+    if(longtap.state == UIGestureRecognizerStateBegan){
+        for (int i=0; i<_dataArray.count; i++) {
+            UIButton *btn = [self.view viewWithTag:i-10000];
+            btn.hidden = NO;
+        }
+    }
+}
 -(void)delAc:(UIButton *)btn{
+    NSDictionary *dic = [_dataArray objectAtIndex:(btn.tag+10000)];
+    NSLog(@"dic=%@",dic);
+    _hud = [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    [Api post:API_DELACTION parameters:@{@"aid":dic[@"aid"],@"udid":@"12"} completion:^(id data, NSError *err) {
+        [_hud hide:YES];
+        
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        YLog(@"json=%@",dic);
+        if ([dic[@"status"]integerValue ] == 200) {
+            [self.view makeToast:@"删除成功"];
+        }else{
+            [self.view makeToast:@"网络异常"];
+        }
+        [self loadData];
+        
+    }];
 }
 
 -(void)goWeb:(UITapGestureRecognizer *)tap{
+    [self hideDel];
     NSInteger tag = [tap view].tag;
         NSLog(@"tag=%ld",tag);
     OpenWebAppVC *webview = [Util createVCFromStoryboard:@"OpenWebAppVC"];

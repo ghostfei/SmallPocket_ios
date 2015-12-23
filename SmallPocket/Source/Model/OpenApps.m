@@ -11,8 +11,8 @@
 @implementation OpenApps
 
 // Insert code here to add functionality to your managed object subclass
-@dynamic id;
-@dynamic createTime;
+@dynamic aid;
+@dynamic createtime;
 @dynamic url;
 @dynamic name;
 @dynamic desc;
@@ -20,6 +20,6 @@
 @dynamic openTime;
 
 + (NSString *)primaryKey {
-    return @"id";
+    return @"aid";
 }
 @end
