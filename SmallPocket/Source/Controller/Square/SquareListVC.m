@@ -36,12 +36,13 @@
     self.navigationItem.title = @"广场";
     
     _dataArray = [[NSMutableArray alloc]init];
+    _sliderArray = [[NSArray alloc]init];
     _page = 1;
     _limit = 20;
     _type = @"0";
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [self loadData];
+    
     self.tableView.header = [Util getMJHeaderTarget:self action:@selector(loadNewData)];
     self.tableView.footer = [Util getMJFooterTarget:self action:@selector(loadMoreData)];
     
@@ -57,6 +58,7 @@
     self.scrollView.scrollEnabled = YES;
     
     [self loadSlider];
+    [self loadData];
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (scrollView.contentOffset.y!=0) {
@@ -143,9 +145,10 @@
     }];
 }
 -(void)loadSlider{
-    [Api post:API_ADV_LIST parameters:@{@"type":@2} completion:^(id data, NSError *err) {
+    [Api post:API_ADV_LIST parameters:@{@"type":@"2"} completion:^(NSData *data, NSError *err) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         _sliderArray = dic[@"data"];
+        NSLog(@"slider=%@",dic);
         [self.tableView reloadData];
     }];
 }

@@ -408,8 +408,8 @@
                                                     </state>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="hK7-vP-aWc"/>
                                                             <exclude reference="d9u-7S-Nxq"/>
+                                                            <exclude reference="hK7-vP-aWc"/>
                                                         </mask>
                                                     </variation>
                                                 </button>
@@ -438,9 +438,9 @@
                                                 <mask key="constraints">
                                                     <exclude reference="AZv-ly-Uc8"/>
                                                     <exclude reference="imZ-PD-XRw"/>
+                                                    <exclude reference="U16-Pv-sN4"/>
                                                     <exclude reference="dD5-6i-BJW"/>
                                                     <exclude reference="fiZ-4I-gw9"/>
-                                                    <exclude reference="U16-Pv-sN4"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
