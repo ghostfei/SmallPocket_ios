@@ -28,6 +28,9 @@
     // Configure the view for the selected state
 }
 -(void)setContent:(NSArray *)array{
+    
+    _myScrollView.contentSize = CGSizeMake(self.frame.size.width*array.count, 100);
+    
     PAGENUM = array.count;
     _myScrollView.pagingEnabled=YES;
     _myScrollView.scrollEnabled=YES;
@@ -44,11 +47,9 @@
     
     
     //定义PageController 设定总页数，当前页，定义当控件被用户操作时,要触发的动作。
-//    _page.numberOfPages = array.count;
-//    _page.currentPage = 0;
-//    _page.currentPageIndicatorTintColor=[UIColor greenColor];
-//    _page.pageIndicatorTintColor=[UIColor whiteColor];
-//    [_page addTarget:self action:@selector(pageTurn:) forControlEvents:UIControlEventValueChanged];
+    _page.numberOfPages = PAGENUM;
+    _page.currentPage = 0; 
+    [_page addTarget:self action:@selector(pageTurn:) forControlEvents:UIControlEventValueChanged];
     
     //使用NSTimer实现定时触发滚动控件滚动的动作。
     currentIndex = 0;

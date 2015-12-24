@@ -30,8 +30,8 @@ typedef NS_ENUM(NSInteger,viewType){
 #define YLog(...);
 #endif
 
-#define DEFAULT_API_URL @"http://120.24.159.129/SmallPocket/"
-//#define DEFAULT_API_URL @"http://127.0.0.1:8888/SmallPocket/"
+//#define DEFAULT_API_URL @"http://120.24.159.129/SmallPocket/"
+#define DEFAULT_API_URL @"http://127.0.0.1:8888/SmallPocket/"
 #define REQUEST_TIME_OUT 20 //网络请求 超时时间
 
 #define K_DeviceToken @"K_DeviceToken"
@@ -55,6 +55,7 @@ typedef NS_ENUM(NSInteger,viewType){
 #define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
 
+#define SYSTEMVERSION [[[UIDevice currentDevice] systemVersion] floatValue]
 @interface Util : NSObject
 + (id)createVCFromStoryboard:(NSString *)identifier;
 

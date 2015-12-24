@@ -24,6 +24,9 @@
     NSArray *_typeArray;
     
     NSString *_type;
+    
+    NSInteger currentIndex;
+    NSInteger PAGENUM;
 }
 
 @end
@@ -38,7 +41,7 @@
     _dataArray = [[NSMutableArray alloc]init];
     _sliderArray = [[NSArray alloc]init];
     _page = 1;
-    _limit = 20;
+    _limit = 5;
     _type = @"0";
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -67,6 +70,7 @@
 }
 - (void)loadNewData {
     _page = 1;
+    [self loadSlider];
     [self loadData];
 }
 - (void)loadMoreData {
@@ -74,20 +78,20 @@
     [self loadData];
 }
 #pragma mark - Table view data source
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    [self addAdv];
+    return _advView;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 100;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _dataArray.count+1;
+    return _dataArray.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    SquareListHeaderCell *headerCell;
     SquareListCell *cell;
-    
-    if (indexPath.row == 0) {
-        headerCell = [tableView  dequeueReusableCellWithIdentifier:@"SquareListHeaderCell"];
-        headerCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [headerCell setContent:_sliderArray];
-        return headerCell;
-    }else{
-        NSDictionary *dic = _dataArray[indexPath.row-1];
+
+        NSDictionary *dic = _dataArray[indexPath.row];
         cell = [tableView  dequeueReusableCellWithIdentifier:@"SquareListCell" forIndexPath:indexPath];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -99,20 +103,15 @@
         [cell.downBtn addTarget:self action:@selector(downAc:) forControlEvents:UIControlEventTouchUpInside];
         
         return cell;
-    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
-        return 100;
-    }else{
-        NSDictionary *dic = _dataArray[indexPath.row-1];
+        NSDictionary *dic = _dataArray[indexPath.row];
         NSString *desc = dic[@"desc"];
         CGSize size = CGSizeMake(self.view.frame.size.width-80, 1000);
         CGSize infoSize = [desc sizeWithFont:[UIFont systemFontOfSize:16] constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
         
         return 44+infoSize.height;
-    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -122,7 +121,7 @@
 
 -(void)loadData{
     NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
-    NSDictionary *bdic = @{@"udid":udid,@"page":[NSString stringWithFormat:@"%ld",_page],@"type":_type};//,@"limit":[NSString stringWithFormat:@"%ld",_limit]};
+    NSDictionary *bdic = @{@"udid":udid,@"page":[NSString stringWithFormat:@"%ld",_page],@"type":_type,@"limit":[NSString stringWithFormat:@"%ld",_limit]};
     NSLog(@"bdic=%@",bdic);
     [Api post:API_APPS_LIST parameters:bdic completion:^(id data, NSError *err) {
         [self.tableView.header endRefreshing];
@@ -149,8 +148,39 @@
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         _sliderArray = dic[@"data"];
         NSLog(@"slider=%@",dic);
-        [self.tableView reloadData];
+//        [self.tableView reloadData];
+        [self addAdv];
     }];
+}
+-(void)addAdv{
+    _advScroll.contentSize = CGSizeMake(self.view.frame.size.width*_sliderArray.count, 100);
+    
+    PAGENUM = _sliderArray.count;
+    _advScroll.pagingEnabled=YES;
+    _advScroll.scrollEnabled=YES;
+    _advScroll.showsHorizontalScrollIndicator=NO;
+    
+    
+    for (int i=0; i<PAGENUM; i++) {
+        NSDictionary *dic=_sliderArray[i];
+        UIImageView *imgview = [[UIImageView alloc]initWithFrame:CGRectMake(i*self.view.frame.size.width, 0, self.view.frame.size.width, 100)];
+        imgview.contentMode = UIViewContentModeScaleAspectFill;
+        imgview.clipsToBounds = YES;
+        [imgview setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:dic[@"image"]]] placeholderImage:[UIImage imageNamed:@""]];
+        
+        [_advScroll addSubview:imgview];
+    }
+    
+    
+    //定义PageController 设定总页数，当前页，定义当控件被用户操作时,要触发的动作。
+    _pageC.numberOfPages = PAGENUM;
+    _pageC.currentPage = 0;
+    [_pageC addTarget:self action:@selector(pageTurn:) forControlEvents:UIControlEventValueChanged];
+    
+    //使用NSTimer实现定时触发滚动控件滚动的动作。
+    currentIndex = 0;
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(scrollTimer) userInfo:nil repeats:YES];
+    
 }
 
 
@@ -216,9 +246,11 @@
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         if ([dic[@"status"]integerValue] == 200) {
             [TSMessage showNotificationWithTitle:dic[@"msg"] subtitle:nil type:TSMessageNotificationTypeSuccess];
-            btn.enabled = NO;
-            [btn setImage:[UIImage imageNamed:@"s_like_ed"] forState:UIControlStateNormal];
-            [self.tableView reloadData];
+//            btn.enabled = NO;
+//            [btn setImage:[UIImage imageNamed:@"s_like_ed"] forState:UIControlStateNormal];
+//            [btn setNeedsDisplay];
+            _page = 1;
+            [self loadData];
         }else{
             [self.view makeToast:dic[@"msg"]];
         }
@@ -235,9 +267,12 @@
         NSLog(@"dic=%@",dic);
         if ([dic[@"status"]integerValue] == 200) {
             [TSMessage showNotificationWithTitle:dic[@"msg"] subtitle:nil type:TSMessageNotificationTypeSuccess];
-            btn.enabled = NO;
-            [btn setImage:[UIImage imageNamed:@"s_down_ed"] forState:UIControlStateNormal];
-            [self.tableView reloadData];
+            
+//            btn.enabled = NO;
+//            [btn setImage:[UIImage imageNamed:@"s_down_ed"] forState:UIControlStateNormal];
+//            [btn setNeedsDisplay];
+            _page = 1;
+            [self loadData];
             [[NSNotificationCenter defaultCenter]postNotificationName:@"downapp_noti" object:nil];
         }else{
             [self.view makeToast:dic[@"msg"]];
@@ -249,4 +284,32 @@
     SearchVC *searchVc = [Util createVCFromStoryboard:@"SearchVC"];
     [self.navigationController pushViewController:searchVc animated:YES];
 }
+#pragma mark 滚图的动画效果
+-(void)pageTurn:(UIPageControl *)aPageControl{
+    NSInteger whichPage = aPageControl.currentPage;
+    NSLog(@"whichPage=%ld",whichPage);
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.5f];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [_advScroll setContentOffset:CGPointMake(self.view.frame.size.width * whichPage, 0.0f) animated:YES];
+    [UIView commitAnimations];
+    _pageC.currentPage=whichPage;
+}
+#pragma page跟随scrollview滑动
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView1{
+    CGPoint offset=scrollView1.contentOffset;
+    CGRect bounds=scrollView1.frame;
+    [_pageC setCurrentPage:offset.x/bounds.size.width];
+    currentIndex=_pageC.currentPage;
+}
+#pragma mark 定时滚动
+-(void)scrollTimer{
+    currentIndex ++;
+    if (currentIndex == PAGENUM) {
+        currentIndex = 0;
+    }
+    _pageC.currentPage=currentIndex;
+    [_advScroll scrollRectToVisible:CGRectMake(currentIndex * self.view.frame.size.width, 0, self.view.frame.size.width, 100) animated:YES];
+}
+
 @end

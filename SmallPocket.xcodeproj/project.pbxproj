@@ -568,7 +568,7 @@
 								enabled = 0;
 							};
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -816,7 +816,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "c3baf370-78a8-44d7-a9b9-5f84adc691dc";
+				PROVISIONING_PROFILE = "189bfbdb-edf3-4c0f-9e61-f2283854427b";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -853,7 +853,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "c3baf370-78a8-44d7-a9b9-5f84adc691dc";
+				PROVISIONING_PROFILE = "189bfbdb-edf3-4c0f-9e61-f2283854427b";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -872,7 +872,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunyaoo.SmallPocket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c3baf370-78a8-44d7-a9b9-5f84adc691dc";
+				PROVISIONING_PROFILE = "189bfbdb-edf3-4c0f-9e61-f2283854427b";
 			};
 			name = Debug;
 		};
@@ -889,7 +889,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunyaoo.SmallPocket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c3baf370-78a8-44d7-a9b9-5f84adc691dc";
+				PROVISIONING_PROFILE = "189bfbdb-edf3-4c0f-9e61-f2283854427b";
 			};
 			name = Release;
 		};

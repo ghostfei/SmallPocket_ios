@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Util.h"
-  
+
 #import "AdvTableViewController.h"
 #import "ISwitchViewController.h"
 #import "LikeIndexVC.h"
@@ -23,29 +23,31 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
-    [[NSUserDefaults standardUserDefaults]setObject:@"13" forKey:K_DeviceToken];
-    [[NSUserDefaults standardUserDefaults]synchronize];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent]; 
     
     [self _initUI];
+    
+    [[NSUserDefaults standardUserDefaults]setObject:@"10" forKey:K_DeviceToken];
+    [[NSUserDefaults standardUserDefaults]synchronize];
     
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     [self.window setRootViewController:self.tabbarVC];
     [self.window setBackgroundColor:[UIColor whiteColor]];
     
-    [NSThread sleepForTimeInterval:2];
-    [self.window makeKeyAndVisible]; 
+//    [self registPush:application];
+    
+    [NSThread sleepForTimeInterval:2.0];
+    
+    [self.window makeKeyAndVisible];
     
     return YES;
-} 
+}
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSString *token = [NSString stringWithFormat:@"%@",deviceToken];
     token = [token stringByReplacingOccurrencesOfString:@"<" withString:@""];
     token = [token stringByReplacingOccurrencesOfString:@">" withString:@""];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-    (@"devicetoken=%@",token);
+    YLog(@"devicetoken=%@",token);
     if([token isEqualToString:@""]){
         token = @"12";
     }
@@ -81,30 +83,27 @@ fetchCompletionHandler:
     completionHandler(UIBackgroundFetchResultNewData);
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+ 
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+ 
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+ 
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
 #pragma mark 定制UI
 -(void)_initUI{
     UIColor *navColor = [UIColor whiteColor]; // THEME_COLOR;
-    [UINavigationBar appearance].tintColor = navColor; 
+    [UINavigationBar appearance].tintColor = navColor;
     
     NSMutableDictionary *titleBarAttributes = [NSMutableDictionary
                                                dictionaryWithDictionary:[[UINavigationBar appearance] titleTextAttributes]];
@@ -124,7 +123,7 @@ fetchCompletionHandler:
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"black_bg"] forBarMetrics:UIBarMetricsDefault];
     //设置导航条
     if ([UINavigationBar conformsToProtocol:@protocol(UIAppearanceContainer)]) {
-//        [[UINavigationBar appearance] setBarTintColor:KEY_BGCOLOR_BLACK]; //修改导航条背景色
+        //        [[UINavigationBar appearance] setBarTintColor:KEY_BGCOLOR_BLACK]; //修改导航条背景色
         //设置返回图标
         UIImage *backBtnIcon = [UIImage imageNamed:@"btn_back.png"];
         [UINavigationBar appearance].backIndicatorImage = backBtnIcon;
@@ -154,41 +153,38 @@ fetchCompletionHandler:
     //                                                        } forState:UIControlStateSelected];
     
     NSArray *tabicon = @[@"tabbar_adv",@"tabbar_switch",@"tabbar_like",@"tabbar_square",@"tabbar_more"];
-    NSArray *tabtitle = @[@"精选",@"切换",@"喜欢",@"广场",@"更多"];
+//    NSArray *tabtitle = @[@"精选",@"切换",@"喜欢",@"广场",@"更多"];
     //    int offset = 10;
-        UIEdgeInsets imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
+    UIEdgeInsets imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
     
     [tabicon enumerateObjectsUsingBlock:^(NSString *item, NSUInteger idx, BOOL * _Nonnull stop) {
         UITabBarItem *tabbarItem = [tabbar.items objectAtIndex:idx];
         
-                tabbarItem.imageInsets = imageInsets;
+        tabbarItem.imageInsets = imageInsets;
         
         tabbarItem.image = [[UIImage imageNamed:item]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
         tabbarItem.selectedImage = [[UIImage imageNamed:[NSString stringWithFormat:@"%@_select",item]]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
-//        tabbarItem.title = tabtitle[idx];
+        //        tabbarItem.title = tabtitle[idx];
     }];
     
     self.tabbarVC.selectedViewController = [self.tabbarVC.viewControllers objectAtIndex:2];//默认选中中间的tabbar
 }
 
--(void)registPush{
-    //注册push功能
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings
-                                                settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge |
-                                                                  UIUserNotificationTypeSound)
-                                                categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-         NSLog(@"registerForRemoteNotificationSet");
+-(void)registPush:(UIApplication *)application{
+    // Push register
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        //可以添加自定义categories
+        YLog(@"8.0 ++");
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge| UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert) categories:nil]];
+        [[UIApplication sharedApplication]registerForRemoteNotifications];
     } else {
-        // register to receive notifications
-        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge |
-        UIRemoteNotificationTypeAlert |
-        UIRemoteNotificationTypeSound;
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
-        NSLog(@"registerForRemoteNotificationTypes");
-    }
+        //categories 必须为nil
+        YLog(@"low 8.0");
+        [application registerForRemoteNotificationTypes:
+         (UIRemoteNotificationTypeBadge| UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    } 
 }
+
 @end
