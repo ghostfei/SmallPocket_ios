@@ -11,11 +11,9 @@
   
 #import "AdvTableViewController.h"
 #import "ISwitchViewController.h"
-#import "LikeIndexCollVC.h"
 #import "LikeIndexVC.h"
-#import "SquareTableViewController.h"
+#import "SquareListVC.h"
 #import "MoreViewController.h"
-#import "LeftVC.h"
 
 @interface AppDelegate ()
 
@@ -31,6 +29,8 @@
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     [self.window setRootViewController:self.tabbarVC];
     [self.window setBackgroundColor:[UIColor whiteColor]];
+    
+    [NSThread sleepForTimeInterval:2];
     [self.window makeKeyAndVisible];
     
     return YES;
@@ -41,7 +41,9 @@
     token = [token stringByReplacingOccurrencesOfString:@">" withString:@""];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     (@"devicetoken=%@",token);
-    
+    if([token isEqualToString:@""]){
+        token = @"12";
+    }
     // Required
     //    [APService registerDeviceToken:deviceToken];
     //    YLog(@"[APService registrationID]=%@",[APService registrationID]);
@@ -127,7 +129,7 @@ fetchCompletionHandler:
     UINavigationController *adv = [[UINavigationController alloc]initWithRootViewController:[Util createVCFromStoryboard:@"AdvTableViewController"]];
     UINavigationController *iswitch = [[UINavigationController alloc]initWithRootViewController:[Util createVCFromStoryboard:@"ISwitchViewController"]];
     UINavigationController *like =  [[UINavigationController alloc]initWithRootViewController: [Util createVCFromStoryboard:@"LikeIndexVC"]];//]@"LikeIndexCollVC"]];
-    UINavigationController *square = [[UINavigationController alloc]initWithRootViewController: [Util createVCFromStoryboard:@"SquareTableViewController"]];
+    UINavigationController *square = [[UINavigationController alloc]initWithRootViewController: [Util createVCFromStoryboard:@"SquareListVC"]];
     UINavigationController *more = [[UINavigationController alloc]initWithRootViewController:[Util createVCFromStoryboard:@"MoreViewController"]];
     
     self.tabbarVC = [[UITabBarController alloc]init];

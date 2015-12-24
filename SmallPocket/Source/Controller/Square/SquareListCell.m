@@ -35,6 +35,8 @@
     [self.downBtn setTitle:apps.downnum forState:UIControlStateNormal];
     
     NSString *iconurl = [Util getAPIUrl:apps.icon];
+    self.icon.layer.masksToBounds = YES;
+    self.icon.layer.cornerRadius = 5;
     [self.icon setImageWithURL:[NSURL URLWithString:iconurl] placeholderImage:[UIImage imageNamed:@"default_app"]];
     
     if ([apps.downstatus intValue]==0) {

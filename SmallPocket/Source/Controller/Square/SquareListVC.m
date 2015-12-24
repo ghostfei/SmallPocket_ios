@@ -1,31 +1,34 @@
 //
-//  SquareTableViewController.m
+//  SquareListVC.m
 //  SmallPocket
 //
 //  Created by ghostfei on 15/11/14.
 //  Copyright © 2015年 ghostfei. All rights reserved.
 //
 
-#import "SquareTableViewController.h"
+#import "SquareListVC.h"
 #import "Util.h"
 #import "SearchVC.h"
 
 #import "SquareListCell.h"
 #import "SquareListHeaderCell.h"
 
-@interface SquareTableViewController (){
+@interface SquareListVC ()<UITableViewDelegate,UITableViewDataSource>{
     NSMutableArray *_dataArray;
-    NSMutableArray *_sliderArray;
+    NSArray *_sliderArray;
     
     NSInteger _page;
     NSInteger _limit;
     
     MBProgressHUD *_hud;
+    NSArray *_typeArray;
+    
+    NSString *_type;
 }
 
 @end
 
-@implementation SquareTableViewController
+@implementation SquareListVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,9 +36,9 @@
     self.navigationItem.title = @"广场";
     
     _dataArray = [[NSMutableArray alloc]init];
-    _sliderArray = [[NSMutableArray alloc]init];
     _page = 1;
     _limit = 20;
+    _type = @"0";
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self loadData];
@@ -45,7 +48,20 @@
     UIBarButtonItem *rbi = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"btn_search_select"] style:UIBarButtonItemStylePlain target:self action:@selector(searchAc)];
     self.navigationItem.rightBarButtonItem = rbi;
     
+    UIBarButtonItem *lbi = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"left_type"] style:UIBarButtonItemStylePlain target:self action:@selector(showType)];
+    self.navigationItem.leftBarButtonItem = lbi;
+    
+    UIBarButtonItem *backBar = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backBar;
+    
+    self.scrollView.scrollEnabled = YES;
+    
     [self loadSlider];
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView.contentOffset.y!=0) {
+        _typeView.hidden = YES;
+    }
 }
 - (void)loadNewData {
     _page = 1;
@@ -103,8 +119,8 @@
 
 
 -(void)loadData{
-    
-    NSDictionary *bdic = @{@"udid":@"12",@"page":[NSString stringWithFormat:@"%ld",_page]};
+    NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
+    NSDictionary *bdic = @{@"udid":@"12",@"page":[NSString stringWithFormat:@"%ld",_page],@"type":_type};
     [Api post:API_APPS_LIST parameters:bdic completion:^(id data, NSError *err) {
         [self.tableView.header endRefreshing];
         [self.tableView.footer endRefreshing];
@@ -135,7 +151,56 @@
 
 
 #pragma mark
+-(void)showType{
+    if (_typeView.hidden) {
+        _typeView.hidden = NO;
+        [self loadType];
+    }else{
+        _typeView.hidden = YES;
+    }
+}
+-(void)loadType{
+    for (UIView *vi in _scrollView.subviews) {
+        [vi removeFromSuperview];
+    }
+    
+    [Api post:API_TYPE_LIST parameters:nil completion:^(id data, NSError *err) {
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        YLog(@"json=%@",dic);
+        if ([dic[@"status"]intValue] == 200) {
+            _typeArray = dic[@"data"];
+            _scrollView.contentSize = CGSizeMake(80, _typeArray.count*35);
+            NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:_typeArray];
+            [tempArray insertObject:@{@"name":@"全部",@"id":@"0"} atIndex:0];
+            
+            [tempArray enumerateObjectsUsingBlock:^(NSDictionary *dic, NSUInteger idx, BOOL * _Nonnull stop) {
+                UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, idx*31, 80, 30)];
+                btn.tag = idx;
+                [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [btn setTitle:dic[@"name"] forState:UIControlStateNormal];
+                [btn addTarget:self action:@selector(choseType:) forControlEvents:UIControlEventTouchUpInside];
+                UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, idx*31+30, 80, 1)];
+                line.backgroundColor = [UIColor lightGrayColor];
+                [_scrollView addSubview:line];
+                [_scrollView addSubview:btn];
+            }];
+            
+        }
+    }];
+}
+
+-(void)choseType:(UIButton *)btn{
+    _typeView.hidden = YES;
+    if (btn.tag == 0) {
+        _type = @"0";
+    }else{
+        NSDictionary *dic = _typeArray[btn.tag-1];
+        _type = dic[@"id"];
+    }
+    [self loadData];
+}
 -(void)zanAc:(UIButton *)btn{
+    NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
     NSDictionary *dic = _dataArray[btn.tag];
     NSNumber *like = @1;
     if ([dic[@"approvestatus"]integerValue]==1) {
@@ -154,6 +219,7 @@
 
 -(void)downAc:(UIButton *)btn{
     NSDictionary *dic = _dataArray[btn.tag];
+    NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [Api post:API_DOWN_ACTION parameters:@{@"udid":@"12",@"aid":dic[@"id"]} completion:^(id data, NSError *err) {
         [_hud hide:YES];
@@ -168,7 +234,6 @@
 }
 -(void)searchAc{
     SearchVC *searchVc = [Util createVCFromStoryboard:@"SearchVC"];
-    self.navigationItem.backBarButtonItem = nil;
     [self.navigationController pushViewController:searchVc animated:YES];
 }
 @end

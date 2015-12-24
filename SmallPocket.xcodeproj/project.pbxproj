@@ -31,9 +31,6 @@
 		AD46D2AA1BF775F9002E71D2 /* tabbar_switch_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD46D29F1BF775F9002E71D2 /* tabbar_switch_select@3x.png */; };
 		AD46D2AB1BF775F9002E71D2 /* tabbar_switch@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD46D2A01BF775F9002E71D2 /* tabbar_switch@3x.png */; };
 		AD4729ED1C29AD5100F50EB8 /* AdvTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729BD1C29AD5100F50EB8 /* AdvTableViewController.m */; };
-		AD4729EE1C29AD5100F50EB8 /* LeftVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729C01C29AD5100F50EB8 /* LeftVC.m */; };
-		AD4729EF1C29AD5100F50EB8 /* LikeIndexCollVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729C21C29AD5100F50EB8 /* LikeIndexCollVC.m */; };
-		AD4729F01C29AD5100F50EB8 /* LikeItemCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729C41C29AD5100F50EB8 /* LikeItemCollectionCell.m */; };
 		AD4729F11C29AD5100F50EB8 /* SearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729C61C29AD5100F50EB8 /* SearchVC.m */; };
 		AD4729F21C29AD5100F50EB8 /* AboutUsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729C91C29AD5100F50EB8 /* AboutUsVC.m */; };
 		AD4729F31C29AD5100F50EB8 /* AppTypeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729CB1C29AD5100F50EB8 /* AppTypeListVC.m */; };
@@ -42,7 +39,7 @@
 		AD4729F61C29AD5100F50EB8 /* UploadAppVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729D11C29AD5100F50EB8 /* UploadAppVC.m */; };
 		AD4729F71C29AD5100F50EB8 /* SquareListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729D41C29AD5100F50EB8 /* SquareListCell.m */; };
 		AD4729F81C29AD5100F50EB8 /* SquareListHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729D61C29AD5100F50EB8 /* SquareListHeaderCell.m */; };
-		AD4729F91C29AD5100F50EB8 /* SquareTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729D81C29AD5100F50EB8 /* SquareTableViewController.m */; };
+		AD4729F91C29AD5100F50EB8 /* SquareListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729D81C29AD5100F50EB8 /* SquareListVC.m */; };
 		AD4729FA1C29AD5100F50EB8 /* ISwitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729DB1C29AD5100F50EB8 /* ISwitchViewController.m */; };
 		AD4729FB1C29AD5100F50EB8 /* AppsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729DE1C29AD5100F50EB8 /* AppsModel.m */; };
 		AD4729FC1C29AD5100F50EB8 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729E01C29AD5100F50EB8 /* BaseModel.m */; };
@@ -118,12 +115,6 @@
 		AD46D2A01BF775F9002E71D2 /* tabbar_switch@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_switch@3x.png"; sourceTree = "<group>"; };
 		AD4729BC1C29AD5100F50EB8 /* AdvTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvTableViewController.h; sourceTree = "<group>"; };
 		AD4729BD1C29AD5100F50EB8 /* AdvTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvTableViewController.m; sourceTree = "<group>"; };
-		AD4729BF1C29AD5100F50EB8 /* LeftVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftVC.h; sourceTree = "<group>"; };
-		AD4729C01C29AD5100F50EB8 /* LeftVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftVC.m; sourceTree = "<group>"; };
-		AD4729C11C29AD5100F50EB8 /* LikeIndexCollVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeIndexCollVC.h; sourceTree = "<group>"; };
-		AD4729C21C29AD5100F50EB8 /* LikeIndexCollVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeIndexCollVC.m; sourceTree = "<group>"; };
-		AD4729C31C29AD5100F50EB8 /* LikeItemCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeItemCollectionCell.h; sourceTree = "<group>"; };
-		AD4729C41C29AD5100F50EB8 /* LikeItemCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeItemCollectionCell.m; sourceTree = "<group>"; };
 		AD4729C51C29AD5100F50EB8 /* SearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchVC.h; sourceTree = "<group>"; };
 		AD4729C61C29AD5100F50EB8 /* SearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchVC.m; sourceTree = "<group>"; };
 		AD4729C81C29AD5100F50EB8 /* AboutUsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsVC.h; sourceTree = "<group>"; };
@@ -140,8 +131,8 @@
 		AD4729D41C29AD5100F50EB8 /* SquareListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareListCell.m; sourceTree = "<group>"; };
 		AD4729D51C29AD5100F50EB8 /* SquareListHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareListHeaderCell.h; sourceTree = "<group>"; };
 		AD4729D61C29AD5100F50EB8 /* SquareListHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareListHeaderCell.m; sourceTree = "<group>"; };
-		AD4729D71C29AD5100F50EB8 /* SquareTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareTableViewController.h; sourceTree = "<group>"; };
-		AD4729D81C29AD5100F50EB8 /* SquareTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareTableViewController.m; sourceTree = "<group>"; };
+		AD4729D71C29AD5100F50EB8 /* SquareListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareListVC.h; sourceTree = "<group>"; };
+		AD4729D81C29AD5100F50EB8 /* SquareListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareListVC.m; sourceTree = "<group>"; };
 		AD4729DA1C29AD5100F50EB8 /* ISwitchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISwitchViewController.h; sourceTree = "<group>"; };
 		AD4729DB1C29AD5100F50EB8 /* ISwitchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISwitchViewController.m; sourceTree = "<group>"; };
 		AD4729DD1C29AD5100F50EB8 /* AppsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppsModel.h; sourceTree = "<group>"; };
@@ -307,14 +298,8 @@
 		AD4729BE1C29AD5100F50EB8 /* Like */ = {
 			isa = PBXGroup;
 			children = (
-				AD4729BF1C29AD5100F50EB8 /* LeftVC.h */,
-				AD4729C01C29AD5100F50EB8 /* LeftVC.m */,
 				AD49B82D1C2ABFD000B3D75F /* LikeIndexVC.h */,
 				AD49B82E1C2ABFD000B3D75F /* LikeIndexVC.m */,
-				AD4729C11C29AD5100F50EB8 /* LikeIndexCollVC.h */,
-				AD4729C21C29AD5100F50EB8 /* LikeIndexCollVC.m */,
-				AD4729C31C29AD5100F50EB8 /* LikeItemCollectionCell.h */,
-				AD4729C41C29AD5100F50EB8 /* LikeItemCollectionCell.m */,
 				AD4729C51C29AD5100F50EB8 /* SearchVC.h */,
 				AD4729C61C29AD5100F50EB8 /* SearchVC.m */,
 			);
@@ -341,8 +326,8 @@
 		AD4729D21C29AD5100F50EB8 /* Square */ = {
 			isa = PBXGroup;
 			children = (
-				AD4729D71C29AD5100F50EB8 /* SquareTableViewController.h */,
-				AD4729D81C29AD5100F50EB8 /* SquareTableViewController.m */,
+				AD4729D71C29AD5100F50EB8 /* SquareListVC.h */,
+				AD4729D81C29AD5100F50EB8 /* SquareListVC.m */,
 				AD4729D51C29AD5100F50EB8 /* SquareListHeaderCell.h */,
 				AD4729D61C29AD5100F50EB8 /* SquareListHeaderCell.m */,
 				AD4729D31C29AD5100F50EB8 /* SquareListCell.h */,
@@ -541,6 +526,11 @@
 				TargetAttributes = {
 					AD1D04D41BE8E82E00290AD5 = {
 						CreatedOnToolsVersion = 7.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					AD1D04ED1BE8E82E00290AD5 = {
 						CreatedOnToolsVersion = 7.1;
@@ -681,7 +671,6 @@
 				AD4729F61C29AD5100F50EB8 /* UploadAppVC.m in Sources */,
 				AD4729F21C29AD5100F50EB8 /* AboutUsVC.m in Sources */,
 				AD4729ED1C29AD5100F50EB8 /* AdvTableViewController.m in Sources */,
-				AD4729EF1C29AD5100F50EB8 /* LikeIndexCollVC.m in Sources */,
 				AD472A0D1C29AD8000F50EB8 /* NSManagedObject+Mappings.m in Sources */,
 				AD4729F71C29AD5100F50EB8 /* SquareListCell.m in Sources */,
 				AD4729FE1C29AD5100F50EB8 /* Api.m in Sources */,
@@ -689,10 +678,8 @@
 				AD4729FF1C29AD5100F50EB8 /* SmallPocket.xcdatamodeld in Sources */,
 				AD4729F11C29AD5100F50EB8 /* SearchVC.m in Sources */,
 				AD4729F51C29AD5100F50EB8 /* OpinionVC.m in Sources */,
-				AD4729EE1C29AD5100F50EB8 /* LeftVC.m in Sources */,
-				AD4729F01C29AD5100F50EB8 /* LikeItemCollectionCell.m in Sources */,
 				AD4729F41C29AD5100F50EB8 /* MoreViewController.m in Sources */,
-				AD4729F91C29AD5100F50EB8 /* SquareTableViewController.m in Sources */,
+				AD4729F91C29AD5100F50EB8 /* SquareListVC.m in Sources */,
 				AD4729FA1C29AD5100F50EB8 /* ISwitchViewController.m in Sources */,
 				AD4729FC1C29AD5100F50EB8 /* BaseModel.m in Sources */,
 				AD1D04DA1BE8E82E00290AD5 /* main.m in Sources */,

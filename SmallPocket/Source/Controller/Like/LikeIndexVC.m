@@ -12,9 +12,11 @@
 #import "Util.h"
 #import "OpenWebAppVC.h"
 #import "OpenApps.h"
+#import "SearchVC.h"
 
 @interface LikeIndexVC (){
     NSArray *_dataArray;
+    NSArray *_typeArray;
     
     MBProgressHUD *_hud;
     
@@ -28,14 +30,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     self.view.backgroundColor = KEY_BGCOLOR_BLACK;
     
     self.navigationItem.title = @"喜欢";
     
     UIBarButtonItem *backbar = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backbar;
-    self.tableView.scrollEnabled = NO;
+    
+    UIBarButtonItem *rbi = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"btn_search_select"] style:UIBarButtonItemStylePlain target:self action:@selector(searchAc)];
+    self.navigationItem.rightBarButtonItem = rbi;
+    
+    UIBarButtonItem *lbi = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"left_type"] style:UIBarButtonItemStylePlain target:self action:@selector(showType)];
+    self.navigationItem.leftBarButtonItem = lbi;
+    
     self.scrollView.pagingEnabled = YES;
+    self.typeScroll.scrollEnabled = YES;
     
     _type = @"0";
     
@@ -43,12 +53,20 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadData) name:@"downapp_noti" object:nil];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideDel)];
-    [self.tableView addGestureRecognizer:tap];
+    [self.scrollView addGestureRecognizer:tap];
     
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self hideDel];
+}
+-(void)showType{
+    if (_typeView.hidden) {
+        _typeView.hidden = NO;
+        [self loadType];
+    }else{
+        _typeView.hidden = YES;
+    }
 }
 -(void)initUI{
     for (UIView *vi in _scrollView.subviews) {
@@ -114,6 +132,7 @@
         }
         la.text = dic[@"name"];
         la.textColor = [UIColor whiteColor];
+        la.font = [UIFont systemFontOfSize:13];
         la.textAlignment = NSTextAlignmentCenter;
         [vi addSubview:la];
         
@@ -130,7 +149,47 @@
         tempW ++;
     }];
 }
+-(void)loadType{
+    for (UIView *vi in _typeScroll.subviews) {
+        [vi removeFromSuperview];
+    }
+    
+    [Api post:API_TYPE_LIST parameters:nil completion:^(id data, NSError *err) {
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        YLog(@"json=%@",dic);
+        if ([dic[@"status"]intValue] == 200) {
+            _typeArray = dic[@"data"];
+            _typeScroll.contentSize = CGSizeMake(80, _typeArray.count*35);
+            NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:_typeArray];
+            [tempArray insertObject:@{@"name":@"全部",@"id":@"0"} atIndex:0];
+            
+            [tempArray enumerateObjectsUsingBlock:^(NSDictionary *dic, NSUInteger idx, BOOL * _Nonnull stop) {
+                UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, idx*31, 80, 30)];
+                btn.tag = idx;
+                [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [btn setTitle:dic[@"name"] forState:UIControlStateNormal];
+                [btn addTarget:self action:@selector(choseType:) forControlEvents:UIControlEventTouchUpInside];
+                UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, idx*31+30, 80, 1)];
+                line.backgroundColor = [UIColor lightGrayColor];
+                [_typeScroll addSubview:line];
+                [_typeScroll addSubview:btn];
+            }];
+            
+        }
+    }];
+}
+-(void)choseType:(UIButton *)btn{
+    _typeView.hidden = YES;
+    if (btn.tag == 0) {
+        _type = @"0";
+    }else{
+        NSDictionary *dic = _typeArray[btn.tag-1];
+        _type = dic[@"id"];
+    }
+    [self loadData];
+}
 -(void)loadData{
+    NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
     NSDictionary *bdic = @{@"udid":@"12",@"type":_type};
     
     [Util startActiciView:self.view];
@@ -164,11 +223,11 @@
                 }
             }
         [self initUI];
-        [self.tableView reloadData];
         
     }];
 }
 -(void)hideDel{
+    _typeView.hidden = YES;
     for (int i=0; i<_dataArray.count; i++) {
         UIButton *btn = [self.view viewWithTag:i-10000];
         btn.hidden = YES;
@@ -183,9 +242,10 @@
     }
 }
 -(void)delAc:(UIButton *)btn{
+    NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
     NSDictionary *dic = [_dataArray objectAtIndex:(btn.tag+10000)];
     NSLog(@"dic=%@",dic);
-    _hud = [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [Api post:API_DELACTION parameters:@{@"aid":dic[@"aid"],@"udid":@"12"} completion:^(id data, NSError *err) {
         [_hud hide:YES];
         
@@ -216,5 +276,10 @@
     NSDictionary *param = @{@"name":app.name,@"url":app.url};
     webview.param = param;
     [self.navigationController pushViewController:webview animated:YES];
+}
+
+-(void)searchAc{
+    SearchVC *searchVc = [Util createVCFromStoryboard:@"SearchVC"];
+    [self.navigationController pushViewController:searchVc animated:YES];
 }
 @end
