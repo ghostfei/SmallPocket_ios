@@ -95,7 +95,7 @@
         like = @0;
     }
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [Api post:API_LIKE_ACTION parameters:@{@"udid":@"12",@"aid":dic[@"id"],@"like":like} completion:^(id data, NSError *err) {
+    [Api post:API_LIKE_ACTION parameters:@{@"udid":udid,@"aid":dic[@"id"],@"like":like} completion:^(id data, NSError *err) {
         [_hud hide:YES];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         if ([dic[@"status"]integerValue] == 200) {
@@ -106,10 +106,10 @@
 }
 
 -(void)downAc:(UIButton *)btn{
-    NSDictionary *dic = _dataArray[btn.tag];
     NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
+    NSDictionary *dic = _dataArray[btn.tag];
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [Api post:API_DOWN_ACTION parameters:@{@"udid":@"12",@"aid":dic[@"id"]} completion:^(id data, NSError *err) {
+    [Api post:API_DOWN_ACTION parameters:@{@"udid":udid,@"aid":dic[@"id"]} completion:^(id data, NSError *err) {
         [_hud hide:YES];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"dic=%@",dic);
@@ -129,7 +129,8 @@
 
 
 -(void)searchAction:(NSString *)key{
-    [Api post:API_SEARCH_ACTION parameters:@{@"keyword":key,@"udid":@"12"} completion:^(id data, NSError *err) {
+    NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
+    [Api post:API_SEARCH_ACTION parameters:@{@"keyword":key,@"udid":udid} completion:^(id data, NSError *err) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"json=%@",dic);
         _dataArray = dic[@"data"];

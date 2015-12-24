@@ -40,6 +40,7 @@
     [self.icon setImageWithURL:[NSURL URLWithString:iconurl] placeholderImage:[UIImage imageNamed:@"default_app"]];
     
     if ([apps.downstatus intValue]==0) {
+        self.downBtn.enabled = YES;
         [self.downBtn setImage:[UIImage imageNamed:@"s_down"] forState:UIControlStateNormal];
     }else{
         self.downBtn.enabled = NO;
@@ -50,6 +51,7 @@
         self.zanBtn.enabled = NO;
         [self.zanBtn setImage:[UIImage imageNamed:@"s_like_ed"] forState:UIControlStateNormal];
     }else{
+        self.zanBtn.enabled = YES;
         [self.zanBtn setImage:[UIImage imageNamed:@"s_like"] forState:UIControlStateNormal];
     }
 }

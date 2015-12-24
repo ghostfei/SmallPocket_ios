@@ -25,16 +25,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    [self _initUI]; 
+    
+    [[NSUserDefaults standardUserDefaults]setObject:@"13" forKey:K_DeviceToken];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+    [self _initUI];
+    
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     [self.window setRootViewController:self.tabbarVC];
     [self.window setBackgroundColor:[UIColor whiteColor]];
     
     [NSThread sleepForTimeInterval:2];
-    [self.window makeKeyAndVisible];
+    [self.window makeKeyAndVisible]; 
     
     return YES;
-}
+} 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSString *token = [NSString stringWithFormat:@"%@",deviceToken];
     token = [token stringByReplacingOccurrencesOfString:@"<" withString:@""];
@@ -57,6 +62,7 @@
     //    [[NSUserDefaults standardUserDefaults]setObject:@"no device" forKey:K_registJPushId];
     //    [[NSUserDefaults standardUserDefaults]synchronize];
 }
+//ios8
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
     //    [APService handleRemoteNotification:userInfo];
@@ -167,4 +173,22 @@ fetchCompletionHandler:
     self.tabbarVC.selectedViewController = [self.tabbarVC.viewControllers objectAtIndex:2];//默认选中中间的tabbar
 }
 
+-(void)registPush{
+    //注册push功能
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings
+                                                settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge |
+                                                                  UIUserNotificationTypeSound)
+                                                categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+         NSLog(@"registerForRemoteNotificationSet");
+    } else {
+        // register to receive notifications
+        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge |
+        UIRemoteNotificationTypeAlert |
+        UIRemoteNotificationTypeSound;
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
+        NSLog(@"registerForRemoteNotificationTypes");
+    }
+}
 @end

@@ -86,7 +86,7 @@
         return headerCell;
     }else{
         NSDictionary *dic = _dataArray[indexPath.row-1];
-        cell = [tableView  dequeueReusableCellWithIdentifier:@"SquareListCell"];
+        cell = [tableView  dequeueReusableCellWithIdentifier:@"SquareListCell" forIndexPath:indexPath];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -120,7 +120,8 @@
 
 -(void)loadData{
     NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
-    NSDictionary *bdic = @{@"udid":@"12",@"page":[NSString stringWithFormat:@"%ld",_page],@"type":_type};
+    NSDictionary *bdic = @{@"udid":udid,@"page":[NSString stringWithFormat:@"%ld",_page],@"type":_type};//,@"limit":[NSString stringWithFormat:@"%ld",_limit]};
+    NSLog(@"bdic=%@",bdic);
     [Api post:API_APPS_LIST parameters:bdic completion:^(id data, NSError *err) {
         [self.tableView.header endRefreshing];
         [self.tableView.footer endRefreshing];
@@ -207,12 +208,16 @@
         like = @0;
     }
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [Api post:API_LIKE_ACTION parameters:@{@"udid":@"12",@"aid":dic[@"id"],@"like":like} completion:^(id data, NSError *err) {
+    [Api post:API_LIKE_ACTION parameters:@{@"udid":udid,@"aid":dic[@"id"],@"like":like} completion:^(id data, NSError *err) {
         [_hud hide:YES];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         if ([dic[@"status"]integerValue] == 200) {
             [TSMessage showNotificationWithTitle:dic[@"msg"] subtitle:nil type:TSMessageNotificationTypeSuccess];
-            [self loadData];
+            btn.enabled = NO;
+            [btn setImage:[UIImage imageNamed:@"s_like_ed"] forState:UIControlStateNormal];
+            [self.tableView reloadData];
+        }else{
+            [self.view makeToast:dic[@"msg"]];
         }
     }];
 }
@@ -221,15 +226,20 @@
     NSDictionary *dic = _dataArray[btn.tag];
     NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [Api post:API_DOWN_ACTION parameters:@{@"udid":@"12",@"aid":dic[@"id"]} completion:^(id data, NSError *err) {
+    [Api post:API_DOWN_ACTION parameters:@{@"udid":udid,@"aid":dic[@"id"]} completion:^(id data, NSError *err) {
         [_hud hide:YES];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"dic=%@",dic);
         if ([dic[@"status"]integerValue] == 200) {
             [TSMessage showNotificationWithTitle:dic[@"msg"] subtitle:nil type:TSMessageNotificationTypeSuccess];
-            [self loadData];
+            btn.enabled = NO;
+            [btn setImage:[UIImage imageNamed:@"s_down_ed"] forState:UIControlStateNormal];
+            [self.tableView reloadData];
             [[NSNotificationCenter defaultCenter]postNotificationName:@"downapp_noti" object:nil];
+        }else{
+            [self.view makeToast:dic[@"msg"]];
         }
+
     }];
 }
 -(void)searchAc{

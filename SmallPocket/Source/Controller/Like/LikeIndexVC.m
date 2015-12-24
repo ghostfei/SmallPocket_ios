@@ -190,7 +190,7 @@
 }
 -(void)loadData{
     NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
-    NSDictionary *bdic = @{@"udid":@"12",@"type":_type};
+    NSDictionary *bdic = @{@"udid":udid,@"type":_type};
     
     [Util startActiciView:self.view];
     [Api post:API_LIKE_LIST parameters:bdic completion:^(id data, NSError *err) {
@@ -246,7 +246,7 @@
     NSDictionary *dic = [_dataArray objectAtIndex:(btn.tag+10000)];
     NSLog(@"dic=%@",dic);
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [Api post:API_DELACTION parameters:@{@"aid":dic[@"aid"],@"udid":@"12"} completion:^(id data, NSError *err) {
+    [Api post:API_DELACTION parameters:@{@"aid":dic[@"aid"],@"udid":udid} completion:^(id data, NSError *err) {
         [_hud hide:YES];
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
