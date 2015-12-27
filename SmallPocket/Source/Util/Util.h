@@ -15,6 +15,7 @@
 #import <UIView+Toast.h>
 #import "MJRefresh.h"
 #import "CoreDataManager.h"
+#import "ObjectiveRecord.h"
 
 #import "Api.h"
 
@@ -83,4 +84,5 @@ typedef NS_ENUM(NSInteger,viewType){
 
 //将字符串转化成日期
 + (NSDate *)stringToDate:(NSString *)date;
++ (void)remarkDeleteAll:(NSString *)className where:(NSDictionary *)where;
 @end

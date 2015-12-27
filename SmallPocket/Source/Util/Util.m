@@ -137,6 +137,17 @@
 + (NSDate *)stringToDate:(NSString *)date{
     return [[Util getDateFormatter] dateFromString:date];
 }
-
+//标记删除数据
++ (void)remarkDeleteAll:(NSString *)className where:(NSDictionary *)where;
+{
+    Class class = NSClassFromString(className);
+    NSMutableDictionary *allWhere = [[NSMutableDictionary alloc] initWithDictionary:where];
+    [allWhere setObject:@0 forKey:@"is_deleted"];
+    NSArray *objects = [class where:allWhere]; //清空原有数据
+    for (NSManagedObject *object in objects) {
+        [object setValue:@1 forKey:@"is_deleted"];
+        [object save];
+    }
+}
 
 @end

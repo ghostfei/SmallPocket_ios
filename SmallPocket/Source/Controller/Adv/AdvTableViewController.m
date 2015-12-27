@@ -27,8 +27,10 @@
     UIBarButtonItem *backBtn = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backBtn;
     
-    self.tableView.backgroundColor = KEY_BGCOLOR_BLACK;
+    self.tableView.backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bg"]];
+//    self.tableView.backgroundColor = KEY_BGCOLOR_BLACK;
     self.tableView.header = [Util getMJHeaderTarget:self action:@selector(loadData)];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [[UIView alloc]init];
     
     [self loadData];
@@ -41,10 +43,11 @@
     return _dataArray.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
+    return 124;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    //去除提示字
     for (UIView *la in self.tableView.subviews) {
         if ([la isKindOfClass:[UILabel class]]) {
             [la removeFromSuperview];
@@ -55,12 +58,21 @@
     for (UIView *vi in cell.contentView.subviews) {
         [vi removeFromSuperview];
     }
+    cell.backgroundColor = [UIColor clearColor];
     
     NSDictionary *dic = _dataArray[indexPath.row];
-    UIImageView *imgv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width,100)];
-    imgv.clipsToBounds = YES;
+    UIImageView *imgv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width,120)];
+    
     [imgv setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:dic[@"image"]]] placeholderImage:[UIImage imageNamed:@"btn_back"]];
     [cell.contentView addSubview:imgv];
+    imgv.contentMode = UIViewContentModeScaleAspectFill;
+    imgv.clipsToBounds = YES;
+    [imgv setNeedsDisplay];
+    
+    UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, 150, cell.frame.size.width, 4)];
+    line.backgroundColor = [UIColor clearColor];
+    [cell.contentView addSubview:line];
+    
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

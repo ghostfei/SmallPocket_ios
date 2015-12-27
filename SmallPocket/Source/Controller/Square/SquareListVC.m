@@ -8,13 +8,14 @@
 
 #import "SquareListVC.h"
 #import "Util.h"
+#import "Apps.h"
 #import "SearchVC.h"
 
 #import "SquareListCell.h"
 #import "SquareListHeaderCell.h"
 
 @interface SquareListVC ()<UITableViewDelegate,UITableViewDataSource>{
-    NSMutableArray *_dataArray;
+//    NSMutableArray *self.apps;
     NSArray *_sliderArray;
     
     NSInteger _page;
@@ -27,6 +28,8 @@
     
     NSInteger currentIndex;
     NSInteger PAGENUM;
+    
+    BOOL _firstLoad;
 }
 
 @end
@@ -38,16 +41,18 @@
     
     self.navigationItem.title = @"广场";
     
-    _dataArray = [[NSMutableArray alloc]init];
+    self.apps = [[NSMutableArray alloc]init];
     _sliderArray = [[NSArray alloc]init];
     _page = 1;
     _limit = 5;
     _type = @"0";
+    _firstLoad = YES;
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     self.tableView.header = [Util getMJHeaderTarget:self action:@selector(loadNewData)];
     self.tableView.footer = [Util getMJFooterTarget:self action:@selector(loadMoreData)];
+    self.tableView.tableFooterView = [[UIView alloc]init];
     
     UIBarButtonItem *rbi = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"btn_search_select"] style:UIBarButtonItemStylePlain target:self action:@selector(searchAc)];
     self.navigationItem.rightBarButtonItem = rbi;
@@ -58,13 +63,22 @@
     UIBarButtonItem *backBar = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backBar;
     
-    self.scrollView.scrollEnabled = YES;
+    self.typeScroll.scrollEnabled = YES;
     
     [self loadSlider];
-    [self loadData];
+//    [self reinitData];
+    if (_firstLoad) {
+        [self loadData];
+        _firstLoad = NO;
+    }
 }
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if (scrollView.contentOffset.y!=0) {
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    _typeView.hidden = YES;
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)typeScroll{
+    if (typeScroll.contentOffset.y!=0) {
         _typeView.hidden = YES;
     }
 }
@@ -79,39 +93,39 @@
 }
 #pragma mark - Table view data source
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    [self addAdv];
+    //    [self addAdv];
     return _advView;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 100;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _dataArray.count;
+    return self.apps.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     SquareListCell *cell;
-
-        NSDictionary *dic = _dataArray[indexPath.row];
-        cell = [tableView  dequeueReusableCellWithIdentifier:@"SquareListCell" forIndexPath:indexPath];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        cell.zanBtn.tag = cell.downBtn.tag = indexPath.row-1;
-        
-        [cell setContent:dic];
-        [cell.zanBtn addTarget:self action:@selector(zanAc:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.downBtn addTarget:self action:@selector(downAc:) forControlEvents:UIControlEventTouchUpInside];
-        
-        return cell;
+    
+    NSDictionary *dic = self.apps[indexPath.row];
+    cell = [tableView  dequeueReusableCellWithIdentifier:@"SquareListCell" forIndexPath:indexPath];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    cell.zanBtn.tag = cell.downBtn.tag = indexPath.row-1;
+    
+    [cell setContent:dic];
+    [cell.zanBtn addTarget:self action:@selector(zanAc:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.downBtn addTarget:self action:@selector(downAc:) forControlEvents:UIControlEventTouchUpInside];
+    
+    return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-        NSDictionary *dic = _dataArray[indexPath.row];
-        NSString *desc = dic[@"desc"];
-        CGSize size = CGSizeMake(self.view.frame.size.width-80, 1000);
-        CGSize infoSize = [desc sizeWithFont:[UIFont systemFontOfSize:16] constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
-        
-        return 44+infoSize.height;
+    NSDictionary *dic = self.apps[indexPath.row];
+    NSString *desc = dic[@"desc"];
+    CGSize size = CGSizeMake(self.view.frame.size.width-80, 1000);
+    CGSize infoSize = [desc sizeWithFont:[UIFont systemFontOfSize:16] constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
+    
+    return 44+infoSize.height;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -123,47 +137,56 @@
     NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
     NSDictionary *bdic = @{@"udid":udid,@"page":[NSString stringWithFormat:@"%ld",_page],@"type":_type,@"limit":[NSString stringWithFormat:@"%ld",_limit]};
     NSLog(@"bdic=%@",bdic);
+    @try{
     [Api post:API_APPS_LIST parameters:bdic completion:^(id data, NSError *err) {
         [self.tableView.header endRefreshing];
         [self.tableView.footer endRefreshing];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        YLog(@"dic=%@",dic);
+        //        YLog(@"dic=%@",dic);
         if ([dic[@"status"]intValue] == 200 || [dic[@"status"]intValue] == 201) {
             NSArray *results = dic[@"data"];
-            
+            if (_page == 1) {
+                [self.apps removeAllObjects];
+//                [Util remarkDeleteAll:@"Apps" where:nil];
+            }
             if (results.count < _limit) {
                 [self.tableView.footer noticeNoMoreData];
-            } 
-            
-            if (_page == 1) {
-                [_dataArray removeAllObjects];
             }
-            [_dataArray addObjectsFromArray:results];
-            [self.tableView reloadData];
+            
+            [results enumerateObjectsUsingBlock:^(NSDictionary *dic, NSUInteger idx, BOOL * _Nonnull stop) {
+                Apps *app = [Apps findOrCreate:dic];
+                app.is_deleted = @0;
+                [app save];
+            }];
+             
+                        [self.apps addObjectsFromArray:results];
+                        [self.tableView reloadData];
+            
+            
         }
-    }];
+    }];}@catch(NSException *ex){NSLog(@"ex1=%@",ex);}
 }
 -(void)loadSlider{
     [Api post:API_ADV_LIST parameters:@{@"type":@"2"} completion:^(NSData *data, NSError *err) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         _sliderArray = dic[@"data"];
-        NSLog(@"slider=%@",dic);
-//        [self.tableView reloadData];
+        //        NSLog(@"slider=%@",dic);
+        //        [self.tableView reloadData];
         [self addAdv];
     }];
 }
 -(void)addAdv{
-    _advScroll.contentSize = CGSizeMake(self.view.frame.size.width*_sliderArray.count, 100);
     
     PAGENUM = _sliderArray.count;
     _advScroll.pagingEnabled=YES;
     _advScroll.scrollEnabled=YES;
     _advScroll.showsHorizontalScrollIndicator=NO;
     
+    CGRect frame  = _advScroll.frame;
     
     for (int i=0; i<PAGENUM; i++) {
         NSDictionary *dic=_sliderArray[i];
-        UIImageView *imgview = [[UIImageView alloc]initWithFrame:CGRectMake(i*self.view.frame.size.width, 0, self.view.frame.size.width, 100)];
+        UIImageView *imgview = [[UIImageView alloc]initWithFrame:CGRectMake(i*frame.origin.x,frame.origin.y ,frame.size.width,frame.size.height)];
         imgview.contentMode = UIViewContentModeScaleAspectFill;
         imgview.clipsToBounds = YES;
         [imgview setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:dic[@"image"]]] placeholderImage:[UIImage imageNamed:@""]];
@@ -194,7 +217,7 @@
     }
 }
 -(void)loadType{
-    for (UIView *vi in _scrollView.subviews) {
+    for (UIView *vi in _typeScroll.subviews) {
         [vi removeFromSuperview];
     }
     
@@ -203,7 +226,7 @@
         YLog(@"json=%@",dic);
         if ([dic[@"status"]intValue] == 200) {
             _typeArray = dic[@"data"];
-            _scrollView.contentSize = CGSizeMake(80, _typeArray.count*35);
+            _typeScroll.contentSize = CGSizeMake(80, _typeArray.count*35);
             NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:_typeArray];
             [tempArray insertObject:@{@"name":@"全部",@"id":@"0"} atIndex:0];
             
@@ -215,8 +238,8 @@
                 [btn addTarget:self action:@selector(choseType:) forControlEvents:UIControlEventTouchUpInside];
                 UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, idx*31+30, 80, 1)];
                 line.backgroundColor = [UIColor lightGrayColor];
-                [_scrollView addSubview:line];
-                [_scrollView addSubview:btn];
+                [_typeScroll addSubview:line];
+                [_typeScroll addSubview:btn];
             }];
             
         }
@@ -231,11 +254,13 @@
         NSDictionary *dic = _typeArray[btn.tag-1];
         _type = dic[@"id"];
     }
+    _page = 1;
+    [self.apps removeAllObjects];
     [self loadData];
 }
 -(void)zanAc:(UIButton *)btn{
     NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
-    NSDictionary *dic = _dataArray[btn.tag];
+    NSDictionary *dic = self.apps[btn.tag];
     NSNumber *like = @1;
     if ([dic[@"approvestatus"]integerValue]==1) {
         like = @0;
@@ -246,11 +271,11 @@
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         if ([dic[@"status"]integerValue] == 200) {
             [TSMessage showNotificationWithTitle:dic[@"msg"] subtitle:nil type:TSMessageNotificationTypeSuccess];
-//            btn.enabled = NO;
-//            [btn setImage:[UIImage imageNamed:@"s_like_ed"] forState:UIControlStateNormal];
-//            [btn setNeedsDisplay];
-            _page = 1;
-            [self loadData];
+            btn.enabled = NO;
+            [btn setImage:[UIImage imageNamed:@"s_like_ed"] forState:UIControlStateNormal];
+            [btn setNeedsDisplay];
+            //            _page = 1;
+            //            [self loadData];
         }else{
             [self.view makeToast:dic[@"msg"]];
         }
@@ -258,7 +283,7 @@
 }
 
 -(void)downAc:(UIButton *)btn{
-    NSDictionary *dic = _dataArray[btn.tag];
+    NSDictionary *dic = self.apps[btn.tag];
     NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [Api post:API_DOWN_ACTION parameters:@{@"udid":udid,@"aid":dic[@"id"]} completion:^(id data, NSError *err) {
@@ -268,16 +293,16 @@
         if ([dic[@"status"]integerValue] == 200) {
             [TSMessage showNotificationWithTitle:dic[@"msg"] subtitle:nil type:TSMessageNotificationTypeSuccess];
             
-//            btn.enabled = NO;
-//            [btn setImage:[UIImage imageNamed:@"s_down_ed"] forState:UIControlStateNormal];
-//            [btn setNeedsDisplay];
-            _page = 1;
-            [self loadData];
+            btn.enabled = NO;
+            [btn setImage:[UIImage imageNamed:@"s_down_ed"] forState:UIControlStateNormal];
+            [btn setNeedsDisplay];
+            //            _page = 1;
+            //            [self loadData];
             [[NSNotificationCenter defaultCenter]postNotificationName:@"downapp_noti" object:nil];
         }else{
             [self.view makeToast:dic[@"msg"]];
         }
-
+        
     }];
 }
 -(void)searchAc{
@@ -295,10 +320,10 @@
     [UIView commitAnimations];
     _pageC.currentPage=whichPage;
 }
-#pragma page跟随scrollview滑动
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView1{
-    CGPoint offset=scrollView1.contentOffset;
-    CGRect bounds=scrollView1.frame;
+#pragma page跟随typeScroll滑动
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)typeScroll1{
+    CGPoint offset=typeScroll1.contentOffset;
+    CGRect bounds=typeScroll1.frame;
     [_pageC setCurrentPage:offset.x/bounds.size.width];
     currentIndex=_pageC.currentPage;
 }

@@ -46,6 +46,10 @@
     
     self.scrollView.pagingEnabled = YES;
     self.typeScroll.scrollEnabled = YES;
+    UIImageView *view = [[UIImageView alloc]initWithFrame:_scrollView.frame];
+    view.image = [UIImage imageNamed:@"bg"];
+    view.tag = -1000;
+    [self.scrollView addSubview:view];
     
     _type = @"0";
     
@@ -70,7 +74,9 @@
 }
 -(void)initUI{
     for (UIView *vi in _scrollView.subviews) {
-        [vi removeFromSuperview];
+        if (vi.tag != -1000) {
+            [vi removeFromSuperview];
+        }
     }
     
     if (_dataArray.count==0) {

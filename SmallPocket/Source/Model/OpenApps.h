@@ -10,7 +10,6 @@
 #import <CoreData/CoreData.h>
 #import "ObjectiveRecord.h"
 
-NS_ASSUME_NONNULL_BEGIN
 
 @interface OpenApps : NSManagedObject
 
@@ -23,6 +22,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) double openTime;
 
 @end
-
-NS_ASSUME_NONNULL_END
+ 
  

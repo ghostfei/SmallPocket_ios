@@ -24,7 +24,11 @@
     // Do any additional setup after loading the view.
     
 
-    self.view.backgroundColor = KEY_BGCOLOR_BLACK;
+//    self.view.backgroundColor = KEY_BGCOLOR_BLACK;
+    UIImageView *view = [[UIImageView alloc]initWithFrame:_scrollView.frame];
+    view.image = [UIImage imageNamed:@"bg"];
+    view.tag = -100;
+    [self.scrollView addSubview:view];
     
     UIBarButtonItem *backbar = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backbar;
@@ -38,7 +42,9 @@
 }
 -(void)loadData{
     for (UIView *vi in _scrollView.subviews) {
-        [vi removeFromSuperview];
+        if (vi.tag != -100) {
+            [vi removeFromSuperview];
+        }
     }
     
     _opens = [OpenApps where:@{} order:@{@"openTime":@"desc"} limit:@12];

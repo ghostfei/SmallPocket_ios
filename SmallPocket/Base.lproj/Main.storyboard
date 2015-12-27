@@ -179,6 +179,7 @@
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHG-yC-Gyf">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="3cF-bj-Ygp" id="D25-GV-3AS"/>
                                 </connections>
@@ -242,7 +243,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="66"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="39z-zi-9hg" id="Wqr-XJ-wjt">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="66"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="65.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dqv-Sd-JeJ">
@@ -383,8 +384,8 @@
                         <outlet property="advScroll" destination="c67-Dx-TPW" id="Jxo-bu-0Z3"/>
                         <outlet property="advView" destination="7rI-Il-TGw" id="rML-tr-KC4"/>
                         <outlet property="pageC" destination="bJp-bt-L6b" id="75P-G6-JaQ"/>
-                        <outlet property="scrollView" destination="gYu-wS-Ska" id="Mp8-My-ubi"/>
                         <outlet property="tableView" destination="ZXR-lY-SvL" id="RdH-sc-IcD"/>
+                        <outlet property="typeScroll" destination="gYu-wS-Ska" id="OLI-av-lOj"/>
                         <outlet property="typeView" destination="gnZ-6h-JYn" id="Pe0-Iu-hOh"/>
                     </connections>
                 </viewController>
