@@ -40,7 +40,7 @@
         [self.navigationController pushViewController:[Util createVCFromStoryboard:@"UploadAppVC"] animated:YES];
     }
     if (indexPath.section ==3 && indexPath.row == 1) {
-        [self.view makeToast:@"敬请期待"];
+        [Util showHintMessage:@"敬请期待"];
     }
     
 }

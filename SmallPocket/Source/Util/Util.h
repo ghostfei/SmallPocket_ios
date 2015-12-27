@@ -31,8 +31,8 @@ typedef NS_ENUM(NSInteger,viewType){
 #define YLog(...);
 #endif
 
-//#define DEFAULT_API_URL @"http://120.24.159.129/SmallPocket/"
-#define DEFAULT_API_URL @"http://127.0.0.1:8888/SmallPocket/"
+#define DEFAULT_API_URL @"http://120.24.159.129/SmallPocket/"
+//#define DEFAULT_API_URL @"http://127.0.0.1:8888/SmallPocket/"
 #define REQUEST_TIME_OUT 20 //网络请求 超时时间
 
 #define K_DeviceToken @"K_DeviceToken"
@@ -85,4 +85,5 @@ typedef NS_ENUM(NSInteger,viewType){
 //将字符串转化成日期
 + (NSDate *)stringToDate:(NSString *)date;
 + (void)remarkDeleteAll:(NSString *)className where:(NSDictionary *)where;
++ (void)showHintMessage:(NSString *)message;
 @end

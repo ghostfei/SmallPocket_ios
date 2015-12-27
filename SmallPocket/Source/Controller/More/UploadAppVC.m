@@ -124,7 +124,7 @@
         if ([dic[@"status"]intValue] == 200) {
             [self.navigationController popViewControllerAnimated:YES];
         }else{
-//            [self.view makeToast:@"未知错误"];
+//            [Util showHintMessage:@"未知错误"];
         }
     }];
 }

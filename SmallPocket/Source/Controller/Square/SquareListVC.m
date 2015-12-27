@@ -15,7 +15,7 @@
 #import "SquareListHeaderCell.h"
 
 @interface SquareListVC ()<UITableViewDelegate,UITableViewDataSource>{
-//    NSMutableArray *self.apps;
+    //    NSMutableArray *self.apps;
     NSArray *_sliderArray;
     
     NSInteger _page;
@@ -44,7 +44,7 @@
     self.apps = [[NSMutableArray alloc]init];
     _sliderArray = [[NSArray alloc]init];
     _page = 1;
-    _limit = 5;
+    _limit = 20;
     _type = @"0";
     _firstLoad = YES;
     
@@ -66,7 +66,7 @@
     self.typeScroll.scrollEnabled = YES;
     
     [self loadSlider];
-//    [self reinitData];
+    //    [self reinitData];
     if (_firstLoad) {
         [self loadData];
         _firstLoad = NO;
@@ -137,7 +137,7 @@
     NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
     NSDictionary *bdic = @{@"udid":udid,@"page":[NSString stringWithFormat:@"%ld",_page],@"type":_type,@"limit":[NSString stringWithFormat:@"%ld",_limit]};
     NSLog(@"bdic=%@",bdic);
-    @try{
+    
     [Api post:API_APPS_LIST parameters:bdic completion:^(id data, NSError *err) {
         [self.tableView.header endRefreshing];
         [self.tableView.footer endRefreshing];
@@ -147,7 +147,7 @@
             NSArray *results = dic[@"data"];
             if (_page == 1) {
                 [self.apps removeAllObjects];
-//                [Util remarkDeleteAll:@"Apps" where:nil];
+                //                [Util remarkDeleteAll:@"Apps" where:nil];
             }
             if (results.count < _limit) {
                 [self.tableView.footer noticeNoMoreData];
@@ -158,13 +158,13 @@
                 app.is_deleted = @0;
                 [app save];
             }];
-             
-                        [self.apps addObjectsFromArray:results];
-                        [self.tableView reloadData];
+            
+            [self.apps addObjectsFromArray:results];
+            [self.tableView reloadData];
             
             
         }
-    }];}@catch(NSException *ex){NSLog(@"ex1=%@",ex);}
+    }];
 }
 -(void)loadSlider{
     [Api post:API_ADV_LIST parameters:@{@"type":@"2"} completion:^(NSData *data, NSError *err) {
@@ -176,7 +176,7 @@
     }];
 }
 -(void)addAdv{
-    
+    _advScroll.contentSize = CGSizeMake(_sliderArray.count * self.view.frame.size.width,100);
     PAGENUM = _sliderArray.count;
     _advScroll.pagingEnabled=YES;
     _advScroll.scrollEnabled=YES;
@@ -186,7 +186,7 @@
     
     for (int i=0; i<PAGENUM; i++) {
         NSDictionary *dic=_sliderArray[i];
-        UIImageView *imgview = [[UIImageView alloc]initWithFrame:CGRectMake(i*frame.origin.x,frame.origin.y ,frame.size.width,frame.size.height)];
+        UIImageView *imgview = [[UIImageView alloc]initWithFrame:CGRectMake(i*self.view.frame.size.width,frame.origin.y ,frame.size.width,frame.size.height)];
         imgview.contentMode = UIViewContentModeScaleAspectFill;
         imgview.clipsToBounds = YES;
         [imgview setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:dic[@"image"]]] placeholderImage:[UIImage imageNamed:@""]];
@@ -277,7 +277,7 @@
             //            _page = 1;
             //            [self loadData];
         }else{
-            [self.view makeToast:dic[@"msg"]];
+            [Util showHintMessage:dic[@"msg"]];
         }
     }];
 }
@@ -300,7 +300,7 @@
             //            [self loadData];
             [[NSNotificationCenter defaultCenter]postNotificationName:@"downapp_noti" object:nil];
         }else{
-            [self.view makeToast:dic[@"msg"]];
+            [Util showHintMessage:dic[@"msg"]];
         }
         
     }];

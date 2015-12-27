@@ -258,9 +258,9 @@
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         YLog(@"json=%@",dic);
         if ([dic[@"status"]integerValue ] == 200) {
-            [self.view makeToast:@"删除成功"];
+            [Util showHintMessage:@"删除成功"];
         }else{
-            [self.view makeToast:@"网络异常"];
+            [Util showHintMessage:@"网络异常"];
         }
         [self loadData];
         

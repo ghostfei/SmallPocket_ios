@@ -149,5 +149,29 @@
         [object save];
     }
 }
+//显示提示信息
++ (void)showHintMessage:(NSString *)message
+{
+    [Util showHintMessage:message afterDelay:2.f];
+}
 
+//显示提示信息（指定显示时间）
++ (void)showHintMessage:(NSString *)message afterDelay:(NSTimeInterval)delay
+{
+    // UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    // UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    // NSLog(@"window:%@,view:%@",window,window.rootViewController.view);
+    UIViewController *topController =
+    [UIApplication sharedApplication].keyWindow.rootViewController;
+    while (topController.presentedViewController) {
+        topController = topController.presentedViewController;
+    }
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:topController.view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.removeFromSuperViewOnHide = YES;
+    hud.detailsLabelText = message;
+    [hud show:YES];
+    [hud hide:YES afterDelay:delay];
+}
 @end
