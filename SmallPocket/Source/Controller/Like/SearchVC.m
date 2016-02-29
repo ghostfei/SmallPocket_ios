@@ -88,7 +88,7 @@
 
 #pragma mark
 -(void)zanAc:(UIButton *)btn{
-    NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
+    NSString *udid = [Util getDeveiceToken];
     NSDictionary *dic = _dataArray[btn.tag];
     NSNumber *like = @1;
     if ([dic[@"approvestatus"]integerValue]==1) {
@@ -106,7 +106,7 @@
 }
 
 -(void)downAc:(UIButton *)btn{
-    NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
+    NSString *udid =[Util getDeveiceToken];
     NSDictionary *dic = _dataArray[btn.tag];
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [Api post:API_DOWN_ACTION parameters:@{@"udid":udid,@"aid":dic[@"id"]} completion:^(id data, NSError *err) {
@@ -129,7 +129,7 @@
 
 
 -(void)searchAction:(NSString *)key{
-    NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
+    NSString *udid = [Util getDeveiceToken];
     [Api post:API_SEARCH_ACTION parameters:@{@"keyword":key,@"udid":udid} completion:^(id data, NSError *err) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"json=%@",dic);

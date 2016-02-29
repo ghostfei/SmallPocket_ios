@@ -195,8 +195,7 @@
     [self loadData];
 }
 -(void)loadData{
-    NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
-    NSDictionary *bdic = @{@"udid":udid,@"type":_type};
+    NSDictionary *bdic = @{@"udid":[Util getDeveiceToken],@"type":_type};
     
     [Util startActiciView:self.view];
     [Api post:API_LIKE_LIST parameters:bdic completion:^(id data, NSError *err) {
@@ -248,7 +247,7 @@
     }
 }
 -(void)delAc:(UIButton *)btn{
-    NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
+    NSString *udid = [Util getDeveiceToken];
     NSDictionary *dic = [_dataArray objectAtIndex:(btn.tag+10000)];
     NSLog(@"dic=%@",dic);
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

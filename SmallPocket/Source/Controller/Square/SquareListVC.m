@@ -134,7 +134,7 @@
 
 
 -(void)loadData{
-    NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
+    NSString *udid = [Util getDeveiceToken];
     NSDictionary *bdic = @{@"udid":udid,@"page":[NSString stringWithFormat:@"%ld",_page],@"type":_type,@"limit":[NSString stringWithFormat:@"%ld",_limit]};
     NSLog(@"bdic=%@",bdic);
     
@@ -228,7 +228,7 @@
     [self loadData];
 }
 -(void)zanAc:(UIButton *)btn{
-    NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
+    NSString *udid = [Util getDeveiceToken];
     NSDictionary *dic = self.apps[btn.tag];
     NSNumber *like = @1;
     if ([dic[@"approvestatus"]integerValue]==1) {
@@ -253,7 +253,7 @@
 
 -(void)downAc:(UIButton *)btn{
     NSDictionary *dic = self.apps[btn.tag];
-    NSString *udid = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
+    NSString *udid = [Util getDeveiceToken];
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [Api post:API_DOWN_ACTION parameters:@{@"udid":udid,@"aid":dic[@"id"]} completion:^(id data, NSError *err) {
         [_hud hide:YES];
