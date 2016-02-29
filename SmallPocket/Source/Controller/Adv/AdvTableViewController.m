@@ -62,12 +62,12 @@
     
     NSDictionary *dic = _dataArray[indexPath.row];
     UIImageView *imgv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width,120)];
+    [cell.contentView addSubview:imgv];
     
     [imgv setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:dic[@"image"]]] placeholderImage:[UIImage imageNamed:@"btn_back"]];
-    [cell.contentView addSubview:imgv];
     imgv.contentMode = UIViewContentModeScaleAspectFill;
     imgv.clipsToBounds = YES;
-    [imgv setNeedsDisplay];
+//    [imgv setNeedsDisplay];
     
     UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, 150, cell.frame.size.width, 4)];
     line.backgroundColor = [UIColor clearColor];

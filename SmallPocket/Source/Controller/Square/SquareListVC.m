@@ -172,40 +172,9 @@
         _sliderArray = dic[@"data"];
         //        NSLog(@"slider=%@",dic);
         //        [self.tableView reloadData];
-        [self addAdv];
+//        [self addAdv];
     }];
 }
--(void)addAdv{
-    _advScroll.contentSize = CGSizeMake(_sliderArray.count * self.view.frame.size.width,100);
-    PAGENUM = _sliderArray.count;
-    _advScroll.pagingEnabled=YES;
-    _advScroll.scrollEnabled=YES;
-    _advScroll.showsHorizontalScrollIndicator=NO;
-    
-    CGRect frame  = _advScroll.frame;
-    
-    for (int i=0; i<PAGENUM; i++) {
-        NSDictionary *dic=_sliderArray[i];
-        UIImageView *imgview = [[UIImageView alloc]initWithFrame:CGRectMake(i*self.view.frame.size.width,frame.origin.y ,frame.size.width,frame.size.height)];
-        imgview.contentMode = UIViewContentModeScaleAspectFill;
-        imgview.clipsToBounds = YES;
-        [imgview setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:dic[@"image"]]] placeholderImage:[UIImage imageNamed:@""]];
-        
-        [_advScroll addSubview:imgview];
-    }
-    
-    
-    //定义PageController 设定总页数，当前页，定义当控件被用户操作时,要触发的动作。
-    _pageC.numberOfPages = PAGENUM;
-    _pageC.currentPage = 0;
-    [_pageC addTarget:self action:@selector(pageTurn:) forControlEvents:UIControlEventValueChanged];
-    
-    //使用NSTimer实现定时触发滚动控件滚动的动作。
-    currentIndex = 0;
-    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(scrollTimer) userInfo:nil repeats:YES];
-    
-}
-
 
 #pragma mark
 -(void)showType{
