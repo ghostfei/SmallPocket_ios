@@ -92,13 +92,13 @@
     [self loadData];
 }
 #pragma mark - Table view data source
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    //    [self addAdv];
-    return _advView;
-}
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 100;
-}
+//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    //    [self addAdv];
+////    return _advView;
+//}
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    return 100;
+//}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.apps.count;
 }
@@ -172,7 +172,7 @@
         _sliderArray = dic[@"data"];
         //        NSLog(@"slider=%@",dic);
         //        [self.tableView reloadData];
-        [self addAdv];
+//        [self addAdv];
     }];
 }
 -(void)addAdv{

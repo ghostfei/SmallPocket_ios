@@ -68,6 +68,10 @@
 		ADACFC3C1C2E534B009D9C12 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADACFC381C2E534B009D9C12 /* Default@2x.png */; };
 		ADACFC411C301220009D9C12 /* Apps.m in Sources */ = {isa = PBXBuildFile; fileRef = ADACFC3E1C301220009D9C12 /* Apps.m */; };
 		ADD2440F1C09DC95001EAC3E /* left_type@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADD2440E1C09DC95001EAC3E /* left_type@2x.png */; };
+		AF7893FB1C3BB678005A2E24 /* YJYYCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7893F41C3BB678005A2E24 /* YJYYCollectionView.m */; };
+		AF7893FC1C3BB678005A2E24 /* YJYYCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7893F61C3BB678005A2E24 /* YJYYCollectionViewCell.m */; };
+		AF7893FD1C3BB678005A2E24 /* YJYYCollectionViewFlowlayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7893F81C3BB678005A2E24 /* YJYYCollectionViewFlowlayout.m */; };
+		AF7893FE1C3BB678005A2E24 /* YJYYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7893FA1C3BB678005A2E24 /* YJYYPageControl.m */; };
 		AF871DE81C2BDEE40037AD41 /* tabbar_adv_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF871DDE1C2BDEE40037AD41 /* tabbar_adv_select@2x.png */; };
 		AF871DE91C2BDEE40037AD41 /* tabbar_adv@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF871DDF1C2BDEE40037AD41 /* tabbar_adv@2x.png */; };
 		AF871DEA1C2BDEE40037AD41 /* tabbar_like_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF871DE01C2BDEE40037AD41 /* tabbar_like_select@2x.png */; };
@@ -188,6 +192,14 @@
 		ADACFC3D1C301220009D9C12 /* Apps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Apps.h; sourceTree = "<group>"; };
 		ADACFC3E1C301220009D9C12 /* Apps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Apps.m; sourceTree = "<group>"; };
 		ADD2440E1C09DC95001EAC3E /* left_type@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_type@2x.png"; sourceTree = "<group>"; };
+		AF7893F31C3BB678005A2E24 /* YJYYCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJYYCollectionView.h; sourceTree = "<group>"; };
+		AF7893F41C3BB678005A2E24 /* YJYYCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJYYCollectionView.m; sourceTree = "<group>"; };
+		AF7893F51C3BB678005A2E24 /* YJYYCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJYYCollectionViewCell.h; sourceTree = "<group>"; };
+		AF7893F61C3BB678005A2E24 /* YJYYCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJYYCollectionViewCell.m; sourceTree = "<group>"; };
+		AF7893F71C3BB678005A2E24 /* YJYYCollectionViewFlowlayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJYYCollectionViewFlowlayout.h; sourceTree = "<group>"; };
+		AF7893F81C3BB678005A2E24 /* YJYYCollectionViewFlowlayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJYYCollectionViewFlowlayout.m; sourceTree = "<group>"; };
+		AF7893F91C3BB678005A2E24 /* YJYYPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJYYPageControl.h; sourceTree = "<group>"; };
+		AF7893FA1C3BB678005A2E24 /* YJYYPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJYYPageControl.m; sourceTree = "<group>"; };
 		AF871DDE1C2BDEE40037AD41 /* tabbar_adv_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_adv_select@2x.png"; sourceTree = "<group>"; };
 		AF871DDF1C2BDEE40037AD41 /* tabbar_adv@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_adv@2x.png"; sourceTree = "<group>"; };
 		AF871DE01C2BDEE40037AD41 /* tabbar_like_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_like_select@2x.png"; sourceTree = "<group>"; };
@@ -413,6 +425,7 @@
 		AD472A021C29AD8000F50EB8 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				AF7893F21C3BB678005A2E24 /* YJYYAutoScroll */,
 				AD472A031C29AD8000F50EB8 /* ObjectiveRecord */,
 			);
 			path = Vender;
@@ -507,6 +520,21 @@
 				AD46D2A01BF775F9002E71D2 /* tabbar_switch@3x.png */,
 			);
 			path = tabbar;
+			sourceTree = "<group>";
+		};
+		AF7893F21C3BB678005A2E24 /* YJYYAutoScroll */ = {
+			isa = PBXGroup;
+			children = (
+				AF7893F31C3BB678005A2E24 /* YJYYCollectionView.h */,
+				AF7893F41C3BB678005A2E24 /* YJYYCollectionView.m */,
+				AF7893F51C3BB678005A2E24 /* YJYYCollectionViewCell.h */,
+				AF7893F61C3BB678005A2E24 /* YJYYCollectionViewCell.m */,
+				AF7893F71C3BB678005A2E24 /* YJYYCollectionViewFlowlayout.h */,
+				AF7893F81C3BB678005A2E24 /* YJYYCollectionViewFlowlayout.m */,
+				AF7893F91C3BB678005A2E24 /* YJYYPageControl.h */,
+				AF7893FA1C3BB678005A2E24 /* YJYYPageControl.m */,
+			);
+			path = YJYYAutoScroll;
 			sourceTree = "<group>";
 		};
 		E779EA0DF0B602345FAB8758 /* Pods */ = {
@@ -722,7 +750,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD4729F31C29AD5100F50EB8 /* AppTypeListVC.m in Sources */,
+				AF7893FB1C3BB678005A2E24 /* YJYYCollectionView.m in Sources */,
 				AD1D04DD1BE8E82E00290AD5 /* AppDelegate.m in Sources */,
+				AF7893FD1C3BB678005A2E24 /* YJYYCollectionViewFlowlayout.m in Sources */,
 				AD472A0B1C29AD8000F50EB8 /* CoreDataManager.m in Sources */,
 				AD4729F81C29AD5100F50EB8 /* SquareListHeaderCell.m in Sources */,
 				AD472A011C29AD5100F50EB8 /* OpenWebAppVC.m in Sources */,
@@ -730,6 +760,7 @@
 				AD4729FB1C29AD5100F50EB8 /* AppsModel.m in Sources */,
 				AD472A001C29AD5100F50EB8 /* Util.m in Sources */,
 				AD4729F61C29AD5100F50EB8 /* UploadAppVC.m in Sources */,
+				AF7893FE1C3BB678005A2E24 /* YJYYPageControl.m in Sources */,
 				AD4729F21C29AD5100F50EB8 /* AboutUsVC.m in Sources */,
 				ADACFC411C301220009D9C12 /* Apps.m in Sources */,
 				AD4729ED1C29AD5100F50EB8 /* AdvTableViewController.m in Sources */,
@@ -742,6 +773,7 @@
 				AD4729F51C29AD5100F50EB8 /* OpinionVC.m in Sources */,
 				AD4729F41C29AD5100F50EB8 /* MoreViewController.m in Sources */,
 				AD4729F91C29AD5100F50EB8 /* SquareListVC.m in Sources */,
+				AF7893FC1C3BB678005A2E24 /* YJYYCollectionViewCell.m in Sources */,
 				AD4729FA1C29AD5100F50EB8 /* ISwitchViewController.m in Sources */,
 				AD4729FC1C29AD5100F50EB8 /* BaseModel.m in Sources */,
 				AD1D04DA1BE8E82E00290AD5 /* main.m in Sources */,
