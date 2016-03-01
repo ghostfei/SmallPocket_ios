@@ -174,4 +174,13 @@
     [hud show:YES];
     [hud hide:YES afterDelay:delay];
 }
++(NSString *)getDeveiceToken{
+    NSString *token = [[NSUserDefaults standardUserDefaults]objectForKey:K_DeviceToken];
+    if (token == nil || token.length == 0) {
+        token = @"暂无";
+    }
+    NSLog(@"util token=%@",token);
+    return token;
+}
+
 @end

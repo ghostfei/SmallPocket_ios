@@ -59,6 +59,7 @@
 		AD59DC7A1BFCDA9D0027602A /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD59DC791BFCDA9D0027602A /* CoreFoundation.framework */; };
 		AD59DC7C1BFCDAA50027602A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD59DC7B1BFCDAA50027602A /* Foundation.framework */; };
 		AD59DC7E1BFCDAAF0027602A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD59DC7D1BFCDAAF0027602A /* CoreGraphics.framework */; };
+		AD8C1CF91C4134BF00D6DA41 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD8C1CF81C4134BF00D6DA41 /* SystemConfiguration.framework */; };
 		AD9EDFC11C0AEE7900814ABD /* btn_search_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD9EDFBF1C0AEE7900814ABD /* btn_search_select@2x.png */; };
 		AD9EDFC21C0AEE7900814ABD /* btn_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD9EDFC01C0AEE7900814ABD /* btn_search@2x.png */; };
 		ADA64AE31BF72DC600FAA433 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = ADA64AE21BF72DC600FAA433 /* Podfile */; };
@@ -182,6 +183,7 @@
 		AD59DC791BFCDA9D0027602A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		AD59DC7B1BFCDAA50027602A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AD59DC7D1BFCDAAF0027602A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AD8C1CF81C4134BF00D6DA41 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AD9EDFBF1C0AEE7900814ABD /* btn_search_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_search_select@2x.png"; sourceTree = "<group>"; };
 		AD9EDFC01C0AEE7900814ABD /* btn_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_search@2x.png"; sourceTree = "<group>"; };
 		ADA64AE21BF72DC600FAA433 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -223,6 +225,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD8C1CF91C4134BF00D6DA41 /* SystemConfiguration.framework in Frameworks */,
 				AD59DC7E1BFCDAAF0027602A /* CoreGraphics.framework in Frameworks */,
 				AD59DC7C1BFCDAA50027602A /* Foundation.framework in Frameworks */,
 				AD59DC7A1BFCDA9D0027602A /* CoreFoundation.framework in Frameworks */,
@@ -244,6 +247,7 @@
 		7B56E48F13D0D509FA5FE117 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD8C1CF81C4134BF00D6DA41 /* SystemConfiguration.framework */,
 				AD59DC7D1BFCDAAF0027602A /* CoreGraphics.framework */,
 				AD59DC7B1BFCDAA50027602A /* Foundation.framework */,
 				AD59DC791BFCDA9D0027602A /* CoreFoundation.framework */,
@@ -601,10 +605,10 @@
 						DevelopmentTeam = V347XFFX68;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -850,7 +854,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "189bfbdb-edf3-4c0f-9e61-f2283854427b";
+				PROVISIONING_PROFILE = "ebf20cc9-98a8-496c-bd7c-e4e29924c5b4";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -887,7 +891,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "189bfbdb-edf3-4c0f-9e61-f2283854427b";
+				PROVISIONING_PROFILE = "ebf20cc9-98a8-496c-bd7c-e4e29924c5b4";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -906,7 +910,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunyaoo.SmallPocket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "189bfbdb-edf3-4c0f-9e61-f2283854427b";
+				PROVISIONING_PROFILE = "ebf20cc9-98a8-496c-bd7c-e4e29924c5b4";
 			};
 			name = Debug;
 		};
@@ -923,7 +927,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunyaoo.SmallPocket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "189bfbdb-edf3-4c0f-9e61-f2283854427b";
+				PROVISIONING_PROFILE = "ebf20cc9-98a8-496c-bd7c-e4e29924c5b4";
 			};
 			name = Release;
 		};
@@ -935,6 +939,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunyaoo.SmallPocketTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmallPocket.app/SmallPocket";
 			};
 			name = Debug;
@@ -947,6 +952,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunyaoo.SmallPocketTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmallPocket.app/SmallPocket";
 			};
 			name = Release;

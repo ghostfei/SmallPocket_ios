@@ -23,18 +23,14 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent]; 
-    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self _initUI];
     
-    [[NSUserDefaults standardUserDefaults]setObject:@"10" forKey:K_DeviceToken];
-    [[NSUserDefaults standardUserDefaults]synchronize];
-    
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+    [self registPush];
     [self.window setRootViewController:self.tabbarVC];
     [self.window setBackgroundColor:[UIColor whiteColor]];
     
-//    [self registPush:application];
     
     [NSThread sleepForTimeInterval:2.0];
     
@@ -48,9 +44,6 @@
     token = [token stringByReplacingOccurrencesOfString:@">" withString:@""];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     YLog(@"devicetoken=%@",token);
-    if([token isEqualToString:@""]){
-        token = @"12";
-    }
     // Required
     //    [APService registerDeviceToken:deviceToken];
     //    YLog(@"[APService registrationID]=%@",[APService registrationID]);
@@ -61,43 +54,46 @@
 }
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
     YLog(@"no device");
+    NSString  *token = @"12";
+    [[NSUserDefaults standardUserDefaults]setObject:token forKey:K_DeviceToken];
     //    [[NSUserDefaults standardUserDefaults]setObject:@"no device" forKey:K_registJPushId];
-    //    [[NSUserDefaults standardUserDefaults]synchronize];
+    [[NSUserDefaults standardUserDefaults]synchronize];
 }
-//ios8
+
+
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    //    [APService handleRemoteNotification:userInfo];
     YLog(@"收到通知:%@",userInfo);
     [[NSNotificationCenter defaultCenter]postNotificationName:@"turnonview" object:userInfo];
 }
-
 //ios7
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo
 fetchCompletionHandler:
 (void (^)(UIBackgroundFetchResult))completionHandler {
-    //    [APService handleRemoteNotification:userInfo];
     YLog(@"收到通知:%@",userInfo);
     [[NSNotificationCenter defaultCenter]postNotificationName:@"turnonview" object:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
 }
+
 - (void)applicationWillResignActive:(UIApplication *)application {
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
- 
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
- 
+    [application setApplicationIconBadgeNumber:0];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
- 
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+    
 }
 
 #pragma mark 定制UI
@@ -172,19 +168,18 @@ fetchCompletionHandler:
     self.tabbarVC.selectedViewController = [self.tabbarVC.viewControllers objectAtIndex:2];//默认选中中间的tabbar
 }
 
--(void)registPush:(UIApplication *)application{
+-(void)registPush{
     // Push register
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-        //可以添加自定义categories
-        YLog(@"8.0 ++");
-        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge| UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert) categories:nil]];
-        [[UIApplication sharedApplication]registerForRemoteNotifications];
+    NSLog(@"SYSTEMVERSION=%f",SYSTEMVERSION);
+    UIApplication *application = [UIApplication sharedApplication];
+    if (SYSTEMVERSION >=8.0) {
+        NSLog(@"do this");
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge |UIRemoteNotificationTypeSound |UIRemoteNotificationTypeAlert) categories:nil];
+        [application registerUserNotificationSettings:settings];
     } else {
-        //categories 必须为nil
-        YLog(@"low 8.0");
-        [application registerForRemoteNotificationTypes:
-         (UIRemoteNotificationTypeBadge| UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-    } 
+        [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge];
+    }
+    [application registerForRemoteNotifications];//注册后必须监听
 }
 
 @end

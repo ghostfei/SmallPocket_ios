@@ -86,4 +86,6 @@ typedef NS_ENUM(NSInteger,viewType){
 + (NSDate *)stringToDate:(NSString *)date;
 + (void)remarkDeleteAll:(NSString *)className where:(NSDictionary *)where;
 + (void)showHintMessage:(NSString *)message;
+
++(NSString *)getDeveiceToken;
 @end

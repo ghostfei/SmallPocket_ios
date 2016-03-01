@@ -251,7 +251,7 @@
                                         <rect key="frame" x="0.0" y="72" width="600" height="66"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="39z-zi-9hg" id="Wqr-XJ-wjt">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="65.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="66"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dqv-Sd-JeJ">
@@ -362,67 +362,33 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gnZ-6h-JYn">
                                 <rect key="frame" x="0.0" y="64" width="80" height="536"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gYu-wS-Ska">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gYu-wS-Ska">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="536"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="gYu-wS-Ska" firstAttribute="top" secondItem="gnZ-6h-JYn" secondAttribute="top" id="8PG-On-xGx"/>
-                                    <constraint firstAttribute="width" constant="80" id="EMR-Qj-u6s"/>
-                                    <constraint firstItem="gYu-wS-Ska" firstAttribute="leading" secondItem="gnZ-6h-JYn" secondAttribute="leading" id="d3B-kO-aDD"/>
-                                    <constraint firstAttribute="trailing" secondItem="gYu-wS-Ska" secondAttribute="trailing" id="thf-1c-YVg"/>
-                                    <constraint firstAttribute="bottom" secondItem="gYu-wS-Ska" secondAttribute="bottom" id="ux0-HB-3jK"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gnZ-6h-JYn" firstAttribute="leading" secondItem="nEJ-80-KlO" secondAttribute="leadingMargin" constant="-20" id="e5I-XD-hul"/>
-                            <constraint firstItem="aDS-GW-lBp" firstAttribute="top" secondItem="gnZ-6h-JYn" secondAttribute="bottom" id="gPZ-ly-Nu2"/>
-                            <constraint firstItem="ZXR-lY-SvL" firstAttribute="top" secondItem="nEJ-80-KlO" secondAttribute="topMargin" id="i6s-LQ-KDn"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ZXR-lY-SvL" secondAttribute="trailing" constant="-20" id="noz-u5-Cxf"/>
-                            <constraint firstItem="ZXR-lY-SvL" firstAttribute="leading" secondItem="nEJ-80-KlO" secondAttribute="leadingMargin" constant="-20" id="rrm-1g-bQw"/>
-                            <constraint firstItem="gnZ-6h-JYn" firstAttribute="top" secondItem="nEJ-80-KlO" secondAttribute="topMargin" constant="64" id="wEC-yJ-JBW"/>
-                            <constraint firstItem="aDS-GW-lBp" firstAttribute="top" secondItem="ZXR-lY-SvL" secondAttribute="bottom" id="wSK-Eg-iuY"/>
+                            <constraint firstItem="ZXR-lY-SvL" firstAttribute="leading" secondItem="gnZ-6h-JYn" secondAttribute="leading" id="9Sx-ii-gWo"/>
+                            <constraint firstItem="gnZ-6h-JYn" firstAttribute="top" secondItem="qWg-9X-UPs" secondAttribute="bottom" constant="44" id="Lbg-Qw-2QO"/>
+                            <constraint firstItem="ZXR-lY-SvL" firstAttribute="top" secondItem="nEJ-80-KlO" secondAttribute="top" id="Xg1-u6-GPR"/>
+                            <constraint firstItem="ZXR-lY-SvL" firstAttribute="centerX" secondItem="nEJ-80-KlO" secondAttribute="centerX" id="bTc-Wk-QU0"/>
+                            <constraint firstItem="ZXR-lY-SvL" firstAttribute="leading" secondItem="nEJ-80-KlO" secondAttribute="leading" id="gOD-8R-GZu"/>
+                            <constraint firstAttribute="trailing" secondItem="gnZ-6h-JYn" secondAttribute="trailing" constant="520" id="imR-m4-H8m"/>
+                            <constraint firstItem="ZXR-lY-SvL" firstAttribute="bottom" secondItem="gnZ-6h-JYn" secondAttribute="bottom" id="poL-PM-8mJ"/>
+                            <constraint firstItem="ZXR-lY-SvL" firstAttribute="bottom" secondItem="aDS-GW-lBp" secondAttribute="top" id="vHg-Ce-Zm5"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="advScroll" destination="c67-Dx-TPW" id="Jxo-bu-0Z3"/>
-                        <outlet property="advView" destination="7rI-Il-TGw" id="rML-tr-KC4"/>
-                        <outlet property="pageC" destination="bJp-bt-L6b" id="75P-G6-JaQ"/>
                         <outlet property="tableView" destination="ZXR-lY-SvL" id="RdH-sc-IcD"/>
                         <outlet property="typeScroll" destination="gYu-wS-Ska" id="OLI-av-lOj"/>
                         <outlet property="typeView" destination="gnZ-6h-JYn" id="Pe0-Iu-hOh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fEM-HZ-Ias" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="7rI-Il-TGw">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
-                    <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c67-Dx-TPW">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
-                            <connections>
-                                <outlet property="delegate" destination="IO0-tP-fTe" id="iYJ-QU-nfL"/>
-                            </connections>
-                        </scrollView>
-                        <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="bJp-bt-L6b">
-                            <rect key="frame" x="280" y="66" width="39" height="37"/>
-                            <color key="pageIndicatorTintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                            <color key="currentPageIndicatorTintColor" red="1" green="0.0" blue="0.24290360329999999" alpha="1" colorSpace="calibratedRGB"/>
-                        </pageControl>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="c67-Dx-TPW" firstAttribute="leading" secondItem="7rI-Il-TGw" secondAttribute="leading" id="4pa-5y-sNP"/>
-                        <constraint firstItem="c67-Dx-TPW" firstAttribute="top" secondItem="7rI-Il-TGw" secondAttribute="top" id="9Ay-WJ-oWX"/>
-                        <constraint firstAttribute="trailing" secondItem="c67-Dx-TPW" secondAttribute="trailing" id="B0Q-N7-Hy0"/>
-                        <constraint firstItem="bJp-bt-L6b" firstAttribute="centerX" secondItem="7rI-Il-TGw" secondAttribute="centerX" id="qw3-vQ-EF1"/>
-                        <constraint firstAttribute="bottom" secondItem="c67-Dx-TPW" secondAttribute="bottom" id="tKq-1q-sPH"/>
-                        <constraint firstItem="bJp-bt-L6b" firstAttribute="centerY" secondItem="7rI-Il-TGw" secondAttribute="centerY" constant="34.5" id="tP9-H1-hf0"/>
-                    </constraints>
-                </view>
             </objects>
             <point key="canvasLocation" x="-224" y="-601"/>
         </scene>
