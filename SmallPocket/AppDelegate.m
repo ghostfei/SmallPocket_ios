@@ -128,13 +128,14 @@ fetchCompletionHandler:
     
     //定制navigation和tabbar
     UINavigationController *adv = [[UINavigationController alloc]initWithRootViewController:[Util createVCFromStoryboard:@"AdvTableViewController"]];
-    UINavigationController *iswitch = [[UINavigationController alloc]initWithRootViewController:[Util createVCFromStoryboard:@"ISwitchViewController"]];
+//    UINavigationController *iswitch = [[UINavigationController alloc]initWithRootViewController:[Util createVCFromStoryboard:@"ISwitchViewController"]];
     UINavigationController *like =  [[UINavigationController alloc]initWithRootViewController: [Util createVCFromStoryboard:@"LikeIndexVC"]];//]@"LikeIndexCollVC"]];
-    UINavigationController *square = [[UINavigationController alloc]initWithRootViewController: [Util createVCFromStoryboard:@"SquareListVC"]];
+//    UINavigationController *square = [[UINavigationController alloc]initWithRootViewController: [Util createVCFromStoryboard:@"SquareListVC"]];
     UINavigationController *more = [[UINavigationController alloc]initWithRootViewController:[Util createVCFromStoryboard:@"MoreViewController"]];
     
     self.tabbarVC = [[UITabBarController alloc]init];
-    self.tabbarVC.viewControllers = @[adv,iswitch,like,square,more];
+//    self.tabbarVC.viewControllers = @[adv,iswitch,like,square,more];
+    self.tabbarVC.viewControllers = @[adv,like,more];
     
     UITabBar *tabbar = self.tabbarVC.tabBar;
     [tabbar setShadowImage:img];
@@ -148,24 +149,27 @@ fetchCompletionHandler:
     //                                                        NSForegroundColorAttributeName :UIColorFromRGB(0x787878)
     //                                                        } forState:UIControlStateSelected];
     
-    NSArray *tabicon = @[@"tabbar_adv",@"tabbar_switch",@"tabbar_like",@"tabbar_square",@"tabbar_more"];
+//    NSArray *tabicon = @[@"tabbar_adv",@"tabbar_switch",@"tabbar_like",@"tabbar_square",@"tabbar_more"];
 //    NSArray *tabtitle = @[@"精选",@"切换",@"喜欢",@"广场",@"更多"];
-    //    int offset = 10;
+    NSArray *tabicon = @[@"tabbar_adv",@"tabbar_like2",@"tabbar_more"];
+    NSArray *tabtitle = @[@"精选",@"喜欢",@"更多"];
     UIEdgeInsets imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
     
     [tabicon enumerateObjectsUsingBlock:^(NSString *item, NSUInteger idx, BOOL * _Nonnull stop) {
         UITabBarItem *tabbarItem = [tabbar.items objectAtIndex:idx];
-        
         tabbarItem.imageInsets = imageInsets;
         
-        tabbarItem.image = [[UIImage imageNamed:item]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        
-        tabbarItem.selectedImage = [[UIImage imageNamed:[NSString stringWithFormat:@"%@_select",item]]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        
-        //        tabbarItem.title = tabtitle[idx];
+//        if(idx == 1){
+            tabbarItem.image = [[UIImage imageNamed:item]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            tabbarItem.selectedImage = [[UIImage imageNamed:[NSString stringWithFormat:@"%@_select",item]]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//        }
+//        if (idx != 1) {
+//            tabbarItem.imageInsets = UIEdgeInsetsMake(0, 0, -40, 0);
+//            tabbarItem.title = tabtitle[idx];
+//        }
     }];
     
-    self.tabbarVC.selectedViewController = [self.tabbarVC.viewControllers objectAtIndex:2];//默认选中中间的tabbar
+    self.tabbarVC.selectedViewController = [self.tabbarVC.viewControllers objectAtIndex:1];//默认选中中间的tabbar
 }
 
 -(void)registPush{
