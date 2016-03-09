@@ -951,7 +951,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunyaoo.SmallPocket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ebf20cc9-98a8-496c-bd7c-e4e29924c5b4";
+				PROVISIONING_PROFILE = "c3baf370-78a8-44d7-a9b9-5f84adc691dc";
 			};
 			name = Debug;
 		};
@@ -973,7 +973,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunyaoo.SmallPocket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ebf20cc9-98a8-496c-bd7c-e4e29924c5b4";
+				PROVISIONING_PROFILE = "c3baf370-78a8-44d7-a9b9-5f84adc691dc";
 			};
 			name = Release;
 		};

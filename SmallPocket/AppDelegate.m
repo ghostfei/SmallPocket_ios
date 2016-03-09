@@ -180,10 +180,13 @@ fetchCompletionHandler:
         NSLog(@"do this");
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge |UIRemoteNotificationTypeSound |UIRemoteNotificationTypeAlert) categories:nil];
         [application registerUserNotificationSettings:settings];
+        [application registerForRemoteNotifications];//注册后必须监听
     } else {
-        [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge];
+        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge |
+        UIRemoteNotificationTypeAlert |
+        UIRemoteNotificationTypeSound;
+        [application registerForRemoteNotificationTypes:myTypes];
     }
-    [application registerForRemoteNotifications];//注册后必须监听
 }
 
 @end
