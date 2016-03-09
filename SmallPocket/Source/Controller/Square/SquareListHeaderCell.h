@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SquareListHeaderCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
-@property (weak, nonatomic) IBOutlet UIPageControl *page;
--(void)setContent:(NSArray *)array;
+-(void)initScroll:(NSArray *)images;
 @end

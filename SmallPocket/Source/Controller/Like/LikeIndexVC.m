@@ -35,6 +35,7 @@
     
     self.navigationItem.title = @"喜欢";
     
+    //下级页面的返回
     UIBarButtonItem *backbar = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backbar;
     
