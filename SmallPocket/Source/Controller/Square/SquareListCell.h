@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *desc;
 @property (weak, nonatomic) IBOutlet UIButton *zanBtn;
 @property (weak, nonatomic) IBOutlet UIButton *downBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *bgView;
 
 
 -(void)setContent:(NSDictionary *)dic;

@@ -48,7 +48,8 @@
     _type = @"0";
     _firstLoad = YES;
     
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.tableView.header = [Util getMJHeaderTarget:self action:@selector(loadNewData)];
     self.tableView.footer = [Util getMJFooterTarget:self action:@selector(loadMoreData)];
@@ -107,7 +108,7 @@
     
     NSDictionary *dic = self.apps[indexPath.row];
     cell = [tableView  dequeueReusableCellWithIdentifier:@"SquareListCell" forIndexPath:indexPath];
-    
+    cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     cell.zanBtn.tag = cell.downBtn.tag = indexPath.row-1;
@@ -176,10 +177,11 @@
     }];
 }
 
-#pragma mark
+#pragma mark typeview
 -(void)showType{
     if (_typeView.hidden) {
         _typeView.hidden = NO;
+        [self.view bringSubviewToFront:_typeView];
         [self loadType];
     }else{
         _typeView.hidden = YES;
@@ -207,6 +209,7 @@
                 [btn addTarget:self action:@selector(choseType:) forControlEvents:UIControlEventTouchUpInside];
                 UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, idx*31+30, 80, 1)];
                 line.backgroundColor = [UIColor lightGrayColor];
+                line.alpha = 0.6;
                 [_typeScroll addSubview:line];
                 [_typeScroll addSubview:btn];
             }];
@@ -214,7 +217,6 @@
         }
     }];
 }
-
 -(void)choseType:(UIButton *)btn{
     _typeView.hidden = YES;
     if (btn.tag == 0) {
@@ -223,9 +225,7 @@
         NSDictionary *dic = _typeArray[btn.tag-1];
         _type = dic[@"id"];
     }
-    _page = 1;
-    [self.apps removeAllObjects];
-    [self loadData];
+    [self loadNewData];
 }
 -(void)zanAc:(UIButton *)btn{
     NSString *udid = [Util getDeveiceToken];

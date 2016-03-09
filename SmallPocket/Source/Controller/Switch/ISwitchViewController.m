@@ -92,7 +92,7 @@
         vi.tag = idx;
         
         UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH/2-20)/2-30, 50, 60, 60)];
-        [img setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:app.icon]] placeholderImage:[UIImage imageNamed:@""]];
+        [img setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:app.icon]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
         [vi addSubview:img];
         
         UILabel *la = [[UILabel alloc]initWithFrame:CGRectMake(0, SCREENHEIGHT/2-87-40, SCREENWIDTH/2-20, 30)];

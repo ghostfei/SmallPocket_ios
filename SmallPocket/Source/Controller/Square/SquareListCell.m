@@ -14,6 +14,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    
+    _bgView.layer.cornerRadius = 15;
+    _bgView.layer.masksToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -35,7 +38,7 @@
     NSString *iconurl = [Util getAPIUrl:dic[@"icon"]];
     self.icon.layer.masksToBounds = YES;
     self.icon.layer.cornerRadius = 5;
-    [self.icon setImageWithURL:[NSURL URLWithString:iconurl] placeholderImage:[UIImage imageNamed:@"default_app"]];
+    [self.icon setImageWithURL:[NSURL URLWithString:iconurl] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     
     if ([dic[@"downstatus"] intValue]==0) {
         self.downBtn.enabled = YES;
