@@ -87,10 +87,10 @@
         YLog(@"json=%@",dic);
         if ([dic[@"status"]intValue] == 200) {
             _typeArray = dic[@"data"];
-            _typeScroll.contentSize = CGSizeMake(80, _typeArray.count*35);
             NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:_typeArray];
             [tempArray insertObject:@{@"name":@"全部",@"id":@"0"} atIndex:0];
             
+            _typeScroll.contentSize = CGSizeMake(80, tempArray.count*35);
             [tempArray enumerateObjectsUsingBlock:^(NSDictionary *dic, NSUInteger idx, BOOL * _Nonnull stop) {
                 UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, idx*31, 80, 30)];
                 btn.tag = idx;

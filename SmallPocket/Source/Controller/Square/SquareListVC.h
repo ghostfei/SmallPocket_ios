@@ -12,9 +12,8 @@
 @property (strong,nonatomic) NSMutableArray *apps;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UIView *advView;
-@property (weak, nonatomic) IBOutlet UIScrollView *advScroll;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageC;
+@property (weak, nonatomic) IBOutlet UIScrollView *advScroll;
 
 @property (weak, nonatomic) IBOutlet UIView *typeView;
 @property (weak, nonatomic) IBOutlet UIScrollView *typeScroll;
