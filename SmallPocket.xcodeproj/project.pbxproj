@@ -88,6 +88,10 @@
 		AF871DEF1C2BDEE40037AD41 /* tabbar_square@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF871DE51C2BDEE40037AD41 /* tabbar_square@2x.png */; };
 		AF871DF01C2BDEE40037AD41 /* tabbar_switch_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF871DE61C2BDEE40037AD41 /* tabbar_switch_select@2x.png */; };
 		AF871DF11C2BDEE40037AD41 /* tabbar_switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF871DE71C2BDEE40037AD41 /* tabbar_switch@2x.png */; };
+		AF893AC51C8FB82700B6A1A8 /* YJYYCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF893ABE1C8FB82700B6A1A8 /* YJYYCollectionView.m */; };
+		AF893AC61C8FB82700B6A1A8 /* YJYYCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF893AC01C8FB82700B6A1A8 /* YJYYCollectionViewCell.m */; };
+		AF893AC71C8FB82700B6A1A8 /* YJYYCollectionViewFlowlayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AF893AC21C8FB82700B6A1A8 /* YJYYCollectionViewFlowlayout.m */; };
+		AF893AC81C8FB82700B6A1A8 /* YJYYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AF893AC41C8FB82700B6A1A8 /* YJYYPageControl.m */; };
 		AF8A72A71C2A34DF003FA50F /* black_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8A72A51C2A34DF003FA50F /* black_bg@2x.png */; };
 		AF8A72A81C2A34DF003FA50F /* black_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8A72A61C2A34DF003FA50F /* black_bg@3x.png */; };
 		AFD9BD331C21597500CB5C01 /* s_down_ed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD9BD2F1C21597500CB5C01 /* s_down_ed@2x.png */; };
@@ -218,6 +222,14 @@
 		AF871DE51C2BDEE40037AD41 /* tabbar_square@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_square@2x.png"; sourceTree = "<group>"; };
 		AF871DE61C2BDEE40037AD41 /* tabbar_switch_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_switch_select@2x.png"; sourceTree = "<group>"; };
 		AF871DE71C2BDEE40037AD41 /* tabbar_switch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_switch@2x.png"; sourceTree = "<group>"; };
+		AF893ABD1C8FB82700B6A1A8 /* YJYYCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJYYCollectionView.h; sourceTree = "<group>"; };
+		AF893ABE1C8FB82700B6A1A8 /* YJYYCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJYYCollectionView.m; sourceTree = "<group>"; };
+		AF893ABF1C8FB82700B6A1A8 /* YJYYCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJYYCollectionViewCell.h; sourceTree = "<group>"; };
+		AF893AC01C8FB82700B6A1A8 /* YJYYCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJYYCollectionViewCell.m; sourceTree = "<group>"; };
+		AF893AC11C8FB82700B6A1A8 /* YJYYCollectionViewFlowlayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJYYCollectionViewFlowlayout.h; sourceTree = "<group>"; };
+		AF893AC21C8FB82700B6A1A8 /* YJYYCollectionViewFlowlayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJYYCollectionViewFlowlayout.m; sourceTree = "<group>"; };
+		AF893AC31C8FB82700B6A1A8 /* YJYYPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJYYPageControl.h; sourceTree = "<group>"; };
+		AF893AC41C8FB82700B6A1A8 /* YJYYPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJYYPageControl.m; sourceTree = "<group>"; };
 		AF8A72A51C2A34DF003FA50F /* black_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black_bg@2x.png"; sourceTree = "<group>"; };
 		AF8A72A61C2A34DF003FA50F /* black_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black_bg@3x.png"; sourceTree = "<group>"; };
 		AFD9BD2F1C21597500CB5C01 /* s_down_ed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "s_down_ed@2x.png"; sourceTree = "<group>"; };
@@ -544,6 +556,14 @@
 		AF7893F21C3BB678005A2E24 /* YJYYAutoScroll */ = {
 			isa = PBXGroup;
 			children = (
+				AF893ABD1C8FB82700B6A1A8 /* YJYYCollectionView.h */,
+				AF893ABE1C8FB82700B6A1A8 /* YJYYCollectionView.m */,
+				AF893ABF1C8FB82700B6A1A8 /* YJYYCollectionViewCell.h */,
+				AF893AC01C8FB82700B6A1A8 /* YJYYCollectionViewCell.m */,
+				AF893AC11C8FB82700B6A1A8 /* YJYYCollectionViewFlowlayout.h */,
+				AF893AC21C8FB82700B6A1A8 /* YJYYCollectionViewFlowlayout.m */,
+				AF893AC31C8FB82700B6A1A8 /* YJYYPageControl.h */,
+				AF893AC41C8FB82700B6A1A8 /* YJYYPageControl.m */,
 			);
 			path = YJYYAutoScroll;
 			sourceTree = "<group>";
@@ -770,7 +790,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD4729F31C29AD5100F50EB8 /* AppTypeListVC.m in Sources */,
+				AF893AC51C8FB82700B6A1A8 /* YJYYCollectionView.m in Sources */,
 				AD1D04DD1BE8E82E00290AD5 /* AppDelegate.m in Sources */,
+				AF893AC71C8FB82700B6A1A8 /* YJYYCollectionViewFlowlayout.m in Sources */,
 				AD472A0B1C29AD8000F50EB8 /* CoreDataManager.m in Sources */,
 				AD4729F81C29AD5100F50EB8 /* SquareListHeaderCell.m in Sources */,
 				AD472A011C29AD5100F50EB8 /* OpenWebAppVC.m in Sources */,
@@ -778,6 +800,7 @@
 				AD4729FB1C29AD5100F50EB8 /* AppsModel.m in Sources */,
 				AD472A001C29AD5100F50EB8 /* Util.m in Sources */,
 				AD4729F61C29AD5100F50EB8 /* UploadAppVC.m in Sources */,
+				AF893AC81C8FB82700B6A1A8 /* YJYYPageControl.m in Sources */,
 				AD4729F21C29AD5100F50EB8 /* AboutUsVC.m in Sources */,
 				ADACFC411C301220009D9C12 /* Apps.m in Sources */,
 				AD4729ED1C29AD5100F50EB8 /* AdvTableViewController.m in Sources */,
@@ -790,6 +813,7 @@
 				AD4729F51C29AD5100F50EB8 /* OpinionVC.m in Sources */,
 				AD4729F41C29AD5100F50EB8 /* MoreViewController.m in Sources */,
 				AD4729F91C29AD5100F50EB8 /* SquareListVC.m in Sources */,
+				AF893AC61C8FB82700B6A1A8 /* YJYYCollectionViewCell.m in Sources */,
 				AD4729FA1C29AD5100F50EB8 /* ISwitchViewController.m in Sources */,
 				AD4729FC1C29AD5100F50EB8 /* BaseModel.m in Sources */,
 				AD1D04DA1BE8E82E00290AD5 /* main.m in Sources */,
