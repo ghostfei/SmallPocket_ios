@@ -22,8 +22,7 @@
 @dynamic downnum;
 @dynamic tel;
 @dynamic atid;
-@dynamic is_del;
-@dynamic is_deleted;
+@dynamic is_del; 
 @dynamic approvestatus;
 @dynamic downstatus;
 

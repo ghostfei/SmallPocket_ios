@@ -14,13 +14,15 @@
 #import "OpenApps.h"
 #import "SearchVC.h"
 
-@interface LikeIndexVC (){
+@interface LikeIndexVC ()<UIScrollViewDelegate>{
     NSMutableArray *_dataArray;
     NSArray *_typeArray;
     
     MBProgressHUD *_hud;
     
     NSString *_type;
+    
+    UIPageControl *_pageControl;
 }
 
 @end
@@ -47,19 +49,22 @@
     
     self.scrollView.pagingEnabled = YES;
     self.typeScroll.scrollEnabled = YES;
+    
+    self.scrollView.backgroundColor = [UIColor clearColor];
+    
     UIImageView *bgView = [[UIImageView alloc]initWithFrame:_scrollView.frame];
     bgView.image = [UIImage imageNamed:@"bg"];
     bgView.contentMode = UIViewContentModeScaleAspectFill;
     bgView.clipsToBounds = YES;
     [self.view addSubview:bgView];
-    self.scrollView.backgroundColor = [UIColor clearColor];
     
     _type = @"0";
     _dataArray = [[NSMutableArray alloc]init];
-    
+    [self initPageControl];
     [self loadData];
     
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadData) name:@"downapp_noti" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadData) name:NOTIFY_LIKE_REFRESH object:nil];
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideDel)];
     [self.scrollView addGestureRecognizer:tap];
     
@@ -68,6 +73,18 @@
     [super viewWillDisappear:animated];
     [self hideDel];
 }
+#pragma mark pagecontrol
+-(void)initPageControl{
+    _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height-86, self.view.frame.size.width, 37)];
+    [self.view addSubview:_pageControl];
+    
+    _pageControl.currentPage = 0;
+    _pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    _pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
+    
+    [self.view bringSubviewToFront:_pageControl];
+}
+#pragma mark 侧栏分类
 -(void)showType{
     if (_typeView.hidden) {
         _typeView.hidden = NO;
@@ -84,7 +101,7 @@
     
     [Api post:API_TYPE_LIST parameters:nil completion:^(id data, NSError *err) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        YLog(@"json=%@",dic);
+//        YLog(@"json=%@",dic);
         if ([dic[@"status"]intValue] == 200) {
             _typeArray = dic[@"data"];
             NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:_typeArray];
@@ -117,8 +134,15 @@
     }
     [self loadData];
 }
+#pragma page跟随advScroll滑动
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)typeScroll1{
+    CGPoint offset=typeScroll1.contentOffset;
+    CGRect bounds=self.view.frame;
+    NSLog(@"offset=%lf w=%lf",offset.x,bounds.size.width);
+    [_pageControl setCurrentPage:(offset.x+30)/bounds.size.width];
+}
 #pragma mark 创建主UI
--(void)initUI{
+-(void)createGridCell{
     [self.view bringSubviewToFront:self.scrollView];
     for (UIView *vi in _scrollView.subviews) {
         [vi removeFromSuperview];
@@ -132,18 +156,10 @@
             tempH += 1;
             tempW = 0;
         }
-        if (HH>567) {
-            if (idx % 20 == 0 && idx != 0) {
-                NSInteger count = idx/20;
-                totalW = W*count;
-                tempH = 0;
-            }
-        }else{
-            if (idx % 16 == 0 && idx != 0) {
-                NSInteger count = idx/16;
-                totalW = W*count;
-                tempH = 0;
-            }
+        if (idx % 16 == 0 && idx != 0) {
+            NSInteger count = idx/16;
+            totalW = W*count;
+            tempH = 0;
         }
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goWeb:)];
         
@@ -167,7 +183,6 @@
             [img setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:dic[@"icon"]]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
             
             UIButton *delBtn = [[UIButton alloc]initWithFrame:CGRectMake(vi.frame.size.width-30, 0, 30, 30)];
-            //        delBtn.backgroundColor = [UIColor redColor];
             delBtn.tag = idx-10000;
             delBtn.hidden = YES;
             [delBtn setImage:[UIImage imageNamed:@"delApp"] forState:UIControlStateNormal];
@@ -176,10 +191,8 @@
             [vi bringSubviewToFront:delBtn];
         }
         UILabel *la = [[UILabel alloc]init ];//WithFrame:CGRectMake(0, vi.frame.size.height-30, W/4-10, 30)];
-        if (HH > 666) {
-            la.frame = CGRectMake(0, vi.frame.size.height-30, W/4-10, 30);
-        }else if (HH<667 && HH>567){
-            la.frame = CGRectMake(0, vi.frame.size.height-25, W/4-10, 30);
+        if (HH>=567){
+            la.frame = CGRectMake(0, vi.frame.size.height-16, W/4-10, 30);
         }else{
             la.frame = CGRectMake(0, vi.frame.size.height-5, W/4-10, 30);
         }
@@ -208,25 +221,17 @@
         self.navigationItem.title = [NSString stringWithFormat:@"喜欢(%ld)",_dataArray.count];
         
         [_dataArray addObject:@{@"icon":@"like_add",@"name":@"添加应用"}];
-        NSLog(@"data=%@",_dataArray);
-        if (HH>567) {
-            if (_dataArray.count > 20) {
-                NSInteger count = _dataArray.count/20;
-                count = count +1;
-                self.scrollView.contentSize = CGSizeMake(W*count, 0);
-            }else{
-                self.scrollView.contentSize = CGSizeMake(W, 0);
-            }
+        
+        _pageControl.numberOfPages = ceil(_dataArray.count/16.0);
+        
+        if (_dataArray.count > 16) {
+            NSInteger count = _dataArray.count/16;
+            count = count +1;
+            self.scrollView.contentSize = CGSizeMake(W*count, 0);
         }else{
-            if (_dataArray.count > 16) {
-                NSInteger count = _dataArray.count/16;
-                count = count +1;
-                self.scrollView.contentSize = CGSizeMake(W*count, 0);
-            }else{
-                self.scrollView.contentSize = CGSizeMake(W, 0);
-            }
+            self.scrollView.contentSize = CGSizeMake(W, 0);
         }
-        [self initUI];
+        [self createGridCell];
     }];
 }
 #pragma mark 删除相关
@@ -264,7 +269,7 @@
         
     }];
 }
-#pragma mark
+#pragma mark 进入web
 -(void)goWeb:(UITapGestureRecognizer *)tap{
     NSInteger tag = [tap view].tag;
     if (tag == _dataArray.count - 1) {
@@ -285,7 +290,7 @@
         [self.navigationController pushViewController:webview animated:YES];
     }
 }
-#pragma mark
+#pragma mark 右上角按钮
 -(void)searchAc{
     SearchVC *searchVc = [Util createVCFromStoryboard:@"SearchVC"];
     [self.navigationController pushViewController:searchVc animated:YES];

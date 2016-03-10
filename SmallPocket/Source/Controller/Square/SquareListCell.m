@@ -6,8 +6,7 @@
 //  Copyright © 2015年 ghostfei. All rights reserved.
 //
 
-#import "SquareListCell.h"
-#import "AppsModel.h"
+#import "SquareListCell.h" 
 #import "Util.h"
 
 @implementation SquareListCell
@@ -24,23 +23,21 @@
 
     // Configure the view for the selected state
 }
--(void)setContent:(NSDictionary *)dic{
-    self.name.text = dic[@"name"];
-    CGRect frame = self.desc.frame;
-    self.desc.text = dic[@"desc"];
-    CGSize size = CGSizeMake(self.frame.size.width-80, 1000);
-    CGSize infoSize = [dic[@"desc"] sizeWithFont:[UIFont systemFontOfSize:16] constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
-    self.desc.frame = CGRectMake(frame.origin.x, frame.origin.y, infoSize.width, infoSize.height);
+-(void)setContent:(Apps *)app{
+    NSLog(@"app=%@",app);
+    self.name.text = app.name;
+    self.desc.text = app.desc;
+    self.desc.font = [UIFont systemFontOfSize:14];
     
-    [self.zanBtn setTitle:dic[@"likenum"] forState:UIControlStateNormal];
-    [self.downBtn setTitle:dic[@"downnum"] forState:UIControlStateNormal];
+    [self.zanBtn setTitle:[NSString stringWithFormat:@"%@",app.likenum] forState:UIControlStateNormal];
+    [self.downBtn setTitle:[NSString stringWithFormat:@"%@",app.downnum] forState:UIControlStateNormal];
     
-    NSString *iconurl = [Util getAPIUrl:dic[@"icon"]];
+    NSString *iconurl = [Util getAPIUrl:app.icon];
     self.icon.layer.masksToBounds = YES;
     self.icon.layer.cornerRadius = 5;
     [self.icon setImageWithURL:[NSURL URLWithString:iconurl] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     
-    if ([dic[@"downstatus"] intValue]==0) {
+    if ([app.downstatus isEqual:@0]) {
         self.downBtn.enabled = YES;
         [self.downBtn setImage:[UIImage imageNamed:@"s_down"] forState:UIControlStateNormal];
     }else{
@@ -48,7 +45,7 @@
         [self.downBtn setImage:[UIImage imageNamed:@"s_down_ed"] forState:UIControlStateNormal];
     }
     
-    if ([dic[@"approvestatus"] intValue]==1) {
+    if ([app.approvestatus isEqual:@1]) {
         self.zanBtn.enabled = NO;
         [self.zanBtn setImage:[UIImage imageNamed:@"s_like_ed"] forState:UIControlStateNormal];
     }else{

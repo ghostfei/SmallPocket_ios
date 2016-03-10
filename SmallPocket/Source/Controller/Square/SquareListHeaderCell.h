@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface SquareListHeaderCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIScrollView *advScroll;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControll;
+
 -(void)initScroll:(NSArray *)images;
 @end

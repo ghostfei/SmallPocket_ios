@@ -14,6 +14,8 @@
 @interface SearchVC (){
     NSMutableArray *_dataArray;
     MBProgressHUD *_hud;
+    
+    NSString *_key;
 }
 
 
@@ -46,14 +48,14 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     SquareListCell *cell;
-        NSDictionary *dic = _dataArray[indexPath.row];
+        Apps *app = _dataArray[indexPath.row];
     cell = [tableView  dequeueReusableCellWithIdentifier:@"SquareListCell"];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     cell.zanBtn.tag = cell.downBtn.tag = indexPath.row;
     
-    [cell setContent:dic];
+    [cell setContent:app];
     [cell.zanBtn addTarget:self action:@selector(zanAc:) forControlEvents:UIControlEventTouchUpInside];
     [cell.downBtn addTarget:self action:@selector(downAc:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -61,25 +63,24 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *dic = _dataArray[indexPath.row];
-    NSString *desc = dic[@"desc"];
-    CGSize size = CGSizeMake(self.view.frame.size.width-80, 1000);
-    CGSize infoSize = [desc sizeWithFont:[UIFont systemFontOfSize:16] constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
+    Apps *app = _dataArray[indexPath.row];
+    CGSize infoSize = [app.desc boundingRectWithSize:CGSizeMake(tableView.frame.size.width-85, 1000)		 options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
     
     return 44+infoSize.height;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary *dic = _dataArray[indexPath.row];
-    NSDictionary *param = @{@"name":dic[@"name"],@"url":dic[@"url"]};
+    Apps *app = _dataArray[indexPath.row];
+    NSDictionary *param = @{@"name":app.name,@"url":app.url};
     OpenWebAppVC *webview = [Util createVCFromStoryboard:@"OpenWebAppVC"];
+     
+    NSMutableDictionary *ddic = [[NSMutableDictionary alloc]initWithDictionary:@{@"aid":app.id}];
+    NSDictionary *dic = [app dictionaryWithValuesForKeys:@[@"createtime",@"url",@"name",@"desc",@"icon"]];
+    [ddic addEntriesFromDictionary:dic];
     
-    NSMutableDictionary *ddic = [[NSMutableDictionary alloc]initWithDictionary:dic];
-    [ddic addEntriesFromDictionary:@{@"aid":dic[@"id"]}];
-    
-    OpenApps *app = [OpenApps findOrCreate:ddic];
-    app.openTime = [[NSDate new]timeIntervalSinceReferenceDate];
+    OpenApps *openApp = [OpenApps findOrCreate:ddic];
+    openApp.openTime = [[NSDate new]timeIntervalSinceReferenceDate];
     [app save];
     
     webview.param = param;
@@ -89,34 +90,47 @@
 #pragma mark
 -(void)zanAc:(UIButton *)btn{
     NSString *udid = [Util getDeveiceToken];
-    NSDictionary *dic = _dataArray[btn.tag];
+    Apps *app = _dataArray[btn.tag];
     NSNumber *like = @1;
-    if ([dic[@"approvestatus"]integerValue]==1) {
+    if ([app.approvestatus isEqual:@1]) {
         like = @0;
     }
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [Api post:API_LIKE_ACTION parameters:@{@"udid":udid,@"aid":dic[@"id"],@"like":like} completion:^(id data, NSError *err) {
+    [Api post:API_LIKE_ACTION parameters:@{@"udid":udid,@"aid":app.id,@"like":like} completion:^(id data, NSError *err) {
         [_hud hide:YES];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         if ([dic[@"status"]integerValue] == 200) {
-            [TSMessage showNotificationWithTitle:dic[@"msg"] subtitle:nil type:TSMessageNotificationTypeSuccess];
+            [TSMessage showNotificationWithTitle:dic[@"msg"] type:TSMessageNotificationTypeSuccess];
+            
+            app.approvestatus = like;
+            [app save];
+            
             [self searchAction:_searchBar.text];
+        }else{
+            [Util showHintMessage:dic[@"msg"]];
         }
     }];
 }
 
 -(void)downAc:(UIButton *)btn{
     NSString *udid =[Util getDeveiceToken];
-    NSDictionary *dic = _dataArray[btn.tag];
+    Apps *app = _dataArray[btn.tag];
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [Api post:API_DOWN_ACTION parameters:@{@"udid":udid,@"aid":dic[@"id"]} completion:^(id data, NSError *err) {
+    [Api post:API_DOWN_ACTION parameters:@{@"udid":udid,@"aid":app.id} completion:^(id data, NSError *err) {
         [_hud hide:YES];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"dic=%@",dic);
         if ([dic[@"status"]integerValue] == 200) {
-            [TSMessage showNotificationWithTitle:dic[@"msg"] subtitle:nil type:TSMessageNotificationTypeSuccess];
             [self searchAction:_searchBar.text];
-            [[NSNotificationCenter defaultCenter]postNotificationName:@"downapp_noti" object:nil];
+            
+            app.downstatus = @1;
+            [app save];
+            
+            [TSMessage showNotificationWithTitle:dic[@"msg"] type:TSMessageNotificationTypeSuccess];
+            
+            [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFY_LIKE_REFRESH object:nil];
+        }else{
+            [Util showHintMessage:dic[@"msg"]];
         }
     }];
 }
@@ -127,14 +141,27 @@
     [searchBar resignFirstResponder];
 }
 
-
+#pragma mark loaddata
+-(void)reloadData{
+    [_dataArray removeAllObjects];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@",_key];
+    [_dataArray addObjectsFromArray:[Apps where:predicate order:@{@"sort":@"DESC"}]];
+    NSLog(@"_dataArray.count:%ld", _dataArray.count);
+    [self.tableView reloadData];
+}
 -(void)searchAction:(NSString *)key{
+    _key = key;
     NSString *udid = [Util getDeveiceToken];
     [Api post:API_SEARCH_ACTION parameters:@{@"keyword":key,@"udid":udid} completion:^(id data, NSError *err) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"json=%@",dic);
-        _dataArray = dic[@"data"];
-        [self.tableView reloadData];
+        NSArray *result = dic[@"data"];
+//        [self.tableView reloadData];
+        for (NSDictionary *dic in result) {
+            Apps *app = [Apps findOrCreate:dic];
+            [app save];
+        }
+        [self reloadData];
     }];
 }
 

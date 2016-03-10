@@ -52,6 +52,8 @@ typedef NS_ENUM(NSInteger,viewType){
 #define API_DELACTION @"api.php/Apps/delApp" //删除应用
 
 
+#define NOTIFY_LIKE_REFRESH @"NOTIFY_LIKE_REFRESH"
+
 #define KEY_BGCOLOR_BLACK [UIColor blackColor]
 #define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
