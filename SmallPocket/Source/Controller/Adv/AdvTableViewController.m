@@ -67,7 +67,7 @@
     imgv.layer.cornerRadius = 15;
     imgv.layer.masksToBounds = YES;
     
-    [imgv setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:dic[@"image"]]] placeholderImage:[UIImage imageNamed:@"btn_back"]];
+    [imgv setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:dic[@"image"]]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
 //    [imgv setNeedsDisplay];
     
     UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, 150, cell.frame.size.width, 4)];

@@ -48,7 +48,8 @@
     _type = @"0";
     _firstLoad = YES;
     
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.tableView.header = [Util getMJHeaderTarget:self action:@selector(loadNewData)];
     self.tableView.footer = [Util getMJFooterTarget:self action:@selector(loadMoreData)];
@@ -92,13 +93,46 @@
     [self loadData];
 }
 #pragma mark - Table view data source
-//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    //    [self addAdv];
-////    return _advView;
-//}
-//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-//    return 100;
-//}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//        [self addAdv];
+    _advScroll.pagingEnabled=YES;
+    _advScroll.scrollEnabled=NO;
+    _advScroll.showsHorizontalScrollIndicator=NO;
+    
+    NSInteger imgNum = _sliderArray.count;//可以动态获取
+    if (imgNum>0) {
+        for (int i=0; i<imgNum; i++) {
+            NSDictionary *imgDic = _sliderArray[i];//image name url
+            UIImageView *imgview = [[UIImageView alloc]initWithFrame:CGRectMake(i*ScreenW, 0, ScreenW, 100)];
+            [imgview setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:imgDic[@"image"]]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+            imgview.contentMode = UIViewContentModeScaleAspectFill;
+            imgview.clipsToBounds = YES;
+            [_advScroll addSubview:imgview];
+        }
+    }else{
+        UIImageView *imgview = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ScreenW, 100)];
+        [imgview setImage:[UIImage imageNamed:@"placeholder"]];
+        [_advScroll addSubview:imgview];
+    }
+    
+    PAGENUM =imgNum;
+    
+    //定义PageController 设定总页数，当前页，定义当控件被用户操作时,要触发的动作。    _page.numberOfPages = PAGENUM;
+    _pageC.currentPage = 0;
+    _pageC.currentPageIndicatorTintColor=[UIColor greenColor];
+    _pageC.pageIndicatorTintColor=[UIColor whiteColor];
+    [_pageC addTarget:self action:@selector(pageTurn:) forControlEvents:UIControlEventValueChanged];
+    
+    //使用NSTimer实现定时触发滚动控件滚动的动作。
+    currentIndex = 0;
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(scrollTimer) userInfo:nil repeats:YES];
+    
+    return _advScroll;
+//    return _advView;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 100;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.apps.count;
 }
@@ -107,7 +141,7 @@
     
     NSDictionary *dic = self.apps[indexPath.row];
     cell = [tableView  dequeueReusableCellWithIdentifier:@"SquareListCell" forIndexPath:indexPath];
-    
+    cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     cell.zanBtn.tag = cell.downBtn.tag = indexPath.row-1;
@@ -170,16 +204,18 @@
     [Api post:API_ADV_LIST parameters:@{@"type":@"2"} completion:^(NSData *data, NSError *err) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         _sliderArray = dic[@"data"];
-        //        NSLog(@"slider=%@",dic);
-        //        [self.tableView reloadData];
+                NSLog(@"slider=%@",dic);
+
 //        [self addAdv];
+        [self.tableView reloadData];
     }];
 }
 
-#pragma mark
+#pragma mark typeview
 -(void)showType{
     if (_typeView.hidden) {
         _typeView.hidden = NO;
+        [self.view bringSubviewToFront:_typeView];
         [self loadType];
     }else{
         _typeView.hidden = YES;
@@ -195,9 +231,10 @@
         YLog(@"json=%@",dic);
         if ([dic[@"status"]intValue] == 200) {
             _typeArray = dic[@"data"];
-            _typeScroll.contentSize = CGSizeMake(80, _typeArray.count*35);
             NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:_typeArray];
             [tempArray insertObject:@{@"name":@"全部",@"id":@"0"} atIndex:0];
+            
+            _typeScroll.contentSize = CGSizeMake(80, tempArray.count*35);
             
             [tempArray enumerateObjectsUsingBlock:^(NSDictionary *dic, NSUInteger idx, BOOL * _Nonnull stop) {
                 UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, idx*31, 80, 30)];
@@ -207,6 +244,7 @@
                 [btn addTarget:self action:@selector(choseType:) forControlEvents:UIControlEventTouchUpInside];
                 UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, idx*31+30, 80, 1)];
                 line.backgroundColor = [UIColor lightGrayColor];
+                line.alpha = 0.6;
                 [_typeScroll addSubview:line];
                 [_typeScroll addSubview:btn];
             }];
@@ -214,7 +252,6 @@
         }
     }];
 }
-
 -(void)choseType:(UIButton *)btn{
     _typeView.hidden = YES;
     if (btn.tag == 0) {
@@ -223,9 +260,7 @@
         NSDictionary *dic = _typeArray[btn.tag-1];
         _type = dic[@"id"];
     }
-    _page = 1;
-    [self.apps removeAllObjects];
-    [self loadData];
+    [self loadNewData];
 }
 -(void)zanAc:(UIButton *)btn{
     NSString *udid = [Util getDeveiceToken];
@@ -279,6 +314,39 @@
     [self.navigationController pushViewController:searchVc animated:YES];
 }
 #pragma mark 滚图的动画效果
+-(void)addAdv{
+    _advScroll.pagingEnabled=YES;
+    _advScroll.scrollEnabled=NO;
+    _advScroll.showsHorizontalScrollIndicator=NO;
+    
+    NSInteger imgNum = _sliderArray.count;//可以动态获取
+    if (imgNum>0) {
+    for (int i=0; i<imgNum; i++) {
+        NSDictionary *imgDic = _sliderArray[i];//image name url
+        UIImageView *imgview = [[UIImageView alloc]initWithFrame:CGRectMake(i*ScreenW, 0, ScreenW, 100)];
+        [imgview setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:imgDic[@"image"]]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        imgview.contentMode = UIViewContentModeScaleAspectFill;
+        imgview.clipsToBounds = YES;
+        [_advScroll addSubview:imgview];
+    }
+    }else{
+        UIImageView *imgview = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ScreenW, 100)];
+        [imgview setImage:[UIImage imageNamed:@"placeholder"]];
+        [_advScroll addSubview:imgview];
+    }
+    
+    PAGENUM =imgNum;
+    
+    //定义PageController 设定总页数，当前页，定义当控件被用户操作时,要触发的动作。    _page.numberOfPages = PAGENUM;
+    _pageC.currentPage = 0;
+    _pageC.currentPageIndicatorTintColor=[UIColor greenColor];
+    _pageC.pageIndicatorTintColor=[UIColor whiteColor];
+    [_pageC addTarget:self action:@selector(pageTurn:) forControlEvents:UIControlEventValueChanged];
+    
+    //使用NSTimer实现定时触发滚动控件滚动的动作。
+    currentIndex = 0;
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(scrollTimer) userInfo:nil repeats:YES];
+}
 -(void)pageTurn:(UIPageControl *)aPageControl{
     NSInteger whichPage = aPageControl.currentPage;
     NSLog(@"whichPage=%ld",whichPage);

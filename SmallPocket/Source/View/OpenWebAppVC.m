@@ -35,10 +35,10 @@
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_param[@"url"]]]];
 }
 - (void)webViewDidStartLoad:(UIWebView *)webView{
-    _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    [_hud hide:YES];
+//    [_hud hide:YES];
 }
 -(void)backAc{
     [self.navigationController popViewControllerAnimated:YES];
