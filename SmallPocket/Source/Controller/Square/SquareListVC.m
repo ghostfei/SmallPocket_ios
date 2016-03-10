@@ -15,7 +15,6 @@
 #import "SquareListHeaderCell.h"
 
 @interface SquareListVC ()<UITableViewDelegate,UITableViewDataSource>{
-    //    NSMutableArray *self.apps;
     NSArray *_sliderArray;
     
     NSInteger _page;
@@ -137,10 +136,10 @@
     return self.apps.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    SquareListCell *cell;
+    SquareListCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"SquareListCell"];
     
     NSDictionary *dic = self.apps[indexPath.row];
-    cell = [tableView  dequeueReusableCellWithIdentifier:@"SquareListCell" forIndexPath:indexPath];
+    
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -207,7 +206,7 @@
                 NSLog(@"slider=%@",dic);
 
 //        [self addAdv];
-        [self.tableView reloadData];
+//        [self.tableView reloadData];
     }];
 }
 
