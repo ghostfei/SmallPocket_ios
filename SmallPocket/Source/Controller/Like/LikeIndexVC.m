@@ -13,6 +13,7 @@
 #import "OpenWebAppVC.h"
 #import "OpenApps.h"
 #import "SearchVC.h"
+#import "LikeApps.h"
 
 @interface LikeIndexVC ()<UIScrollViewDelegate>{
     NSMutableArray *_dataArray;
@@ -99,6 +100,9 @@
     }
     
     [Api post:API_TYPE_LIST parameters:nil completion:^(id data, NSError *err) {
+        if (err) {
+            return ;
+        }
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 //        YLog(@"json=%@",dic);
         if ([dic[@"status"]intValue] == 200) {
@@ -133,7 +137,7 @@
         _type = dic[@"id"];
         self.navigationItem.title = dic[@"name"];
     }
-    [self loadData];
+    [self loadNewData];
 }
 #pragma page跟随advScroll滑动
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)typeScroll1{
@@ -151,7 +155,7 @@
     
     __block NSInteger tempH=0,tempW=0,totalW=0;
     
-    [_dataArray enumerateObjectsUsingBlock:^(NSDictionary *dic, NSUInteger idx, BOOL * _Nonnull stop) {
+    [_dataArray enumerateObjectsUsingBlock:^(LikeApps *app, NSUInteger idx, BOOL * _Nonnull stop) {
         
         if (idx % 4 == 0 && idx != 0) {
             tempH += 1;
@@ -179,9 +183,9 @@
         img.layer.masksToBounds = YES;
         [vi addSubview:img];
         if (idx == _dataArray.count - 1) {
-            [img setImage:[UIImage imageNamed:dic[@"icon"]]];
+            [img setImage:[UIImage imageNamed:app.icon]];
         }else{
-            [img setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:dic[@"icon"]]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+            [img setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:app.icon]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
             
             UIButton *delBtn = [[UIButton alloc]initWithFrame:CGRectMake(vi.frame.size.width-30, 0, 30, 30)];
             delBtn.tag = idx-10000;
@@ -197,7 +201,7 @@
         }else{
             la.frame = CGRectMake(0, vi.frame.size.height-5, W/4-10, 30);
         }
-        la.text = dic[@"name"];
+        la.text = app.name;
         la.textColor = [UIColor whiteColor];
         la.font = [UIFont systemFontOfSize:13];
         la.textAlignment = NSTextAlignmentCenter;
@@ -213,35 +217,59 @@
     self.navigationItem.title = [title substringToIndex:2];
     [self loadData];
 }
--(void)loadData{
+-(void)loadNewData{
+    NSArray *apps = [LikeApps where:@{}];
+    [apps enumerateObjectsUsingBlock:^(LikeApps *app, NSUInteger idx, BOOL * _Nonnull stop) {
+        [app delete];
+    }];
+    [self loadData];
+}
+-(void)reloadData{
     [_dataArray removeAllObjects];
+    LikeApps *noapp = [LikeApps find:@{@"aid":@0}];
+    [noapp delete];
+    [_dataArray addObjectsFromArray:[LikeApps where:@{}]];
+//    NSLog(@"data=%@",_dataArray);
+    NSString *title = self.navigationItem.title;
+    if (title.length == 0) {
+        title = @"全部";
+    }
+    self.navigationItem.title = [NSString stringWithFormat:@"%@(%ld)",title,_dataArray.count];
+    LikeApps *addApp = [LikeApps findOrCreate:@{@"icon":@"like_add",@"name":@"添加应用"}];
+    [_dataArray addObject:addApp];
+    
+    _pageControl.numberOfPages = ceil(_dataArray.count/16.0);
+    
+    if (_dataArray.count > 16) {
+        NSInteger count = _dataArray.count/16;
+        count = count +1;
+        self.scrollView.contentSize = CGSizeMake(W*count, 0);
+    }else{
+        self.scrollView.contentSize = CGSizeMake(W, 0);
+    }
+    NSLog(@"self.apps.count:%ld", _dataArray.count);
+    [self createGridCell];
+}
+-(void)loadData{
     NSDictionary *bdic = @{@"udid":[Util getDeveiceToken],@"type":_type};
     
     [Util startActiciView:self.view];
     [Api post:API_LIKE_LIST parameters:bdic completion:^(id data, NSError *err) {
-        
         [Util stopActiciView:self.view];
+        
+        if (err) {
+            return;
+        }
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         
         _dataArray = dic[@"data"];
-        NSString *title = self.navigationItem.title;
-        if (title.length == 0) {
-            title = @"全部";
+        NSLog(@"array=%@",_dataArray);
+        for (NSDictionary *dicc in _dataArray) {
+            LikeApps *app = [LikeApps findOrCreate:dicc];
+            app.addtime = [app.createtime timeIntervalSinceReferenceDate];
+            [app save];
         }
-        self.navigationItem.title = [NSString stringWithFormat:@"%@(%ld)",title,_dataArray.count];
-        
-        [_dataArray addObject:@{@"icon":@"like_add",@"name":@"添加应用"}];
-        
-        _pageControl.numberOfPages = ceil(_dataArray.count/16.0);
-        
-        if (_dataArray.count > 16) {
-            NSInteger count = _dataArray.count/16;
-            count = count +1;
-            self.scrollView.contentSize = CGSizeMake(W*count, 0);
-        }else{
-            self.scrollView.contentSize = CGSizeMake(W, 0);
-        }
-        [self createGridCell];
+        [self reloadData];
     }];
 }
 #pragma mark 删除相关
@@ -262,10 +290,10 @@
 }
 -(void)delAc:(UIButton *)btn{
     NSString *udid = [Util getDeveiceToken];
-    NSDictionary *dic = [_dataArray objectAtIndex:(btn.tag+10000)];
-    NSLog(@"dic=%@",dic);
+    LikeApps *app = [_dataArray objectAtIndex:(btn.tag+10000)];
+    NSLog(@"dic=%@",app);
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [Api post:API_DELACTION parameters:@{@"aid":dic[@"aid"],@"udid":udid} completion:^(id data, NSError *err) {
+    [Api post:API_DELACTION parameters:@{@"aid":app.aid,@"udid":udid} completion:^(id data, NSError *err) {
         [_hud hide:YES];
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
@@ -289,11 +317,14 @@
         NSLog(@"tag=%ld",tag);
         OpenWebAppVC *webview = [Util createVCFromStoryboard:@"OpenWebAppVC"];
         
-        NSDictionary *dic = [_dataArray objectAtIndex:tag];
+        LikeApps *app = [_dataArray objectAtIndex:tag];
+        NSMutableDictionary *ddic = [[NSMutableDictionary alloc]initWithDictionary:@{@"aid":app.aid}];
+        NSDictionary *dic = [app dictionaryWithValuesForKeys:@[@"createtime",@"url",@"name",@"desc",@"icon"]];
+        [ddic addEntriesFromDictionary:dic];
         
-        OpenApps *app = [OpenApps findOrCreate:dic];
-        app.openTime = [[NSDate new]timeIntervalSinceReferenceDate];
-        [app save];
+        OpenApps *openApp = [OpenApps findOrCreate:ddic];
+        openApp.openTime = [[NSDate new]timeIntervalSinceReferenceDate];
+        [openApp save];
         
         NSDictionary *param = @{@"name":app.name,@"url":app.url};
         webview.param = param;

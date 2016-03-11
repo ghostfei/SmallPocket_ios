@@ -1,6 +1,6 @@
 //
 //  OpenApps.h
-//  
+//
 //
 //  Created by ghostfei on 15/12/23.
 //
@@ -22,5 +22,5 @@
 @property (nonatomic) double openTime;
 
 @end
- 
- 
+
+

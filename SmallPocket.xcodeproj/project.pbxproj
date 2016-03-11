@@ -35,7 +35,6 @@
 		AD4729F81C29AD5100F50EB8 /* SquareListHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729D61C29AD5100F50EB8 /* SquareListHeaderCell.m */; };
 		AD4729F91C29AD5100F50EB8 /* SquareListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729D81C29AD5100F50EB8 /* SquareListVC.m */; };
 		AD4729FA1C29AD5100F50EB8 /* ISwitchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729DB1C29AD5100F50EB8 /* ISwitchVC.m */; };
-		AD4729FD1C29AD5100F50EB8 /* OpenApps.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729E21C29AD5100F50EB8 /* OpenApps.m */; };
 		AD4729FE1C29AD5100F50EB8 /* Api.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729E51C29AD5100F50EB8 /* Api.m */; };
 		AD4729FF1C29AD5100F50EB8 /* SmallPocket.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD4729E61C29AD5100F50EB8 /* SmallPocket.xcdatamodeld */; };
 		AD472A001C29AD5100F50EB8 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729E91C29AD5100F50EB8 /* Util.m */; };
@@ -48,6 +47,8 @@
 		AD59DC7A1BFCDA9D0027602A /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD59DC791BFCDA9D0027602A /* CoreFoundation.framework */; };
 		AD59DC7C1BFCDAA50027602A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD59DC7B1BFCDAA50027602A /* Foundation.framework */; };
 		AD59DC7E1BFCDAAF0027602A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD59DC7D1BFCDAAF0027602A /* CoreGraphics.framework */; };
+		AD8263DF1C9327CC0092AA1F /* LikeApps.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8263DE1C9327CC0092AA1F /* LikeApps.m */; };
+		AD8263E51C9328BA0092AA1F /* OpenApps.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8263E41C9328BA0092AA1F /* OpenApps.m */; };
 		AD8C1CF91C4134BF00D6DA41 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD8C1CF81C4134BF00D6DA41 /* SystemConfiguration.framework */; };
 		ADA64AE31BF72DC600FAA433 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = ADA64AE21BF72DC600FAA433 /* Podfile */; };
 		ADACFC411C301220009D9C12 /* Apps.m in Sources */ = {isa = PBXBuildFile; fileRef = ADACFC3E1C301220009D9C12 /* Apps.m */; };
@@ -169,8 +170,6 @@
 		AD4729D81C29AD5100F50EB8 /* SquareListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareListVC.m; sourceTree = "<group>"; };
 		AD4729DA1C29AD5100F50EB8 /* ISwitchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISwitchVC.h; sourceTree = "<group>"; };
 		AD4729DB1C29AD5100F50EB8 /* ISwitchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISwitchVC.m; sourceTree = "<group>"; };
-		AD4729E11C29AD5100F50EB8 /* OpenApps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenApps.h; sourceTree = "<group>"; };
-		AD4729E21C29AD5100F50EB8 /* OpenApps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenApps.m; sourceTree = "<group>"; };
 		AD4729E41C29AD5100F50EB8 /* Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Api.h; sourceTree = "<group>"; };
 		AD4729E51C29AD5100F50EB8 /* Api.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Api.m; sourceTree = "<group>"; };
 		AD4729E71C29AD5100F50EB8 /* SmallPocket.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SmallPocket.xcdatamodel; sourceTree = "<group>"; };
@@ -191,6 +190,10 @@
 		AD59DC791BFCDA9D0027602A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		AD59DC7B1BFCDAA50027602A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AD59DC7D1BFCDAAF0027602A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AD8263DD1C9327CC0092AA1F /* LikeApps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeApps.h; sourceTree = "<group>"; };
+		AD8263DE1C9327CC0092AA1F /* LikeApps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeApps.m; sourceTree = "<group>"; };
+		AD8263E31C9328BA0092AA1F /* OpenApps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenApps.h; sourceTree = "<group>"; };
+		AD8263E41C9328BA0092AA1F /* OpenApps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenApps.m; sourceTree = "<group>"; };
 		AD8C1CF81C4134BF00D6DA41 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		ADA64AE21BF72DC600FAA433 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		ADACFC3D1C301220009D9C12 /* Apps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Apps.h; sourceTree = "<group>"; };
@@ -436,10 +439,12 @@
 		AD4729DC1C29AD5100F50EB8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AD8263DD1C9327CC0092AA1F /* LikeApps.h */,
+				AD8263DE1C9327CC0092AA1F /* LikeApps.m */,
 				ADACFC3D1C301220009D9C12 /* Apps.h */,
 				ADACFC3E1C301220009D9C12 /* Apps.m */,
-				AD4729E11C29AD5100F50EB8 /* OpenApps.h */,
-				AD4729E21C29AD5100F50EB8 /* OpenApps.m */,
+				AD8263E31C9328BA0092AA1F /* OpenApps.h */,
+				AD8263E41C9328BA0092AA1F /* OpenApps.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -905,6 +910,7 @@
 				AF893AC81C8FB82700B6A1A8 /* YJYYPageControl.m in Sources */,
 				AD4729F21C29AD5100F50EB8 /* AboutUsVC.m in Sources */,
 				ADACFC411C301220009D9C12 /* Apps.m in Sources */,
+				AD8263DF1C9327CC0092AA1F /* LikeApps.m in Sources */,
 				AD4729ED1C29AD5100F50EB8 /* AdvListVC.m in Sources */,
 				AD472A0D1C29AD8000F50EB8 /* NSManagedObject+Mappings.m in Sources */,
 				AD4729F71C29AD5100F50EB8 /* SquareListCell.m in Sources */,
@@ -919,7 +925,7 @@
 				AF893AC61C8FB82700B6A1A8 /* YJYYCollectionViewCell.m in Sources */,
 				AD4729FA1C29AD5100F50EB8 /* ISwitchVC.m in Sources */,
 				AD1D04DA1BE8E82E00290AD5 /* main.m in Sources */,
-				AD4729FD1C29AD5100F50EB8 /* OpenApps.m in Sources */,
+				AD8263E51C9328BA0092AA1F /* OpenApps.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

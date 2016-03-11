@@ -153,6 +153,9 @@
     _key = key;
     NSString *udid = [Util getDeveiceToken];
     [Api post:API_SEARCH_ACTION parameters:@{@"keyword":key,@"udid":udid} completion:^(id data, NSError *err) {
+        if (err) {
+            return ;
+        }
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"json=%@",dic);
         NSArray *result = dic[@"data"];

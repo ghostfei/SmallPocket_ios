@@ -68,7 +68,7 @@
     
     self.typeScroll.scrollEnabled = YES;
     
-    //    [self loadSlider];
+    [self reloadData];
     if (_firstLoad) {
         [self loadNewData];
         _firstLoad = NO;
@@ -183,14 +183,18 @@
 -(void)refreshData{
     NSString *udid = [Util getDeveiceToken];
     NSDictionary *bdic = @{@"udid":udid,@"page":[NSString stringWithFormat:@"%ld",_page],@"type":_type,@"limit":[NSString stringWithFormat:@"%ld",_limit]};
-    NSLog(@"bdic=%@",bdic);
+//    NSLog(@"bdic=%@",bdic);
     _hud = [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     [Api post:API_APPS_LIST parameters:bdic completion:^(id data, NSError *err) {
         [_hud hide:YES];
         [self.tableView.header endRefreshing];
         [self.tableView.footer endRefreshing];
+        
+        if (err) {
+            return;
+        }
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-//                YLog(@"dic=%@",dic);
+                        YLog(@"dic=%@",dic);
         if ([dic[@"status"]intValue] == 200 || [dic[@"status"]intValue] == 201) {
             NSArray *results = dic[@"data"];
             if (_page == 1) {
@@ -203,11 +207,10 @@
             if (results.count < _limit) {
                 [self.tableView.footer noticeNoMoreData];
             }
-            
-            [results enumerateObjectsUsingBlock:^(NSDictionary *dic, NSUInteger idx, BOOL * _Nonnull stop) {
+            for(NSDictionary *dic in results){
                 Apps *app = [Apps findOrCreate:dic];
                 [app save];
-            }];
+            };
             
             if (_page !=1) {
                 [self reloadData];
@@ -243,6 +246,9 @@
     }
     
     [Api post:API_TYPE_LIST parameters:nil completion:^(id data, NSError *err) {
+        if (err) {
+            return ;
+        }
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         YLog(@"json=%@",dic);
         if ([dic[@"status"]intValue] == 200) {
@@ -291,6 +297,7 @@
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         if ([dic[@"status"]integerValue] == 200) {
             app.approvestatus = like;
+            app.addtime = [NSDate new];
             [app save];
             
             btn.enabled = NO;
