@@ -10,7 +10,6 @@
         <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="is_del" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="is_deleted" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="likenum" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="modifytime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -28,7 +27,7 @@
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Apps" positionX="-63" positionY="36" width="128" height="270"/>
         <element name="OpenApps" positionX="-63" positionY="-18" width="128" height="150"/>
-        <element name="Apps" positionX="-63" positionY="36" width="128" height="285"/>
     </elements>
 </model>

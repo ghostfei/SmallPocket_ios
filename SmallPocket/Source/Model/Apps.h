@@ -25,8 +25,7 @@
 @property (nullable, nonatomic, retain) NSNumber *downnum;
 @property (nullable, nonatomic, retain) NSString *tel;
 @property (nullable, nonatomic, retain) NSNumber *atid;
-@property (nullable, nonatomic, retain) NSNumber *is_del;
-@property (nullable, nonatomic, retain) NSNumber *is_deleted;
+@property (nullable, nonatomic, retain) NSNumber *is_del; 
 @property (nullable, nonatomic, retain) NSNumber *downstatus;
 @property (nullable, nonatomic, retain) NSNumber *approvestatus;
 

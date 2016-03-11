@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Util.h"
+#import "Apps.h"
 
 @interface SquareListCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *icon;
@@ -18,5 +19,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *bgView;
 
 
--(void)setContent:(NSDictionary *)dic;
+-(void)setContent:(Apps *)app;
 @end

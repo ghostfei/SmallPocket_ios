@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -204,14 +204,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="gHG-yC-Gyf" firstAttribute="leading" secondItem="tNl-k0-6Ep" secondAttribute="leading" id="FB2-R3-Xvh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gHG-yC-Gyf" secondAttribute="trailing" constant="-20" id="O0H-mS-HFA"/>
                             <constraint firstItem="gHG-yC-Gyf" firstAttribute="top" secondItem="fXz-bt-sdO" secondAttribute="topMargin" id="TXh-Xz-wg5"/>
                             <constraint firstItem="tNl-k0-6Ep" firstAttribute="leading" secondItem="fXz-bt-sdO" secondAttribute="leadingMargin" constant="-20" id="VXT-2s-qVf"/>
                             <constraint firstItem="tNl-k0-6Ep" firstAttribute="top" secondItem="fXz-bt-sdO" secondAttribute="topMargin" constant="64" id="ZOY-nE-l4Y"/>
                             <constraint firstItem="gHG-yC-Gyf" firstAttribute="leading" secondItem="fXz-bt-sdO" secondAttribute="leadingMargin" constant="-20" id="ahE-t1-xbU"/>
+                            <constraint firstAttribute="trailing" secondItem="gHG-yC-Gyf" secondAttribute="trailing" id="fmh-Ta-8jU"/>
                             <constraint firstItem="ZHj-2p-imQ" firstAttribute="top" secondItem="tNl-k0-6Ep" secondAttribute="bottom" id="iyY-rz-zex"/>
                             <constraint firstItem="ZHj-2p-imQ" firstAttribute="top" secondItem="gHG-yC-Gyf" secondAttribute="bottom" id="qrQ-Il-TsN"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="O0H-mS-HFA"/>
+                                <exclude reference="ahE-t1-xbU"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="scrollView" destination="gHG-yC-Gyf" id="3XB-UP-XTd"/>
@@ -239,8 +247,44 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SquareListHeaderCell" rowHeight="100" id="0sb-Tz-0vC" customClass="SquareListHeaderCell">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0sb-Tz-0vC" id="C9a-Wc-cKt">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="99.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7rH-H7-giu">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="IO0-tP-fTe" id="SVz-Ye-Pg3"/>
+                                                    </connections>
+                                                </scrollView>
+                                                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Gap-Rg-KT2">
+                                                    <rect key="frame" x="280.5" y="63" width="39" height="37"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="37" id="8Js-tz-ZRW"/>
+                                                    </constraints>
+                                                    <color key="pageIndicatorTintColor" red="0.12170381800000001" green="1" blue="0.13978032779999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="currentPageIndicatorTintColor" red="1" green="0.0" blue="0.24290360329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </pageControl>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="7rH-H7-giu" firstAttribute="leading" secondItem="C9a-Wc-cKt" secondAttribute="leading" id="57t-jl-UDL"/>
+                                                <constraint firstItem="Gap-Rg-KT2" firstAttribute="centerX" secondItem="C9a-Wc-cKt" secondAttribute="centerX" id="8nF-Pa-9Rt"/>
+                                                <constraint firstAttribute="trailing" secondItem="7rH-H7-giu" secondAttribute="trailing" id="9dm-yt-xnT"/>
+                                                <constraint firstItem="7rH-H7-giu" firstAttribute="centerY" secondItem="C9a-Wc-cKt" secondAttribute="centerY" id="M5H-c9-fUR"/>
+                                                <constraint firstItem="7rH-H7-giu" firstAttribute="top" secondItem="C9a-Wc-cKt" secondAttribute="top" id="RW1-b3-vhI"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Gap-Rg-KT2" secondAttribute="bottom" constant="-8" id="oEU-MD-GY6"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="advScroll" destination="7rH-H7-giu" id="pp3-nc-cII"/>
+                                            <outlet property="pageControll" destination="Gap-Rg-KT2" id="2c0-ny-BaY"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SquareListCell" rowHeight="66" id="39z-zi-9hg" customClass="SquareListCell">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="66"/>
+                                        <rect key="frame" x="0.0" y="128" width="600" height="66"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="39z-zi-9hg" id="Wqr-XJ-wjt">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="65.5"/>
@@ -266,7 +310,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="desc" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6e8-CI-Cmq">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="desc" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6e8-CI-Cmq">
                                                     <rect key="frame" x="78" y="37" width="514" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -394,35 +438,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="advScroll" destination="7rH-H7-giu" id="3Z9-D5-b9U"/>
-                        <outlet property="pageC" destination="Gap-Rg-KT2" id="bx3-TZ-W06"/>
                         <outlet property="tableView" destination="ZXR-lY-SvL" id="RdH-sc-IcD"/>
                         <outlet property="typeScroll" destination="gYu-wS-Ska" id="OLI-av-lOj"/>
                         <outlet property="typeView" destination="gnZ-6h-JYn" id="Pe0-Iu-hOh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fEM-HZ-Ias" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7rH-H7-giu">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
-                    <subviews>
-                        <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Gap-Rg-KT2">
-                            <rect key="frame" x="281" y="71" width="39" height="37"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="37" id="XHh-qu-v6s"/>
-                            </constraints>
-                        </pageControl>
-                    </subviews>
-                    <constraints>
-                        <constraint firstAttribute="bottom" secondItem="Gap-Rg-KT2" secondAttribute="bottom" constant="-8" id="92E-jo-pQw"/>
-                        <constraint firstItem="Gap-Rg-KT2" firstAttribute="top" secondItem="7rH-H7-giu" secondAttribute="top" constant="71" id="Avo-Bh-Wc3"/>
-                        <constraint firstAttribute="trailing" secondItem="Gap-Rg-KT2" secondAttribute="trailing" constant="280" id="CkS-5T-WE7"/>
-                        <constraint firstAttribute="height" constant="100" id="PqJ-Cp-pX0"/>
-                        <constraint firstItem="Gap-Rg-KT2" firstAttribute="centerX" secondItem="7rH-H7-giu" secondAttribute="centerX" id="ZVg-oY-9cW"/>
-                    </constraints>
-                    <connections>
-                        <outlet property="delegate" destination="IO0-tP-fTe" id="m6S-d8-ech"/>
-                    </connections>
-                </scrollView>
             </objects>
             <point key="canvasLocation" x="-224" y="-601"/>
         </scene>

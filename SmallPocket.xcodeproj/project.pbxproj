@@ -38,8 +38,6 @@
 		AD4729F81C29AD5100F50EB8 /* SquareListHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729D61C29AD5100F50EB8 /* SquareListHeaderCell.m */; };
 		AD4729F91C29AD5100F50EB8 /* SquareListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729D81C29AD5100F50EB8 /* SquareListVC.m */; };
 		AD4729FA1C29AD5100F50EB8 /* ISwitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729DB1C29AD5100F50EB8 /* ISwitchViewController.m */; };
-		AD4729FB1C29AD5100F50EB8 /* AppsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729DE1C29AD5100F50EB8 /* AppsModel.m */; };
-		AD4729FC1C29AD5100F50EB8 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729E01C29AD5100F50EB8 /* BaseModel.m */; };
 		AD4729FD1C29AD5100F50EB8 /* OpenApps.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729E21C29AD5100F50EB8 /* OpenApps.m */; };
 		AD4729FE1C29AD5100F50EB8 /* Api.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729E51C29AD5100F50EB8 /* Api.m */; };
 		AD4729FF1C29AD5100F50EB8 /* SmallPocket.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD4729E61C29AD5100F50EB8 /* SmallPocket.xcdatamodeld */; };
@@ -162,10 +160,6 @@
 		AD4729D81C29AD5100F50EB8 /* SquareListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareListVC.m; sourceTree = "<group>"; };
 		AD4729DA1C29AD5100F50EB8 /* ISwitchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISwitchViewController.h; sourceTree = "<group>"; };
 		AD4729DB1C29AD5100F50EB8 /* ISwitchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISwitchViewController.m; sourceTree = "<group>"; };
-		AD4729DD1C29AD5100F50EB8 /* AppsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppsModel.h; sourceTree = "<group>"; };
-		AD4729DE1C29AD5100F50EB8 /* AppsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppsModel.m; sourceTree = "<group>"; };
-		AD4729DF1C29AD5100F50EB8 /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
-		AD4729E01C29AD5100F50EB8 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
 		AD4729E11C29AD5100F50EB8 /* OpenApps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenApps.h; sourceTree = "<group>"; };
 		AD4729E21C29AD5100F50EB8 /* OpenApps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenApps.m; sourceTree = "<group>"; };
 		AD4729E41C29AD5100F50EB8 /* Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Api.h; sourceTree = "<group>"; };
@@ -415,12 +409,8 @@
 		AD4729DC1C29AD5100F50EB8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AD4729DD1C29AD5100F50EB8 /* AppsModel.h */,
-				AD4729DE1C29AD5100F50EB8 /* AppsModel.m */,
 				ADACFC3D1C301220009D9C12 /* Apps.h */,
 				ADACFC3E1C301220009D9C12 /* Apps.m */,
-				AD4729DF1C29AD5100F50EB8 /* BaseModel.h */,
-				AD4729E01C29AD5100F50EB8 /* BaseModel.m */,
 				AD4729E11C29AD5100F50EB8 /* OpenApps.h */,
 				AD4729E21C29AD5100F50EB8 /* OpenApps.m */,
 			);
@@ -805,7 +795,6 @@
 				AD4729F81C29AD5100F50EB8 /* SquareListHeaderCell.m in Sources */,
 				AD472A011C29AD5100F50EB8 /* OpenWebAppVC.m in Sources */,
 				AD49B82F1C2ABFD000B3D75F /* LikeIndexVC.m in Sources */,
-				AD4729FB1C29AD5100F50EB8 /* AppsModel.m in Sources */,
 				AD472A001C29AD5100F50EB8 /* Util.m in Sources */,
 				AD4729F61C29AD5100F50EB8 /* UploadAppVC.m in Sources */,
 				AF893AC81C8FB82700B6A1A8 /* YJYYPageControl.m in Sources */,
@@ -823,7 +812,6 @@
 				AD4729F91C29AD5100F50EB8 /* SquareListVC.m in Sources */,
 				AF893AC61C8FB82700B6A1A8 /* YJYYCollectionViewCell.m in Sources */,
 				AD4729FA1C29AD5100F50EB8 /* ISwitchViewController.m in Sources */,
-				AD4729FC1C29AD5100F50EB8 /* BaseModel.m in Sources */,
 				AD1D04DA1BE8E82E00290AD5 /* main.m in Sources */,
 				AD4729FD1C29AD5100F50EB8 /* OpenApps.m in Sources */,
 			);
