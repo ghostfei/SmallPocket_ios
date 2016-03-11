@@ -1,23 +1,23 @@
 //
-//  ISwitchViewController.m
+//  ISwitchVC.m
 //  SmallPocket
 //
 //  Created by ghostfei on 15/11/14.
 //  Copyright © 2015年 ghostfei. All rights reserved.
 //
 
-#import "ISwitchViewController.h"
+#import "ISwitchVC.h"
 #import "OpenApps.h"
 #import "Util.h"
 #import "OpenWebAppVC.h"
 
-@interface ISwitchViewController (){
+@interface ISwitchVC (){
     NSArray *_opens;
 }
 
 @end
 
-@implementation ISwitchViewController
+@implementation ISwitchVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -1,5 +1,5 @@
 //
-//  AdvTableViewController.h
+//  AdvListVC.h
 //  SmallPocket
 //
 //  Created by ghostfei on 15/11/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AdvTableViewController : UITableViewController
+@interface AdvListVC : UITableViewController
 
 @end

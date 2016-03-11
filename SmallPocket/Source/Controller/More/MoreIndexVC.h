@@ -1,5 +1,5 @@
 //
-//  ISwitchViewController.h
+//  MoreIndexVC.h
 //  SmallPocket
 //
 //  Created by ghostfei on 15/11/14.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ISwitchViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@interface MoreIndexVC : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *verLabel;
 @end

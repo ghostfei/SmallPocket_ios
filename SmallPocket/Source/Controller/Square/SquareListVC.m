@@ -10,6 +10,7 @@
 #import "Util.h"
 #import "Apps.h"
 #import "SearchVC.h"
+#import "OpenWebAppVC.h"
 
 #import "SquareListCell.h"
 #import "SquareListHeaderCell.h"
@@ -101,14 +102,18 @@
             for (int i=0; i<imgNum; i++) {
                 NSDictionary *imgDic = _sliderArray[i];//image name url
                 UIImageView *imgview = [[UIImageView alloc]initWithFrame:CGRectMake(i*ScreenW, 0, ScreenW, 100)];
-                [imgview setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:imgDic[@"image"]]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+                [imgview setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:imgDic[@"image"]]] placeholderImage:[UIImage imageNamed:@"adv_default"]];
                 imgview.contentMode = UIViewContentModeScaleAspectFill;
                 imgview.clipsToBounds = YES;
+                imgview.tag = i;
+                imgview.userInteractionEnabled = YES;
                 [headCell.advScroll addSubview:imgview];
+                UITapGestureRecognizer *urlClick = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goWeb:)];
+                [imgview addGestureRecognizer:urlClick];
             }
         }else{
             UIImageView *imgview = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ScreenW, 100)];
-            [imgview setImage:[UIImage imageNamed:@"placeholder"]];
+            [imgview setImage:[UIImage imageNamed:@"adv_default"]];
             [headCell.advScroll addSubview:imgview];
         }
         
@@ -353,5 +358,12 @@
     _pageControl.currentPage=currentIndex;
     [_advScroll scrollRectToVisible:CGRectMake(currentIndex * self.view.frame.size.width, 0, self.view.frame.size.width, 100) animated:YES];
 }
-
+-(void)goWeb:(UITapGestureRecognizer *)tap{
+    NSInteger index = [tap view].tag;
+    NSDictionary *imgDic = _sliderArray[index];//image name url
+    OpenWebAppVC *webview = [Util createVCFromStoryboard:@"OpenWebAppVC"];
+    NSDictionary *param = @{@"name":imgDic[@"name"],@"url":imgDic[@"url"]};
+    webview.param = param;
+    [self.navigationController pushViewController:webview animated:YES];
+}
 @end

@@ -9,11 +9,11 @@
 #import "AppDelegate.h"
 #import "Util.h"
 
-#import "AdvTableViewController.h"
-#import "ISwitchViewController.h"
+#import "AdvListVC.h"
+#import "ISwitchVC.h"
 #import "LikeIndexVC.h"
 #import "SquareListVC.h"
-#import "MoreViewController.h"
+#import "MoreIndexVC.h"
 
 @interface AppDelegate ()
 
@@ -32,7 +32,7 @@
     [self.window setBackgroundColor:[UIColor whiteColor]];
     
     
-    [NSThread sleepForTimeInterval:2.0];
+    [NSThread sleepForTimeInterval:0.5];
     
     [self.window makeKeyAndVisible];
     
@@ -127,11 +127,11 @@ fetchCompletionHandler:
     }
     
     //定制navigation和tabbar
-    UINavigationController *adv = [[UINavigationController alloc]initWithRootViewController:[Util createVCFromStoryboard:@"AdvTableViewController"]];
-//    UINavigationController *iswitch = [[UINavigationController alloc]initWithRootViewController:[Util createVCFromStoryboard:@"ISwitchViewController"]];
+    UINavigationController *adv = [[UINavigationController alloc]initWithRootViewController:[Util createVCFromStoryboard:@"AdvListVC"]];
+//    UINavigationController *iswitch = [[UINavigationController alloc]initWithRootViewController:[Util createVCFromStoryboard:@"ISwitchVC"]];
     UINavigationController *like =  [[UINavigationController alloc]initWithRootViewController: [Util createVCFromStoryboard:@"LikeIndexVC"]];//]@"LikeIndexCollVC"]];
 //    UINavigationController *square = [[UINavigationController alloc]initWithRootViewController: [Util createVCFromStoryboard:@"SquareListVC"]];
-    UINavigationController *more = [[UINavigationController alloc]initWithRootViewController:[Util createVCFromStoryboard:@"MoreViewController"]];
+    UINavigationController *more = [[UINavigationController alloc]initWithRootViewController:[Util createVCFromStoryboard:@"MoreIndexVC"]];
     
     self.tabbarVC = [[UITabBarController alloc]init];
 //    self.tabbarVC.viewControllers = @[adv,iswitch,like,square,more];

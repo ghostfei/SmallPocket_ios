@@ -35,6 +35,9 @@
     
     self.view.backgroundColor = KEY_BGCOLOR_BLACK;
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideDel)];
+    [self.scrollView addGestureRecognizer:tap];
+    
     //下级页面的返回
     UIBarButtonItem *backbar = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backbar;
@@ -42,7 +45,6 @@
     UIBarButtonItem *rbi_search = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"btn_search_select"] style:UIBarButtonItemStylePlain target:self action:@selector(searchAc)];
     UIBarButtonItem *rbi_add = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAc)];
     self.navigationItem.rightBarButtonItems = @[rbi_add,rbi_search];
-    
     
     UIBarButtonItem *lbi = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"left_type"] style:UIBarButtonItemStylePlain target:self action:@selector(showType)];
     self.navigationItem.leftBarButtonItem = lbi;
@@ -60,14 +62,11 @@
     
     _type = @"0";
     _dataArray = [[NSMutableArray alloc]init];
+    
     [self initPageControl];
     [self loadData];
     
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadData) name:NOTIFY_LIKE_REFRESH object:nil];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideDel)];
-    [self.scrollView addGestureRecognizer:tap];
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshData) name:NOTIFY_LIKE_REFRESH object:nil];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -128,9 +127,11 @@
     _typeView.hidden = YES;
     if (btn.tag == 0) {
         _type = @"0";
+        self.navigationItem.title = @"全部";
     }else{
         NSDictionary *dic = _typeArray[btn.tag-1];
         _type = dic[@"id"];
+        self.navigationItem.title = dic[@"name"];
     }
     [self loadData];
 }
@@ -207,6 +208,11 @@
     }];
 }
 #pragma mark 加载数据
+-(void)refreshData{
+    NSString *title = self.navigationItem.title;
+    self.navigationItem.title = [title substringToIndex:2];
+    [self loadData];
+}
 -(void)loadData{
     [_dataArray removeAllObjects];
     NSDictionary *bdic = @{@"udid":[Util getDeveiceToken],@"type":_type};
@@ -218,7 +224,11 @@
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         
         _dataArray = dic[@"data"];
-        self.navigationItem.title = [NSString stringWithFormat:@"喜欢(%ld)",_dataArray.count];
+        NSString *title = self.navigationItem.title;
+        if (title.length == 0) {
+            title = @"全部";
+        }
+        self.navigationItem.title = [NSString stringWithFormat:@"%@(%ld)",title,_dataArray.count];
         
         [_dataArray addObject:@{@"icon":@"like_add",@"name":@"添加应用"}];
         
@@ -265,7 +275,7 @@
         }else{
             [Util showHintMessage:@"网络异常"];
         }
-        [self loadData];
+        [self refreshData];
         
     }];
 }

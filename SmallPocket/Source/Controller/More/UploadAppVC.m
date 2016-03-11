@@ -9,6 +9,7 @@
 #import "UploadAppVC.h"
 #import "Util.h"
 #import "AppTypeListVC.h"
+#import "OpenWebAppVC.h"
 
 
 @interface UploadAppVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>{
@@ -36,6 +37,8 @@
     _iconImg.userInteractionEnabled = YES;
     [_iconImg addGestureRecognizer:tap];
     
+    _url.text = @"http://www.";
+    
     UITapGestureRecognizer *tapEnd = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(endEdit)];
     self.view.userInteractionEnabled = YES;
     [self.view addGestureRecognizer:tapEnd];
@@ -44,6 +47,11 @@
     self.navigationItem.backBarButtonItem = barBack;
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(choseType:) name:@"select_type_noti" object:nil];
+    
+    [_checkImg setImage:[UIImage imageNamed:@"icon_uncheckin"]];
+    _checkImg.userInteractionEnabled = YES;
+    UITapGestureRecognizer *checkTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(checkAc)];
+    [_checkImg addGestureRecognizer:checkTap];
 }
 -(void)choseType:(NSNotificationCenter *)noti{
     NSDictionary *dic = [noti valueForKey:@"object"];
@@ -54,13 +62,6 @@
     return YES;
 }
 
-#pragma mark - Table view data source
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 6) {
-        AppTypeListVC *typeVC = [Util createVCFromStoryboard:@"AppTypeListVC"];
-        [self.navigationController pushViewController:typeVC animated:YES];
-    }
-}
 #pragma mark
 - (void)choseIcon {
     [self endEdit];
@@ -102,33 +103,80 @@
 }
 
 -(void)saveAc{
-    [self endEdit];
-    NSDictionary *dic = @{@"name":_name.text,
-                          @"desc":_desc.text,
-                          @"url":_url.text,
-                          @"tel":_tel.text,
-                          @"publisher":_publisher.text,
-                          @"type":_typeId};
-
-    _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [Api post:API_UPLOADAPP_ACTION
-   parameters:dic formDataBlock:^(id<AFMultipartFormData> formData) {
-    [formData appendPartWithFileData:_imgData
-                                name:@"icon"
-                            fileName:@"icon.jpg"
-                            mimeType:@"image/jpeg"];
-    } completion:^(id data, NSError *err) {
-        [_hud hide:YES];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"dic=%@",dic[@"msg"]);
-        if ([dic[@"status"]intValue] == 200) {
-            [self.navigationController popViewControllerAnimated:YES];
-        }else{
-//            [Util showHintMessage:@"未知错误"];
-        }
-    }];
+    if (_imgData ==nil) {
+        [Util showHintMessage:@"请上传应用图片"];
+        return;
+    }
+    if (_name.text.length == 0) {
+        [Util showHintMessage:@"请输入应用名"];
+        return;
+    }
+    if (_url.text.length == 0) {
+        [Util showHintMessage:@"请输入下载地址"];
+        return;
+    }
+    if (_tel.text.length == 0) {
+        [Util showHintMessage:@"请输入电话"];
+        return;
+    }
+    if (_publisher.text.length == 0) {
+        [Util showHintMessage:@"请输入发布者"];
+        return;
+    }
+    if (_typeId.length == 0) {
+        [Util showHintMessage:@"请选择类型"];
+        return;
+    }
+    if ([_checkImg.image isEqual:[UIImage imageNamed:@"icon_checkin"]]) {
+        [self endEdit];
+        NSDictionary *dic = @{@"name":_name.text,
+                              @"desc":_desc.text,
+                              @"url":_url.text,
+                              @"tel":_tel.text,
+                              @"publisher":_publisher.text,
+                              @"type":_typeId};
+        
+        _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [Api post:API_UPLOADAPP_ACTION
+       parameters:dic formDataBlock:^(id<AFMultipartFormData> formData) {
+           [formData appendPartWithFileData:_imgData
+                                       name:@"icon"
+                                   fileName:@"icon.jpg"
+                                   mimeType:@"image/jpeg"];
+       } completion:^(id data, NSError *err) {
+           [_hud hide:YES];
+           NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+           NSLog(@"dic=%@",dic[@"msg"]);
+           if ([dic[@"status"]intValue] == 200) {
+               [self.navigationController popViewControllerAnimated:YES];
+           }else{
+               [Util showHintMessage:@"未知错误"];
+           }
+       }];
+    }else{
+        [Util showHintMessage:@"请确认已经同意我们的使用协议"];
+    }
 }
 -(void)endEdit{
     [self.view endEditing:YES];
+}
+- (IBAction)goType:(id)sender {
+    AppTypeListVC *typeVC = [Util createVCFromStoryboard:@"AppTypeListVC"];
+    [self.navigationController pushViewController:typeVC animated:YES];
+}
+-(void)checkAc{
+    NSLog(@"勾选协议");
+    if ([_checkImg.image isEqual:[UIImage imageNamed:@"icon_uncheckin"]]) {
+        _checkImg.image = [UIImage imageNamed:@"icon_checkin"];
+    }else{
+        _checkImg.image = [UIImage imageNamed:@"icon_uncheckin"];
+    }
+}
+- (IBAction)goProtocol:(id)sender {
+    OpenWebAppVC *webview = [Util createVCFromStoryboard:@"OpenWebAppVC"];
+    NSDictionary *param = @{@"name":@"服务协议",@"url":[NSString stringWithFormat:@"%@%@",DEFAULT_API_URL,API_PROTOCOL]};
+    webview.type = @1;
+    webview.param = param;
+    [self.navigationController pushViewController:webview animated:YES];
 }
 @end

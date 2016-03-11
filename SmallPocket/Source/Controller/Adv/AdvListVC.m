@@ -1,16 +1,17 @@
 //
-//  AdvTableViewController.m
+//  AdvListVC.m
 //  SmallPocket
 //
 //  Created by ghostfei on 15/11/14.
 //  Copyright © 2015年 ghostfei. All rights reserved.
 //
 
-#import "AdvTableViewController.h"
+#import "AdvListVC.h"
 #import "OpenWebAppVC.h"
 #import "Util.h"
+#import "AdvListCell.h"
 
-@interface AdvTableViewController (){
+@interface AdvListVC (){
     MBProgressHUD *_hud;
     
     NSArray *_dataArray;
@@ -18,7 +19,7 @@
 
 @end
 
-@implementation AdvTableViewController
+@implementation AdvListVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,38 +47,28 @@
     return 124;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    //去除提示字
-    for (UIView *la in self.tableView.subviews) {
-        if ([la isKindOfClass:[UILabel class]]) {
-            [la removeFromSuperview];
-        }
-    }
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"advlist"];
-    for (UIView *vi in cell.contentView.subviews) {
-        [vi removeFromSuperview];
-    }
+    AdvListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AdvListCell"];
     cell.backgroundColor = [UIColor clearColor];
     
     NSDictionary *dic = _dataArray[indexPath.row];
-    UIImageView *imgv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width,120)];
-    imgv.contentMode = UIViewContentModeScaleAspectFill;
-    imgv.clipsToBounds = YES;
-    imgv.layer.cornerRadius = 15;
-    imgv.layer.masksToBounds = YES;
+    cell.bgImg.contentMode = UIViewContentModeScaleAspectFill;
+    cell.bgImg.clipsToBounds = YES;
+//    cell.bgImg.layer.cornerRadius = 15;
+//    cell.bgImg.layer.masksToBounds = YES;
     
-    [imgv setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:dic[@"image"]]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-//    [imgv setNeedsDisplay];
+    cell.nameLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+    cell.nameLabel.layer.shadowOpacity = 1.0;
+    cell.nameLabel.layer.shadowRadius = 1.0;
+    cell.nameLabel.layer.shadowOffset = CGSizeMake(0, 0);
+    cell.nameLabel.clipsToBounds = YES;
     
-    UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, 150, cell.frame.size.width, 4)];
-    line.backgroundColor = [UIColor clearColor];
-    [cell.contentView addSubview:line];
+    [cell.bgImg setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:dic[@"image"]]] placeholderImage:[UIImage imageNamed:@"adv_default"]];
+    cell.nameLabel.text = dic[@"name"];
     
-    [cell.contentView addSubview:imgv];
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     OpenWebAppVC *webview = [Util createVCFromStoryboard:@"OpenWebAppVC"];
     NSDictionary *dic =_dataArray[indexPath.row];
     NSLog(@"dic=%@",dic);

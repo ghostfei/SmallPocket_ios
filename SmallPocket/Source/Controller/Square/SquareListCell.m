@@ -29,8 +29,8 @@
     self.desc.text = app.desc;
     self.desc.font = [UIFont systemFontOfSize:14];
     
-    [self.zanBtn setTitle:[NSString stringWithFormat:@"%@",app.likenum] forState:UIControlStateNormal];
-    [self.downBtn setTitle:[NSString stringWithFormat:@"%@",app.downnum] forState:UIControlStateNormal];
+    [self.zanBtn setTitle:[NSString stringWithFormat:@" %@",app.likenum] forState:UIControlStateNormal];
+    [self.downBtn setTitle:[NSString stringWithFormat:@" %@",app.downnum] forState:UIControlStateNormal];
     
     NSString *iconurl = [Util getAPIUrl:app.icon];
     self.icon.layer.masksToBounds = YES;
