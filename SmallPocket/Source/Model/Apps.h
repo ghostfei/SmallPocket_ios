@@ -28,6 +28,7 @@
 @property (nullable, nonatomic, retain) NSNumber *is_del; 
 @property (nullable, nonatomic, retain) NSNumber *downstatus;
 @property (nullable, nonatomic, retain) NSNumber *approvestatus;
+@property (nullable, nonatomic, retain) NSString *tags;
 
 @end
 

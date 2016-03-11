@@ -50,6 +50,7 @@ typedef NS_ENUM(NSInteger,viewType){
 #define API_UPLOADAPP_ACTION @"api.php/Apps/upApp" //长传应用
 #define API_SEARCH_ACTION @"api.php/Apps/search" //搜索
 #define API_DELACTION @"api.php/Apps/delApp" //删除应用
+#define API_PROTOCOL @"api.php/Index/aboutUs" //应用协议
 
 
 #define NOTIFY_LIKE_REFRESH @"NOTIFY_LIKE_REFRESH"

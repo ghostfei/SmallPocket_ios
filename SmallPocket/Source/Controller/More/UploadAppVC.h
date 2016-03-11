@@ -17,4 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *tel;
 @property (weak, nonatomic) IBOutlet UILabel *type;
 
+- (IBAction)goType:(id)sender;
+@property (weak, nonatomic) IBOutlet UIImageView *checkImg;
+- (IBAction)goProtocol:(id)sender;
 @end

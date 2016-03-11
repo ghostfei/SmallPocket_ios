@@ -10,6 +10,7 @@
 #import "Util.h"
 #import "Apps.h"
 #import "SearchVC.h"
+#import "OpenWebAppVC.h"
 
 #import "SquareListCell.h"
 #import "SquareListHeaderCell.h"
@@ -101,14 +102,18 @@
             for (int i=0; i<imgNum; i++) {
                 NSDictionary *imgDic = _sliderArray[i];//image name url
                 UIImageView *imgview = [[UIImageView alloc]initWithFrame:CGRectMake(i*ScreenW, 0, ScreenW, 100)];
-                [imgview setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:imgDic[@"image"]]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+                [imgview setImageWithURL:[NSURL URLWithString:[Util getAPIUrl:imgDic[@"image"]]] placeholderImage:[UIImage imageNamed:@"adv_default"]];
                 imgview.contentMode = UIViewContentModeScaleAspectFill;
                 imgview.clipsToBounds = YES;
+                imgview.tag = i;
+                imgview.userInteractionEnabled = YES;
                 [headCell.advScroll addSubview:imgview];
+                UITapGestureRecognizer *urlClick = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goWeb:)];
+                [imgview addGestureRecognizer:urlClick];
             }
         }else{
             UIImageView *imgview = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ScreenW, 100)];
-            [imgview setImage:[UIImage imageNamed:@"placeholder"]];
+            [imgview setImage:[UIImage imageNamed:@"adv_default"]];
             [headCell.advScroll addSubview:imgview];
         }
         
@@ -135,7 +140,7 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        cell.zanBtn.tag = cell.downBtn.tag = index;
+        cell.zanBtn.tag = cell.downBtn.tag = index+1000;
         
         [cell setContent:app];
         [cell.zanBtn addTarget:self action:@selector(zanAc:) forControlEvents:UIControlEventTouchUpInside];
@@ -185,7 +190,7 @@
         [self.tableView.header endRefreshing];
         [self.tableView.footer endRefreshing];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        //        YLog(@"dic=%@",dic);
+//                YLog(@"dic=%@",dic);
         if ([dic[@"status"]intValue] == 200 || [dic[@"status"]intValue] == 201) {
             NSArray *results = dic[@"data"];
             if (_page == 1) {
@@ -275,7 +280,7 @@
 }
 -(void)zanAc:(UIButton *)btn{
     NSString *udid = [Util getDeveiceToken];
-    Apps *app = self.apps[btn.tag];
+    Apps *app = self.apps[btn.tag-1000];
     NSNumber *like = @1;
     if ([app.approvestatus isEqual:@1]) {
         like = @0;
@@ -299,7 +304,7 @@
 }
 
 -(void)downAc:(UIButton *)btn{
-    Apps *app = self.apps[btn.tag];
+    Apps *app = self.apps[btn.tag-1000];
     NSString *udid = [Util getDeveiceToken];
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [Api post:API_DOWN_ACTION parameters:@{@"udid":udid,@"aid":app.id} completion:^(id data, NSError *err) {
@@ -353,5 +358,12 @@
     _pageControl.currentPage=currentIndex;
     [_advScroll scrollRectToVisible:CGRectMake(currentIndex * self.view.frame.size.width, 0, self.view.frame.size.width, 100) animated:YES];
 }
-
+-(void)goWeb:(UITapGestureRecognizer *)tap{
+    NSInteger index = [tap view].tag;
+    NSDictionary *imgDic = _sliderArray[index];//image name url
+    OpenWebAppVC *webview = [Util createVCFromStoryboard:@"OpenWebAppVC"];
+    NSDictionary *param = @{@"name":imgDic[@"name"],@"url":imgDic[@"url"]};
+    webview.param = param;
+    [self.navigationController pushViewController:webview animated:YES];
+}
 @end

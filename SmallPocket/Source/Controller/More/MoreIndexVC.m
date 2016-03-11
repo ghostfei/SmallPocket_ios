@@ -1,20 +1,20 @@
 //
-//  MoreViewController.m
+//  MoreIndexVC.m
 //  SmallPocket
 //
 //  Created by ghostfei on 15/11/14.
 //  Copyright © 2015年 ghostfei. All rights reserved.
 //
 
-#import "MoreViewController.h"
+#import "MoreIndexVC.h"
 #import "UploadAppVC.h"
 #import "Util.h"
 
-@interface MoreViewController ()
+@interface MoreIndexVC ()
 
 @end
 
-@implementation MoreViewController
+@implementation MoreIndexVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

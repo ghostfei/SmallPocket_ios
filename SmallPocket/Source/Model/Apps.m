@@ -25,6 +25,7 @@
 @dynamic is_del; 
 @dynamic approvestatus;
 @dynamic downstatus;
+@dynamic tags;
 
 + (NSString *)primaryKey {
     return @"id";

@@ -53,7 +53,7 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    cell.zanBtn.tag = cell.downBtn.tag = indexPath.row;
+    cell.zanBtn.tag = cell.downBtn.tag = indexPath.row+1000;
     
     [cell setContent:app];
     [cell.zanBtn addTarget:self action:@selector(zanAc:) forControlEvents:UIControlEventTouchUpInside];
@@ -90,7 +90,7 @@
 #pragma mark
 -(void)zanAc:(UIButton *)btn{
     NSString *udid = [Util getDeveiceToken];
-    Apps *app = _dataArray[btn.tag];
+    Apps *app = _dataArray[btn.tag-1000];
     NSNumber *like = @1;
     if ([app.approvestatus isEqual:@1]) {
         like = @0;
@@ -114,7 +114,7 @@
 
 -(void)downAc:(UIButton *)btn{
     NSString *udid =[Util getDeveiceToken];
-    Apps *app = _dataArray[btn.tag];
+    Apps *app = _dataArray[btn.tag-1000];
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [Api post:API_DOWN_ACTION parameters:@{@"udid":udid,@"aid":app.id} completion:^(id data, NSError *err) {
         [_hud hide:YES];
