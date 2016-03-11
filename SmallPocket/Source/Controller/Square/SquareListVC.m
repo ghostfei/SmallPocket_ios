@@ -140,7 +140,7 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        cell.zanBtn.tag = cell.downBtn.tag = index;
+        cell.zanBtn.tag = cell.downBtn.tag = index+1000;
         
         [cell setContent:app];
         [cell.zanBtn addTarget:self action:@selector(zanAc:) forControlEvents:UIControlEventTouchUpInside];
@@ -190,7 +190,7 @@
         [self.tableView.header endRefreshing];
         [self.tableView.footer endRefreshing];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        //        YLog(@"dic=%@",dic);
+//                YLog(@"dic=%@",dic);
         if ([dic[@"status"]intValue] == 200 || [dic[@"status"]intValue] == 201) {
             NSArray *results = dic[@"data"];
             if (_page == 1) {
@@ -280,7 +280,7 @@
 }
 -(void)zanAc:(UIButton *)btn{
     NSString *udid = [Util getDeveiceToken];
-    Apps *app = self.apps[btn.tag];
+    Apps *app = self.apps[btn.tag-1000];
     NSNumber *like = @1;
     if ([app.approvestatus isEqual:@1]) {
         like = @0;
@@ -304,7 +304,7 @@
 }
 
 -(void)downAc:(UIButton *)btn{
-    Apps *app = self.apps[btn.tag];
+    Apps *app = self.apps[btn.tag-1000];
     NSString *udid = [Util getDeveiceToken];
     _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [Api post:API_DOWN_ACTION parameters:@{@"udid":udid,@"aid":app.id} completion:^(id data, NSError *err) {
