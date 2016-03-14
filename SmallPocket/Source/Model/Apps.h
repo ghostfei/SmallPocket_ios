@@ -29,6 +29,7 @@
 @property (nullable, nonatomic, retain) NSNumber *downstatus;
 @property (nullable, nonatomic, retain) NSNumber *approvestatus;
 @property (nullable, nonatomic, retain) NSString *tags;
+@property (nullable, nonatomic, retain) NSDate *addtime;
 
 @end
 

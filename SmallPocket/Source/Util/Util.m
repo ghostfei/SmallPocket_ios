@@ -27,7 +27,7 @@
     } else {
         url = [NSString stringWithFormat:@"%@%@/%@", DEFAULT_API_URL, path, idValue];
     }
-    YLog(@"APIUrl:%@", url);
+//    YLog(@"APIUrl:%@", url);
     return url;
 }
 
@@ -152,7 +152,7 @@
 //显示提示信息
 + (void)showHintMessage:(NSString *)message
 {
-    [Util showHintMessage:message afterDelay:2.f];
+    [Util showHintMessage:message afterDelay:1.f];
 }
 
 //显示提示信息（指定显示时间）

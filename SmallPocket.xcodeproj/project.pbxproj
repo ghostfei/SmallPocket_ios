@@ -35,7 +35,6 @@
 		AD4729F81C29AD5100F50EB8 /* SquareListHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729D61C29AD5100F50EB8 /* SquareListHeaderCell.m */; };
 		AD4729F91C29AD5100F50EB8 /* SquareListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729D81C29AD5100F50EB8 /* SquareListVC.m */; };
 		AD4729FA1C29AD5100F50EB8 /* ISwitchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729DB1C29AD5100F50EB8 /* ISwitchVC.m */; };
-		AD4729FD1C29AD5100F50EB8 /* OpenApps.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729E21C29AD5100F50EB8 /* OpenApps.m */; };
 		AD4729FE1C29AD5100F50EB8 /* Api.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729E51C29AD5100F50EB8 /* Api.m */; };
 		AD4729FF1C29AD5100F50EB8 /* SmallPocket.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD4729E61C29AD5100F50EB8 /* SmallPocket.xcdatamodeld */; };
 		AD472A001C29AD5100F50EB8 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4729E91C29AD5100F50EB8 /* Util.m */; };
@@ -48,6 +47,7 @@
 		AD59DC7A1BFCDA9D0027602A /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD59DC791BFCDA9D0027602A /* CoreFoundation.framework */; };
 		AD59DC7C1BFCDAA50027602A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD59DC7B1BFCDAA50027602A /* Foundation.framework */; };
 		AD59DC7E1BFCDAAF0027602A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD59DC7D1BFCDAAF0027602A /* CoreGraphics.framework */; };
+		AD8263E51C9328BA0092AA1F /* OpenApps.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8263E41C9328BA0092AA1F /* OpenApps.m */; };
 		AD8C1CF91C4134BF00D6DA41 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD8C1CF81C4134BF00D6DA41 /* SystemConfiguration.framework */; };
 		ADA64AE31BF72DC600FAA433 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = ADA64AE21BF72DC600FAA433 /* Podfile */; };
 		ADACFC411C301220009D9C12 /* Apps.m in Sources */ = {isa = PBXBuildFile; fileRef = ADACFC3E1C301220009D9C12 /* Apps.m */; };
@@ -110,6 +110,8 @@
 		AF893AC61C8FB82700B6A1A8 /* YJYYCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF893AC01C8FB82700B6A1A8 /* YJYYCollectionViewCell.m */; };
 		AF893AC71C8FB82700B6A1A8 /* YJYYCollectionViewFlowlayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AF893AC21C8FB82700B6A1A8 /* YJYYCollectionViewFlowlayout.m */; };
 		AF893AC81C8FB82700B6A1A8 /* YJYYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AF893AC41C8FB82700B6A1A8 /* YJYYPageControl.m */; };
+		AF9463CE1C96906A001F1672 /* LikeApps.m in Sources */ = {isa = PBXBuildFile; fileRef = AF9463CC1C96906A001F1672 /* LikeApps.m */; };
+		AF9463D41C969685001F1672 /* AppType.m in Sources */ = {isa = PBXBuildFile; fileRef = AF9463D21C969685001F1672 /* AppType.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,8 +171,6 @@
 		AD4729D81C29AD5100F50EB8 /* SquareListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareListVC.m; sourceTree = "<group>"; };
 		AD4729DA1C29AD5100F50EB8 /* ISwitchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISwitchVC.h; sourceTree = "<group>"; };
 		AD4729DB1C29AD5100F50EB8 /* ISwitchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISwitchVC.m; sourceTree = "<group>"; };
-		AD4729E11C29AD5100F50EB8 /* OpenApps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenApps.h; sourceTree = "<group>"; };
-		AD4729E21C29AD5100F50EB8 /* OpenApps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenApps.m; sourceTree = "<group>"; };
 		AD4729E41C29AD5100F50EB8 /* Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Api.h; sourceTree = "<group>"; };
 		AD4729E51C29AD5100F50EB8 /* Api.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Api.m; sourceTree = "<group>"; };
 		AD4729E71C29AD5100F50EB8 /* SmallPocket.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SmallPocket.xcdatamodel; sourceTree = "<group>"; };
@@ -191,6 +191,8 @@
 		AD59DC791BFCDA9D0027602A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		AD59DC7B1BFCDAA50027602A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AD59DC7D1BFCDAAF0027602A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AD8263E31C9328BA0092AA1F /* OpenApps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenApps.h; sourceTree = "<group>"; };
+		AD8263E41C9328BA0092AA1F /* OpenApps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenApps.m; sourceTree = "<group>"; };
 		AD8C1CF81C4134BF00D6DA41 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		ADA64AE21BF72DC600FAA433 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		ADACFC3D1C301220009D9C12 /* Apps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Apps.h; sourceTree = "<group>"; };
@@ -259,6 +261,10 @@
 		AF893AC21C8FB82700B6A1A8 /* YJYYCollectionViewFlowlayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJYYCollectionViewFlowlayout.m; sourceTree = "<group>"; };
 		AF893AC31C8FB82700B6A1A8 /* YJYYPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJYYPageControl.h; sourceTree = "<group>"; };
 		AF893AC41C8FB82700B6A1A8 /* YJYYPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJYYPageControl.m; sourceTree = "<group>"; };
+		AF9463CB1C96906A001F1672 /* LikeApps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeApps.h; sourceTree = "<group>"; };
+		AF9463CC1C96906A001F1672 /* LikeApps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeApps.m; sourceTree = "<group>"; };
+		AF9463D11C969685001F1672 /* AppType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppType.h; sourceTree = "<group>"; };
+		AF9463D21C969685001F1672 /* AppType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppType.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -436,10 +442,14 @@
 		AD4729DC1C29AD5100F50EB8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AF9463D11C969685001F1672 /* AppType.h */,
+				AF9463D21C969685001F1672 /* AppType.m */,
+				AF9463CB1C96906A001F1672 /* LikeApps.h */,
+				AF9463CC1C96906A001F1672 /* LikeApps.m */,
 				ADACFC3D1C301220009D9C12 /* Apps.h */,
 				ADACFC3E1C301220009D9C12 /* Apps.m */,
-				AD4729E11C29AD5100F50EB8 /* OpenApps.h */,
-				AD4729E21C29AD5100F50EB8 /* OpenApps.m */,
+				AD8263E31C9328BA0092AA1F /* OpenApps.h */,
+				AD8263E41C9328BA0092AA1F /* OpenApps.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -719,7 +729,7 @@
 				TargetAttributes = {
 					AD1D04D41BE8E82E00290AD5 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = V347XFFX68;
+						DevelopmentTeam = 4AX4WMTQ8E;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -896,6 +906,7 @@
 				AF893AC51C8FB82700B6A1A8 /* YJYYCollectionView.m in Sources */,
 				AD1D04DD1BE8E82E00290AD5 /* AppDelegate.m in Sources */,
 				AF893AC71C8FB82700B6A1A8 /* YJYYCollectionViewFlowlayout.m in Sources */,
+				AF9463CE1C96906A001F1672 /* LikeApps.m in Sources */,
 				AD472A0B1C29AD8000F50EB8 /* CoreDataManager.m in Sources */,
 				AD4729F81C29AD5100F50EB8 /* SquareListHeaderCell.m in Sources */,
 				AD472A011C29AD5100F50EB8 /* OpenWebAppVC.m in Sources */,
@@ -907,6 +918,7 @@
 				ADACFC411C301220009D9C12 /* Apps.m in Sources */,
 				AD4729ED1C29AD5100F50EB8 /* AdvListVC.m in Sources */,
 				AD472A0D1C29AD8000F50EB8 /* NSManagedObject+Mappings.m in Sources */,
+				AF9463D41C969685001F1672 /* AppType.m in Sources */,
 				AD4729F71C29AD5100F50EB8 /* SquareListCell.m in Sources */,
 				AD4729FE1C29AD5100F50EB8 /* Api.m in Sources */,
 				AD472A0C1C29AD8000F50EB8 /* NSManagedObject+ActiveRecord.m in Sources */,
@@ -919,7 +931,7 @@
 				AF893AC61C8FB82700B6A1A8 /* YJYYCollectionViewCell.m in Sources */,
 				AD4729FA1C29AD5100F50EB8 /* ISwitchVC.m in Sources */,
 				AD1D04DA1BE8E82E00290AD5 /* main.m in Sources */,
-				AD4729FD1C29AD5100F50EB8 /* OpenApps.m in Sources */,
+				AD8263E51C9328BA0092AA1F /* OpenApps.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -970,6 +982,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -992,7 +1005,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "31f02a13-ed45-4607-b661-dcbff5a29d80";
+				PROVISIONING_PROFILE = "cce6f476-3481-46d4-b457-5a7fd0965068";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1014,6 +1027,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1029,7 +1043,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "31f02a13-ed45-4607-b661-dcbff5a29d80";
+				PROVISIONING_PROFILE = "cce6f476-3481-46d4-b457-5a7fd0965068";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1053,7 +1067,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunyaoo.SmallPocket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "31f02a13-ed45-4607-b661-dcbff5a29d80";
+				PROVISIONING_PROFILE = "cce6f476-3481-46d4-b457-5a7fd0965068";
 			};
 			name = Debug;
 		};
@@ -1075,7 +1089,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunyaoo.SmallPocket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "31f02a13-ed45-4607-b661-dcbff5a29d80";
+				PROVISIONING_PROFILE = "cce6f476-3481-46d4-b457-5a7fd0965068";
 			};
 			name = Release;
 		};

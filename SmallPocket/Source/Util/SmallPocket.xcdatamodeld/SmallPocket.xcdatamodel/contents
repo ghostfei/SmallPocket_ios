@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="14F1021" minimumToolsVersion="Xcode 7.0">
     <entity name="Apps" representedClassName="Apps" syncable="YES">
+        <attribute name="addtime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="approvestatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="atid" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="createtime" optional="YES" attributeType="String" syncable="YES"/>
@@ -18,6 +19,23 @@
         <attribute name="tel" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="AppType" representedClassName="AppType" syncable="YES">
+        <attribute name="father" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sort" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="LikeApps" representedClassName="LikeApps" syncable="YES">
+        <attribute name="addtime" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="aid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="atid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="createtime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="OpenApps" representedClassName="OpenApps" syncable="YES">
         <attribute name="aid" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="createtime" optional="YES" attributeType="Date" syncable="YES"/>
@@ -28,7 +46,9 @@
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Apps" positionX="-63" positionY="36" width="128" height="285"/>
-        <element name="OpenApps" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="Apps" positionX="-63" positionY="36" width="128" height="300"/>
+        <element name="OpenApps" positionX="-63" positionY="135" width="128" height="150"/>
+        <element name="LikeApps" positionX="-63" positionY="162" width="128" height="180"/>
+        <element name="AppType" positionX="-54" positionY="171" width="128" height="105"/>
     </elements>
 </model>

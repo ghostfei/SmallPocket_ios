@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _dataArray = [[NSMutableArray alloc]init];
-    self.navigationItem.title = @"Search";
+    self.navigationItem.title = @"搜索";
 
     UIBarButtonItem *backBar = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backBar;
@@ -153,6 +153,9 @@
     _key = key;
     NSString *udid = [Util getDeveiceToken];
     [Api post:API_SEARCH_ACTION parameters:@{@"keyword":key,@"udid":udid} completion:^(id data, NSError *err) {
+        if (err) {
+            return ;
+        }
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"json=%@",dic);
         NSArray *result = dic[@"data"];

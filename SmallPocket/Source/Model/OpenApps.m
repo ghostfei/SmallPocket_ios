@@ -2,7 +2,7 @@
 //  OpenApps.m
 //  
 //
-//  Created by ghostfei on 15/12/23.
+//  Created by ghostfei on 16/3/12.
 //
 //
 
@@ -10,14 +10,13 @@
 
 @implementation OpenApps
 
-// Insert code here to add functionality to your managed object subclass
 @dynamic aid;
 @dynamic createtime;
-@dynamic url;
-@dynamic name;
 @dynamic desc;
 @dynamic icon;
+@dynamic name;
 @dynamic openTime;
+@dynamic url;
 
 + (NSString *)primaryKey {
     return @"aid";

@@ -26,6 +26,7 @@
 @dynamic approvestatus;
 @dynamic downstatus;
 @dynamic tags;
+@dynamic addtime;
 
 + (NSString *)primaryKey {
     return @"id";
