@@ -24,6 +24,7 @@
     
     UIBarButtonItem *barBack = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = barBack;
+    self.tableView.scrollEnabled = NO;
     
     [self showVersion];
 }
