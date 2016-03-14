@@ -43,7 +43,6 @@
     token = [token stringByReplacingOccurrencesOfString:@"<" withString:@""];
     token = [token stringByReplacingOccurrencesOfString:@">" withString:@""];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-    YLog(@"devicetoken=%@",token);
     // Required
     //    [APService registerDeviceToken:deviceToken];
     //    YLog(@"[APService registrationID]=%@",[APService registrationID]);
@@ -51,13 +50,10 @@
     [[NSUserDefaults standardUserDefaults]setObject:token forKey:K_DeviceToken];
     //    [[NSUserDefaults standardUserDefaults]setObject:[APService registrationID] forKey:K_registJPushId];
     [[NSUserDefaults standardUserDefaults]synchronize];
+    YLog(@"devicetoken=%@",token);
 }
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
-    YLog(@"no device");
-    NSString  *token = @"12";
-    [[NSUserDefaults standardUserDefaults]setObject:token forKey:K_DeviceToken];
-    //    [[NSUserDefaults standardUserDefaults]setObject:@"no device" forKey:K_registJPushId];
-    [[NSUserDefaults standardUserDefaults]synchronize];
+    YLog(@"no device"); 
 }
 
 

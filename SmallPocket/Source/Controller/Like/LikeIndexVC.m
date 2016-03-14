@@ -74,8 +74,10 @@
         [self refreshData];
         _first = NO;
     }
-    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshData) name:NOTIFY_LIKE_REFRESH object:nil];
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
