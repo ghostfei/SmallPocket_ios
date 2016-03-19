@@ -724,7 +724,7 @@
 				TargetAttributes = {
 					AD1D04D41BE8E82E00290AD5 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = V347XFFX68;
+						DevelopmentTeam = P6XL3SJ283;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -998,7 +998,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "31f02a13-ed45-4607-b661-dcbff5a29d80";
+				PROVISIONING_PROFILE = "9f55ab3e-9554-49df-8d6e-b845a74e3b89";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1035,7 +1035,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "31f02a13-ed45-4607-b661-dcbff5a29d80";
+				PROVISIONING_PROFILE = "9f55ab3e-9554-49df-8d6e-b845a74e3b89";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1059,7 +1059,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunyaoo.SmallPocket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "31f02a13-ed45-4607-b661-dcbff5a29d80";
+				PROVISIONING_PROFILE = "9f55ab3e-9554-49df-8d6e-b845a74e3b89";
 			};
 			name = Debug;
 		};
@@ -1081,7 +1081,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunyaoo.SmallPocket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "31f02a13-ed45-4607-b661-dcbff5a29d80";
+				PROVISIONING_PROFILE = "9f55ab3e-9554-49df-8d6e-b845a74e3b89";
 			};
 			name = Release;
 		};
