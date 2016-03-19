@@ -100,6 +100,14 @@
         headCell.advScroll.scrollEnabled=YES;
         headCell.advScroll.showsHorizontalScrollIndicator=NO;
         
+        //刷新时重置时间 以及情况之前的imageview
+        [_playTime invalidate];
+        for (UIView *vi in headCell.advScroll.subviews) {
+            if ([vi isKindOfClass:[UIImageView class]]) {
+                [vi removeFromSuperview];
+            }
+        }
+        
         NSInteger imgNum = _sliderArray.count;//可以动态获取
         if (imgNum>0) {
             headCell.advScroll.contentSize = CGSizeMake(_sliderArray.count*headCell.frame.size.width, 100);
@@ -130,7 +138,6 @@
         //使用NSTimer实现定时触发滚动控件滚动的动作。
         currentIndex = 0;
         
-        [_playTime invalidate];
         _playTime = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(scrollTimer) userInfo:nil repeats:YES];
         
         _advScroll = headCell.advScroll;
