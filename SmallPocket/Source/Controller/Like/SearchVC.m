@@ -152,7 +152,9 @@
 -(void)searchAction:(NSString *)key{
     _key = key;
     NSString *udid = [Util getDeveiceToken];
+    _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [Api post:API_SEARCH_ACTION parameters:@{@"keyword":key,@"udid":udid} completion:^(id data, NSError *err) {
+        _hud.hidden = YES;
         if (err) {
             return ;
         }
