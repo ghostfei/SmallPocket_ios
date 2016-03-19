@@ -29,7 +29,8 @@
         UIBarButtonItem *pre = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"btn_pre"] style:UIBarButtonItemStylePlain target:self action:@selector(goPre)];
         UIBarButtonItem *next = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"btn_next"] style:UIBarButtonItemStylePlain target:self action:@selector(goNext)];
     
-        UIBarButtonItem *back = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"btn_home"] style:UIBarButtonItemStylePlain target:self action:@selector(backAc)];
+//        UIBarButtonItem *back = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"btn_home"] style:UIBarButtonItemStylePlain target:self action:@selector(backAc)];//图片关闭
+        UIBarButtonItem *back = [[UIBarButtonItem alloc]initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(backAc)];//文字关闭
         self.navigationItem.leftBarButtonItems = @[pre,next];
         self.navigationItem.rightBarButtonItem = back;
     }

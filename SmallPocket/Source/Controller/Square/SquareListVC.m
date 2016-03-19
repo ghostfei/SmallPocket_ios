@@ -9,6 +9,7 @@
 #import "SquareListVC.h"
 #import "Util.h"
 #import "Apps.h"
+#import "AppType.h"
 #import "SearchVC.h"
 #import "OpenWebAppVC.h"
 
@@ -24,7 +25,7 @@
     MBProgressHUD *_hud;
     NSArray *_typeArray;
     
-    NSString *_type;
+    NSNumber *_type;
     
     NSInteger currentIndex;
     NSInteger PAGENUM;
@@ -32,6 +33,8 @@
     UIPageControl *_pageControl;
     
     BOOL _firstLoad;
+    
+    NSTimer *_playTime;
 }
 
 @end
@@ -47,7 +50,7 @@
     _sliderArray = [[NSArray alloc]init];
     _page = 1;
     _limit = 20;
-    _type = @"0";
+    _type = @0;
     _firstLoad = YES;
     
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -76,6 +79,7 @@
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [_playTime invalidate];
     _typeView.hidden = YES;
 }
 
@@ -125,7 +129,9 @@
         
         //使用NSTimer实现定时触发滚动控件滚动的动作。
         currentIndex = 0;
-        [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(scrollTimer) userInfo:nil repeats:YES];
+        
+        [_playTime invalidate];
+        _playTime = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(scrollTimer) userInfo:nil repeats:YES];
         
         _advScroll = headCell.advScroll;
         _pageControl = headCell.pageControll;
@@ -168,7 +174,13 @@
 #pragma mark loaddata
 -(void)reloadData{
     [self.apps removeAllObjects];
-    [self.apps addObjectsFromArray:[Apps where:nil order:@{@"sort":@"DESC"} limit:[NSNumber numberWithInteger:_limit * _page]]];
+    
+    NSDictionary *param = nil;
+    if(![_type isEqual:@0]){
+        param = @{@"atid":_type};
+    }
+
+    [self.apps addObjectsFromArray:[Apps where:param order:@{@"sort":@"DESC"} limit:[NSNumber numberWithInteger:_limit * _page]]];
     NSLog(@"self.apps.count:%ld", self.apps.count);
     [self.tableView reloadData];
 }
@@ -211,7 +223,7 @@
                 Apps *app = [Apps findOrCreate:dic];
                 [app save];
             };
-            
+            [self refreshType];
             if (_page !=1) {
                 [self reloadData];
             }else{
@@ -231,59 +243,62 @@
 }
 
 #pragma mark typeview
--(void)showType{
-    if (_typeView.hidden) {
-        _typeView.hidden = NO;
-        [self.view bringSubviewToFront:_typeView];
-        [self loadType];
-    }else{
-        _typeView.hidden = YES;
-    }
-}
--(void)loadType{
-    for (UIView *vi in _typeScroll.subviews) {
-        [vi removeFromSuperview];
-    }
-    
+#pragma mark 侧栏分类
+-(void)refreshType{
     [Api post:API_TYPE_LIST parameters:nil completion:^(id data, NSError *err) {
         if (err) {
             return ;
         }
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        YLog(@"json=%@",dic);
+        //        YLog(@"json=%@",dic);
         if ([dic[@"status"]intValue] == 200) {
-            _typeArray = dic[@"data"];
-            NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:_typeArray];
-            [tempArray insertObject:@{@"name":@"全部",@"id":@"0"} atIndex:0];
-            
-            _typeScroll.contentSize = CGSizeMake(80, tempArray.count*35);
-            
-            [tempArray enumerateObjectsUsingBlock:^(NSDictionary *dic, NSUInteger idx, BOOL * _Nonnull stop) {
-                UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, idx*31, 80, 30)];
-                btn.tag = idx;
-                [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                [btn setTitle:dic[@"name"] forState:UIControlStateNormal];
-                [btn addTarget:self action:@selector(choseType:) forControlEvents:UIControlEventTouchUpInside];
-                UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, idx*31+30, 80, 1)];
-                line.backgroundColor = [UIColor lightGrayColor];
-                line.alpha = 0.6;
-                [_typeScroll addSubview:line];
-                [_typeScroll addSubview:btn];
+            NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:@[@{@"id":@0,@"name":@"全部",@"father":@"0"}]];
+            [tempArray addObjectsFromArray:(NSArray *)dic[@"data"]];
+            [tempArray enumerateObjectsUsingBlock:^(NSDictionary *type, NSUInteger idx, BOOL * _Nonnull stop) {
+                AppType *types = [AppType findOrCreate:type];
+                [types save];
             }];
-            
         }
+    }];
+}
+-(void)showType{
+    if (_typeView.hidden) {
+        _typeView.hidden = NO;
+        [self.view bringSubviewToFront:_typeView];
+        [self reloadType];
+    }else{
+        _typeView.hidden = YES;
+    }
+}
+-(void)reloadType{
+    CGFloat w = 60;
+    for (UIView *vi in _typeScroll.subviews) {
+        [vi removeFromSuperview];
+    }
+    _typeArray = [AppType where:nil];
+    
+    _typeScroll.contentSize = CGSizeMake(w, _typeArray.count*35);
+    [_typeArray enumerateObjectsUsingBlock:^(AppType *type, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, idx*31, w, 30)];
+        btn.tag = idx;
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn setTitle:type.name forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(choseType:) forControlEvents:UIControlEventTouchUpInside];
+        UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(2, idx*31+30, w-4, 1)];
+        line.backgroundColor = [UIColor lightGrayColor];
+        line.alpha = 0.6;
+        [_typeScroll addSubview:line];
+        [_typeScroll addSubview:btn];
     }];
 }
 -(void)choseType:(UIButton *)btn{
     _typeView.hidden = YES;
-    if (btn.tag == 0) {
-        _type = @"0";
-    }else{
-        NSDictionary *dic = _typeArray[btn.tag-1];
-        _type = dic[@"id"];
-    }
+    AppType *type = _typeArray[btn.tag];
+    _type =type.id;
+    self.navigationItem.title = type.name;
     [self loadNewData];
 }
+
 -(void)zanAc:(UIButton *)btn{
     NSString *udid = [Util getDeveiceToken];
     Apps *app = self.apps[btn.tag-1000];

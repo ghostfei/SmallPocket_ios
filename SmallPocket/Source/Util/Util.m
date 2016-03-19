@@ -27,7 +27,7 @@
     } else {
         url = [NSString stringWithFormat:@"%@%@/%@", DEFAULT_API_URL, path, idValue];
     }
-    YLog(@"APIUrl:%@", url);
+//    YLog(@"APIUrl:%@", url);
     return url;
 }
 

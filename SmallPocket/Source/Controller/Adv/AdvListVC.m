@@ -53,8 +53,8 @@
     NSDictionary *dic = _dataArray[indexPath.row];
     cell.bgImg.contentMode = UIViewContentModeScaleAspectFill;
     cell.bgImg.clipsToBounds = YES;
-//    cell.bgImg.layer.cornerRadius = 15;
-//    cell.bgImg.layer.masksToBounds = YES;
+    cell.bgImg.layer.cornerRadius = 5;
+    cell.bgImg.layer.masksToBounds = YES;
     
     cell.nameLabel.layer.shadowColor = [UIColor blackColor].CGColor;
     cell.nameLabel.layer.shadowOpacity = 1.0;

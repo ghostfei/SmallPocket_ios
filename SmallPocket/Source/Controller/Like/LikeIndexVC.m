@@ -14,6 +14,7 @@
 #import "OpenApps.h"
 #import "SearchVC.h"
 #import "LikeApps.h"
+#import "AppType.h"
 
 @interface LikeIndexVC ()<UIScrollViewDelegate>{
     NSMutableArray *_dataArray;
@@ -21,9 +22,10 @@
     
     MBProgressHUD *_hud;
     
-    NSString *_type;
+    NSNumber *_type;
     
     UIPageControl *_pageControl;
+    BOOL _first;
 }
 
 @end
@@ -61,13 +63,21 @@
     bgView.clipsToBounds = YES;
     [self.view addSubview:bgView];
     
-    _type = @"0";
+    _type = @0;
     _dataArray = [[NSMutableArray alloc]init];
+    //    _typeArray = [[NSMutableArray alloc]init];
+    _first = YES;
     
     [self initPageControl];
-    [self loadData];
-    
+    [self reloadData];
+    if (_first) {
+        [self refreshData];
+        _first = NO;
+    }
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshData) name:NOTIFY_LIKE_REFRESH object:nil];
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -85,20 +95,7 @@
     [self.view bringSubviewToFront:_pageControl];
 }
 #pragma mark 侧栏分类
--(void)showType{
-    if (_typeView.hidden) {
-        _typeView.hidden = NO;
-        [self.view bringSubviewToFront:_typeView];
-        [self loadType];
-    }else{
-        _typeView.hidden = YES;
-    }
-}
--(void)loadType{
-    for (UIView *vi in _typeScroll.subviews) {
-        [vi removeFromSuperview];
-    }
-    
+-(void)refreshType{
     [Api post:API_TYPE_LIST parameters:nil completion:^(id data, NSError *err) {
         if (err) {
             return ;
@@ -106,41 +103,56 @@
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 //        YLog(@"json=%@",dic);
         if ([dic[@"status"]intValue] == 200) {
-            _typeArray = dic[@"data"];
-            NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:_typeArray];
-            [tempArray insertObject:@{@"name":@"全部",@"id":@"0"} atIndex:0];
-            
-            _typeScroll.contentSize = CGSizeMake(80, tempArray.count*35);
-            [tempArray enumerateObjectsUsingBlock:^(NSDictionary *dic, NSUInteger idx, BOOL * _Nonnull stop) {
-                UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, idx*31, 80, 30)];
-                btn.tag = idx;
-                [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                [btn setTitle:dic[@"name"] forState:UIControlStateNormal];
-                [btn addTarget:self action:@selector(choseType:) forControlEvents:UIControlEventTouchUpInside];
-                UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, idx*31+30, 80, 1)];
-                line.backgroundColor = [UIColor lightGrayColor];
-                line.alpha = 0.6;
-                [_typeScroll addSubview:line];
-                [_typeScroll addSubview:btn];
+            NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:@[@{@"id":@0,@"name":@"全部",@"father":@"0"}]];
+            [tempArray addObjectsFromArray:(NSArray *)dic[@"data"]];
+            [tempArray enumerateObjectsUsingBlock:^(NSDictionary *type, NSUInteger idx, BOOL * _Nonnull stop) {
+                AppType *types = [AppType findOrCreate:type];
+                [types save];
             }];
-            
         }
+    }];
+}
+
+-(void)showType{
+    if (_typeView.hidden) {
+        _typeView.hidden = NO;
+        [self.view bringSubviewToFront:_typeView];
+        [self reloadType];
+    }else{
+        _typeView.hidden = YES;
+    }
+}
+-(void)reloadType{
+    CGFloat w = 60;
+    for (UIView *vi in _typeScroll.subviews) {
+        [vi removeFromSuperview];
+    }
+    _typeArray = [AppType where:nil];
+    
+    _typeScroll.contentSize = CGSizeMake(w, _typeArray.count*35);
+    [_typeArray enumerateObjectsUsingBlock:^(AppType *type, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, idx*31, w, 30)];
+        btn.tag = idx;
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn setTitle:type.name forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(choseType:) forControlEvents:UIControlEventTouchUpInside];
+        UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(2, idx*31+30, w-4, 1)];
+        line.backgroundColor = [UIColor lightGrayColor];
+        line.alpha = 0.6;
+        [_typeScroll addSubview:line];
+        [_typeScroll addSubview:btn];
     }];
 }
 -(void)choseType:(UIButton *)btn{
     _typeView.hidden = YES;
-    if (btn.tag == 0) {
-        _type = @"0";
-        self.navigationItem.title = @"全部";
-    }else{
-        NSDictionary *dic = _typeArray[btn.tag-1];
-        _type = dic[@"id"];
-        self.navigationItem.title = dic[@"name"];
-    }
-    [self loadNewData];
+    AppType *type = _typeArray[btn.tag];
+    _type =type.id;
+    self.navigationItem.title = type.name;
+    [self reloadData];
 }
 #pragma page跟随advScroll滑动
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)typeScroll1{
+    _typeView.hidden = YES;
     CGPoint offset=typeScroll1.contentOffset;
     CGRect bounds=self.view.frame;
     NSLog(@"offset=%lf w=%lf",offset.x,bounds.size.width);
@@ -212,63 +224,62 @@
     }];
 }
 #pragma mark 加载数据
--(void)refreshData{
-    NSString *title = self.navigationItem.title;
-    self.navigationItem.title = [title substringToIndex:2];
-    [self loadData];
-}
--(void)loadNewData{
-    NSArray *apps = [LikeApps where:@{}];
-    [apps enumerateObjectsUsingBlock:^(LikeApps *app, NSUInteger idx, BOOL * _Nonnull stop) {
-        [app delete];
-    }];
-    [self loadData];
-}
 -(void)reloadData{
+    //清空数据
     [_dataArray removeAllObjects];
     LikeApps *noapp = [LikeApps find:@{@"aid":@0}];
     [noapp delete];
-    [_dataArray addObjectsFromArray:[LikeApps where:@{}]];
-//    NSLog(@"data=%@",_dataArray);
+    //判断查询type
+    NSDictionary *param = nil;
+    if(![_type isEqual:@0]){
+        param = @{@"atid":_type};
+    }
+    NSLog(@"type=%@",_type);
+    [_dataArray addObjectsFromArray:[LikeApps where:param order:@{@"addtime":@"DESC"}]];
+    LikeApps *addApp = [LikeApps findOrCreate:@{@"icon":@"like_add",@"name":@"添加应用",@"addtime":@0}];
+    [_dataArray addObject:addApp];
+    NSInteger count = _dataArray.count -1;
+    
     NSString *title = self.navigationItem.title;
     if (title.length == 0) {
         title = @"全部";
+    }else{
+        title = [title substringToIndex:2];
+        NSLog(@"title=%@",title);
     }
-    self.navigationItem.title = [NSString stringWithFormat:@"%@(%ld)",title,_dataArray.count];
-    LikeApps *addApp = [LikeApps findOrCreate:@{@"icon":@"like_add",@"name":@"添加应用"}];
-    [_dataArray addObject:addApp];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@(%ld)",title,count];
     
-    _pageControl.numberOfPages = ceil(_dataArray.count/16.0);
+    _pageControl.numberOfPages = ceil(count/16.0);
     
-    if (_dataArray.count > 16) {
-        NSInteger count = _dataArray.count/16;
-        count = count +1;
-        self.scrollView.contentSize = CGSizeMake(W*count, 0);
+    if (count > 16) {
+        NSInteger pageCount = count/16;
+        pageCount = pageCount +1;
+        self.scrollView.contentSize = CGSizeMake(W*pageCount, 0);
     }else{
         self.scrollView.contentSize = CGSizeMake(W, 0);
     }
-    NSLog(@"self.apps.count:%ld", _dataArray.count);
+    YLog(@"self.apps.count:%ld", count);
     [self createGridCell];
 }
--(void)loadData{
+-(void)refreshData{
     NSDictionary *bdic = @{@"udid":[Util getDeveiceToken],@"type":_type};
-    
     [Util startActiciView:self.view];
     [Api post:API_LIKE_LIST parameters:bdic completion:^(id data, NSError *err) {
         [Util stopActiciView:self.view];
-        
         if (err) {
             return;
         }
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         
-        _dataArray = dic[@"data"];
-        NSLog(@"array=%@",_dataArray);
-        for (NSDictionary *dicc in _dataArray) {
-            LikeApps *app = [LikeApps findOrCreate:dicc];
-            app.addtime = [app.createtime timeIntervalSinceReferenceDate];
+        NSArray *array = dic[@"data"];
+        NSLog(@"array=%ld",array.count);
+        for (NSDictionary *appDic in array) {
+            LikeApps *app = [LikeApps findOrCreate:appDic];
+            app.addtime = [NSNumber numberWithInteger:[[Util stringToDate:app.createtime] timeIntervalSinceReferenceDate]];
+//            YLog(@"app.createtime=%@ and addtime=%@",app.createtime,app.addtime);
             [app save];
         }
+        [self refreshType];
         [self reloadData];
     }];
 }
@@ -299,11 +310,13 @@
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         YLog(@"json=%@",dic);
         if ([dic[@"status"]integerValue ] == 200) {
-            [Util showHintMessage:@"删除成功"];
+//            [Util showHintMessage:@"删除成功"];
+            [app delete];
+            [app save];
         }else{
             [Util showHintMessage:@"网络异常"];
         }
-        [self refreshData];
+        [self reloadData];
         
     }];
 }

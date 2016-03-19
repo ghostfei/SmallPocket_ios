@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _dataArray = [[NSMutableArray alloc]init];
-    self.navigationItem.title = @"Search";
+    self.navigationItem.title = @"搜索";
 
     UIBarButtonItem *backBar = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backBar;

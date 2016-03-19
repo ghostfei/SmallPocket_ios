@@ -19,7 +19,7 @@
 - (void)awakeFromNib {
     // Initialization code
     
-    _bgView.layer.cornerRadius = 15;
+    _bgView.layer.cornerRadius = 5;
     _bgView.layer.masksToBounds = YES;
     
     _colorArray = @[[UIColor blueColor],[UIColor purpleColor],[UIColor greenColor],[UIColor redColor]];
@@ -78,11 +78,14 @@
 
 -(void)addTags:(NSArray *)array{
     [array enumerateObjectsUsingBlock:^(NSString *tag, NSUInteger idx, BOOL * _Nonnull stop) {
-        UIButton *tabBtn = [[UIButton alloc]initWithFrame:CGRectMake(self.name.frame.size.width+self.name.frame.origin.x+1 + idx*25, 12, 24, 14)];
+        CGSize nameSize = [self.name.text boundingRectWithSize:CGSizeMake(200, 21) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.name.font} context:nil].size;
+        UIFont *tagFont = [UIFont systemFontOfSize:10];
+        CGSize size = [tag boundingRectWithSize:CGSizeMake(100, 14) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:tagFont} context:nil].size;
+        UIButton *tabBtn = [[UIButton alloc]initWithFrame:CGRectMake(nameSize.width+self.name.frame.origin.x+3 + idx*25, 12, size.width+4, 14)];
         [self.contentView addSubview:tabBtn];
         
         [tabBtn setTitle:tag forState:UIControlStateNormal];
-        tabBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+        tabBtn.titleLabel.font = tagFont;
         [tabBtn setTitleColor:_colorArray[idx+1] forState:UIControlStateNormal];
         if ([tag isEqualToString:@"官方"]) {
             [tabBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];

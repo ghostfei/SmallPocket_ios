@@ -1,28 +1,25 @@
 //
-//  LikeApps+CoreDataProperties.m
+//  LikeApps.m
 //  
 //
-//  Created by ghostfei on 16/3/12.
+//  Created by pf on 16/3/14.
 //
-//
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
 //
 
 #import "LikeApps.h"
 
 @implementation LikeApps
+@dynamic id;
 @dynamic aid;
-@dynamic createtime;
+@dynamic atid;
+@dynamic name;
 @dynamic desc;
 @dynamic icon;
-@dynamic name;
 @dynamic addtime;
+@dynamic createtime;
 @dynamic url;
-@dynamic atid;
-@dynamic modifytime;
 
-+ (NSString *)primaryKey {
-    return @"aid";
++(NSString *)primaryKey{
+    return @"id";
 }
 @end
