@@ -1169,13 +1169,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon3000.png" translatesAutoresizingMaskIntoConstraints="NO" id="cKa-h8-9lO">
-                                <rect key="frame" x="240" y="109" width="120" height="120"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="QGb-gf-ToJ"/>
-                                    <constraint firstAttribute="height" constant="120" id="xvY-mf-Dys"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afr-aL-ZA9">
                                 <rect key="frame" x="20" y="251" width="560" height="43"/>
                                 <string key="text">美袋轻应用平台由深圳市聚优乐科技有限公司IT团队精心开发，主要为手机用户带来轻松的便捷的应用使用体验，无需下载即可以使用各类好玩好用的手机应用，省内存，免去应用低频使用带来的安装卸载的烦恼！并提供开放平台供WAP/H5应用开发者上传！为广大WAP应用开发爱好者提供更好的展示平台！</string>
@@ -1210,6 +1203,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon3000.png" translatesAutoresizingMaskIntoConstraints="NO" id="cKa-h8-9lO">
+                                <rect key="frame" x="240" y="109" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="QGb-gf-ToJ"/>
+                                    <constraint firstAttribute="height" constant="120" id="xvY-mf-Dys"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1271,8 +1271,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Icon3000.png" width="3000" height="3000"/>
         <image name="btn_add.png" width="30" height="30"/>
+        <image name="icon3000.png" width="3000" height="3000"/>
         <image name="icon_about.png" width="30" height="30"/>
         <image name="icon_addapp.png" width="30" height="30"/>
         <image name="icon_myself.png" width="30" height="30"/>
