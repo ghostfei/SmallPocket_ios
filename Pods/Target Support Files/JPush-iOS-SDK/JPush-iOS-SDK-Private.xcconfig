@@ -1,0 +1,7 @@
+#include "JPush-iOS-SDK.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/JPush-iOS-SDK" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/HexColors" "${PODS_ROOT}/Headers/Public/JPush-iOS-SDK" "${PODS_ROOT}/Headers/Public/JSONModel" "${PODS_ROOT}/Headers/Public/MBProgressHUD" "${PODS_ROOT}/Headers/Public/MJRefresh" "${PODS_ROOT}/Headers/Public/ObjectiveSugar" "${PODS_ROOT}/Headers/Public/TSMessages" "${PODS_ROOT}/Headers/Public/Toast" "${PODS_ROOT}/Headers/Public/UMengAnalytics-NO-IDFA"
+LIBRARY_SEARCH_PATHS = ${JPUSH_IOS_SDK_LIBRARY_SEARCH_PATHS}
+OTHER_LDFLAGS = ${JPUSH_IOS_SDK_OTHER_LDFLAGS}
+PODS_ROOT = ${SRCROOT}
+SKIP_INSTALL = YES

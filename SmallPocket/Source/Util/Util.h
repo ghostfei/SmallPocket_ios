@@ -35,6 +35,7 @@ typedef NS_ENUM(NSInteger,viewType){
 //#define DEFAULT_API_URL @"http://127.0.0.1:8888/SmallPocket/"
 #define REQUEST_TIME_OUT 20 //网络请求 超时时间
 
+#define KUMENG_TOKEN @"5672872e67e58e5f0e001a36"
 #define K_DeviceToken @"K_DeviceToken"
 #define ScreenW self.view.frame.size.width
 

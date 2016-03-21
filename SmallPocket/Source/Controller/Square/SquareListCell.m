@@ -22,7 +22,7 @@
     _bgView.layer.cornerRadius = 5;
     _bgView.layer.masksToBounds = YES;
     
-    _colorArray = @[[UIColor blueColor],[UIColor purpleColor],[UIColor greenColor],[UIColor redColor]];
+    _colorArray = @[[UIColor blueColor],[UIColor purpleColor],[UIColor brownColor],[UIColor redColor]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -88,7 +88,7 @@
         tabBtn.titleLabel.font = tagFont;
         [tabBtn setTitleColor:_colorArray[idx+1] forState:UIControlStateNormal];
         if ([tag isEqualToString:@"官方"]) {
-            [tabBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+            [tabBtn setTitleColor:[UIColor colorWithRed:151/255.0 green:228/255.0 blue:55/255.0 alpha:1] forState:UIControlStateNormal];
         }
         
         tabBtn.layer.borderWidth = 0.5;

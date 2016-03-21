@@ -14,6 +14,7 @@
 #import "LikeIndexVC.h"
 #import "SquareListVC.h"
 #import "MoreIndexVC.h"
+#import <UMengAnalytics-NO-IDFA/MobClick.h>
 
 @interface AppDelegate ()
 
@@ -25,6 +26,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self _initUI];
+    
+    [MobClick startWithAppkey:KUMENG_TOKEN reportPolicy:BATCH   channelId:@""];//chinnelid==@"" AppStore
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
     
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     [self registPush];
@@ -50,7 +55,7 @@
     [[NSUserDefaults standardUserDefaults]setObject:token forKey:K_DeviceToken];
     //    [[NSUserDefaults standardUserDefaults]setObject:[APService registrationID] forKey:K_registJPushId];
     [[NSUserDefaults standardUserDefaults]synchronize];
-    YLog(@"devicetoken=%@",token);
+    YLog(@"devicetoken=%@",token); 
 }
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
     YLog(@"no device"); 
