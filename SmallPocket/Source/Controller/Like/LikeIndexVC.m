@@ -263,9 +263,11 @@
 }
 -(void)refreshData{
     NSDictionary *bdic = @{@"udid":[Util getDeveiceToken],@"type":_type};
-    [Util startActiciView:self.view];
+//    [Util startActiciView:self.view];
+    _hud = [MBProgressHUD showHUDAddedTo:self.scrollView animated:YES];
     [Api post:API_LIKE_LIST parameters:bdic completion:^(id data, NSError *err) {
-        [Util stopActiciView:self.view];
+//        [Util stopActiciView:self.view];
+        [_hud hide:YES];
         if (err) {
             return;
         }
@@ -273,6 +275,17 @@
         
         NSArray *array = dic[@"data"];
         NSLog(@"array=%ld",array.count);
+        if (array.count == 0) {
+            NSString *first = [[NSUserDefaults standardUserDefaults]objectForKey:KFIRSTLOAD];
+            if (![first isEqualToString:@"nofirst"]) {
+                NSLog(@"first load");
+                first = @"nofirst";
+                [[NSUserDefaults standardUserDefaults]setObject:first forKey:KFIRSTLOAD];
+                [[NSUserDefaults standardUserDefaults]synchronize];
+                [self refreshData];
+                return;
+            }
+        }
         for (NSDictionary *appDic in array) {
             LikeApps *app = [LikeApps findOrCreate:appDic];
             app.addtime = [NSNumber numberWithInteger:[[Util stringToDate:app.createtime] timeIntervalSinceReferenceDate]];

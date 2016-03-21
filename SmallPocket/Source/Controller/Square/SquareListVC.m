@@ -177,6 +177,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSInteger index = indexPath.row - 1;
+    Apps *app = self.apps[index];
+    NSDictionary *param = @{@"name":app.name,@"url":app.url};
+    OpenWebAppVC *webview = [Util createVCFromStoryboard:@"OpenWebAppVC"];
+    webview.param = param;
+    [self.navigationController pushViewController:webview animated:YES];
 }
 #pragma mark loaddata
 -(void)reloadData{
