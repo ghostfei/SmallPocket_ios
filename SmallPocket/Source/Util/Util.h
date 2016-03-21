@@ -37,6 +37,8 @@ typedef NS_ENUM(NSInteger,viewType){
 
 #define KUMENG_TOKEN @"5672872e67e58e5f0e001a36"
 #define K_DeviceToken @"K_DeviceToken"
+#define KFIRSTLOAD @"KFIRSTLOAD"
+
 #define ScreenW self.view.frame.size.width
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
