@@ -131,7 +131,8 @@
         
         PAGENUM =imgNum;
         
-        //定义PageController 设定总页数，当前页，定义当控件被用户操作时,要触发的动作。    _page.numberOfPages = PAGENUM;
+        //定义PageController 设定总页数，当前页，定义当控件被用户操作时,要触发的动作。
+        headCell.pageControll.numberOfPages = PAGENUM;
         headCell.pageControll.currentPage = 0;
         [headCell.pageControll addTarget:self action:@selector(pageTurn:) forControlEvents:UIControlEventValueChanged];
         
