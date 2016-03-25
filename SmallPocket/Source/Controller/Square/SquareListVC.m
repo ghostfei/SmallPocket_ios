@@ -350,10 +350,13 @@
         NSLog(@"dic=%@",dic);
         if ([dic[@"status"]integerValue] == 200) {
             app.downstatus = @1;
+            app.downnum = [NSNumber numberWithInteger:([app.downnum integerValue] + 1)];
             [app save];
             
             btn.enabled = NO;
+            [btn setTitle:[NSString stringWithFormat:@" %@",app.downnum] forState:UIControlStateNormal];
             [btn setImage:[UIImage imageNamed:@"s_down_ed"] forState:UIControlStateNormal];
+            
             
             [TSMessage showNotificationWithTitle:dic[@"msg"] type:TSMessageNotificationTypeSuccess];
             
