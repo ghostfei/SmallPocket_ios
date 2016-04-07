@@ -60,11 +60,12 @@
     self.tableView.footer = [Util getMJFooterTarget:self action:@selector(loadMoreData)];
     self.tableView.tableFooterView = [[UIView alloc]init];
     
-    UIBarButtonItem *rbi = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"btn_search_select"] style:UIBarButtonItemStylePlain target:self action:@selector(searchAc)];
-    self.navigationItem.rightBarButtonItem = rbi;
+    UIBarButtonItem *menu_btn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"btn_search_select"] style:UIBarButtonItemStylePlain target:self action:@selector(searchAc)];
+//    self.navigationItem.rightBarButtonItem = menu_btn;
     
-    UIBarButtonItem *lbi = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"left_type"] style:UIBarButtonItemStylePlain target:self action:@selector(showType)];
-    self.navigationItem.leftBarButtonItem = lbi;
+    UIBarButtonItem *search_btn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"left_type"] style:UIBarButtonItemStylePlain target:self action:@selector(showType)];
+//    self.navigationItem.leftBarButtonItem = lbi;
+    self.navigationItem.rightBarButtonItems = @[search_btn,menu_btn];
     
     UIBarButtonItem *backBar = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backBar;
@@ -82,7 +83,9 @@
     [_playTime invalidate];
     _typeView.hidden = YES;
 }
-
+-(BOOL)hidesBottomBarWhenPushed{
+    return YES;
+}
 -(void)scrollViewDidScroll:(UIScrollView *)typeScroll{
     if (typeScroll.contentOffset.y!=0) {
         _typeView.hidden = YES;

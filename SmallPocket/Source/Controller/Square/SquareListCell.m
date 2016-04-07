@@ -23,6 +23,8 @@
     _bgView.layer.masksToBounds = YES;
     
     _colorArray = @[[UIColor blueColor],[UIColor purpleColor],[UIColor brownColor],[UIColor redColor]];
+    
+//    _downBtn.titleLabel.font = [UIFont systemFontOfSize:10];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

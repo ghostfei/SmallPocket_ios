@@ -977,7 +977,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "89ac23d6-2796-4ded-9014-0dffdf809122";
+				PROVISIONING_PROFILE = "f3aae7f7-e100-4b5c-a7f8-29955557ff89";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1015,7 +1015,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "89ac23d6-2796-4ded-9014-0dffdf809122";
+				PROVISIONING_PROFILE = "f3aae7f7-e100-4b5c-a7f8-29955557ff89";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1044,7 +1044,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunyaoo.SmallPocket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "89ac23d6-2796-4ded-9014-0dffdf809122";
+				PROVISIONING_PROFILE = "f3aae7f7-e100-4b5c-a7f8-29955557ff89";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1072,7 +1072,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunyaoo.SmallPocket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "89ac23d6-2796-4ded-9014-0dffdf809122";
+				PROVISIONING_PROFILE = "f3aae7f7-e100-4b5c-a7f8-29955557ff89";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -1081,6 +1081,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "";
 				INFOPLIST_FILE = SmallPocketTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunyaoo.SmallPocketTests;
@@ -1094,6 +1095,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "";
 				INFOPLIST_FILE = SmallPocketTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunyaoo.SmallPocketTests;

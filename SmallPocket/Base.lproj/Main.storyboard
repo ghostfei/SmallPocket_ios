@@ -240,7 +240,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0sb-Tz-0vC" id="C9a-Wc-cKt">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="99.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7rH-H7-giu">
@@ -250,7 +250,7 @@
                                                     </connections>
                                                 </scrollView>
                                                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="1" translatesAutoresizingMaskIntoConstraints="NO" id="Gap-Rg-KT2">
-                                                    <rect key="frame" x="296.5" y="70.5" width="7" height="37"/>
+                                                    <rect key="frame" x="297" y="71" width="7" height="37"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="37" id="8Js-tz-ZRW"/>
                                                     </constraints>
@@ -276,7 +276,7 @@
                                         <rect key="frame" x="0.0" y="128" width="600" height="66"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="39z-zi-9hg" id="Wqr-XJ-wjt">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="65.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="66"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xl1-pv-IMy">
@@ -305,7 +305,7 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bq7-ZY-DDI">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Bq7-ZY-DDI">
                                                     <rect key="frame" x="532" y="8" width="60" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="80" id="21B-l1-CEs"/>
@@ -398,31 +398,33 @@
                                 </connections>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gnZ-6h-JYn">
-                                <rect key="frame" x="0.0" y="20" width="60" height="580"/>
+                                <rect key="frame" x="540" y="20" width="60" height="580"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gYu-wS-Ska">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="580"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="IXR-fK-kxJ"/>
+                                        </constraints>
                                     </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="gYu-wS-Ska" firstAttribute="top" secondItem="gnZ-6h-JYn" secondAttribute="top" id="5wW-a5-726"/>
+                                    <constraint firstItem="gYu-wS-Ska" firstAttribute="top" secondItem="gnZ-6h-JYn" secondAttribute="top" id="Awu-RX-fsu"/>
+                                    <constraint firstItem="gYu-wS-Ska" firstAttribute="leading" secondItem="gnZ-6h-JYn" secondAttribute="leading" id="BjD-1O-6fq"/>
                                     <constraint firstAttribute="width" constant="60" id="DnC-Y0-cfd"/>
-                                    <constraint firstAttribute="trailing" secondItem="gYu-wS-Ska" secondAttribute="trailing" id="FKD-Ql-VMV"/>
-                                    <constraint firstAttribute="bottom" secondItem="gYu-wS-Ska" secondAttribute="bottom" id="FNT-XD-7VO"/>
-                                    <constraint firstItem="gYu-wS-Ska" firstAttribute="leading" secondItem="gnZ-6h-JYn" secondAttribute="leading" id="uA5-XS-Boc"/>
+                                    <constraint firstAttribute="bottom" secondItem="gYu-wS-Ska" secondAttribute="bottom" id="HGv-fp-gSl"/>
+                                    <constraint firstAttribute="trailing" secondItem="gYu-wS-Ska" secondAttribute="trailing" id="OuO-a9-Hgr"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="gnZ-6h-JYn" firstAttribute="trailing" secondItem="ZXR-lY-SvL" secondAttribute="trailing" id="0EW-zJ-hC4"/>
                             <constraint firstItem="ZXR-lY-SvL" firstAttribute="leading" secondItem="nEJ-80-KlO" secondAttribute="leading" id="3C1-Fn-uoH"/>
+                            <constraint firstItem="aDS-GW-lBp" firstAttribute="top" secondItem="gnZ-6h-JYn" secondAttribute="bottom" id="3D4-mz-fVG"/>
                             <constraint firstItem="ZXR-lY-SvL" firstAttribute="top" secondItem="nEJ-80-KlO" secondAttribute="topMargin" id="BAY-mE-q4x"/>
                             <constraint firstAttribute="trailing" secondItem="ZXR-lY-SvL" secondAttribute="trailing" id="MkF-UE-xP4"/>
-                            <constraint firstItem="gnZ-6h-JYn" firstAttribute="bottom" secondItem="aDS-GW-lBp" secondAttribute="top" id="RhR-o0-WPM"/>
-                            <constraint firstItem="ZXR-lY-SvL" firstAttribute="leading" secondItem="gnZ-6h-JYn" secondAttribute="leading" id="hI5-Vp-4E7"/>
-                            <constraint firstItem="gnZ-6h-JYn" firstAttribute="top" secondItem="qWg-9X-UPs" secondAttribute="bottom" id="l0w-Zw-QoQ"/>
+                            <constraint firstItem="gnZ-6h-JYn" firstAttribute="top" secondItem="qWg-9X-UPs" secondAttribute="bottom" id="V1a-uI-3yI"/>
                             <constraint firstItem="aDS-GW-lBp" firstAttribute="top" secondItem="ZXR-lY-SvL" secondAttribute="bottom" id="rMN-oB-hqh"/>
                         </constraints>
                     </view>
