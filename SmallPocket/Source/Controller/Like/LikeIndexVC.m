@@ -230,9 +230,9 @@
     LikeApps *noapp = [LikeApps find:@{@"aid":@0}];
     [noapp delete];
     //判断查询type
-    NSDictionary *param = nil;
+    NSDictionary *param = @{@"is_del":@0};
     if(![_type isEqual:@0]){
-        param = @{@"atid":_type};
+        param = @{@"atid":_type,@"is_del":@0};
     }
     NSLog(@"type=%@",_type);
     [_dataArray addObjectsFromArray:[LikeApps where:param order:@{@"addtime":@"DESC"}]];
@@ -262,7 +262,7 @@
     [self createGridCell];
 }
 -(void)refreshData{
-    NSDictionary *bdic = @{@"udid":[Util getDeveiceToken],@"type":_type};
+    NSDictionary *bdic = @{@"udid":[Util getDeveiceToken],@"type":_type,@"apple":@1};
 //    [Util startActiciView:self.view];
     _hud = [MBProgressHUD showHUDAddedTo:self.scrollView animated:YES];
     [Api post:API_LIKE_LIST parameters:bdic completion:^(id data, NSError *err) {
@@ -274,7 +274,7 @@
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         
         NSArray *array = dic[@"data"];
-        NSLog(@"array=%ld",array.count);
+//        NSLog(@"array=%@",array);
         if (array.count == 0) {
             NSString *first = [[NSUserDefaults standardUserDefaults]objectForKey:KFIRSTLOAD];
             if (![first isEqualToString:@"nofirst"]) {
@@ -290,6 +290,9 @@
             LikeApps *app = [LikeApps findOrCreate:appDic];
             app.addtime = [NSNumber numberWithInteger:[[Util stringToDate:app.createtime] timeIntervalSinceReferenceDate]];
 //            YLog(@"app.createtime=%@ and addtime=%@",app.createtime,app.addtime);
+            
+                YLog(@"app.del=%@",app.is_del);
+            
             [app save];
         }
         [self refreshType];

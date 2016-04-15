@@ -18,6 +18,7 @@
 @dynamic addtime;
 @dynamic createtime;
 @dynamic url;
+@dynamic is_del;
 
 +(NSString *)primaryKey{
     return @"id";

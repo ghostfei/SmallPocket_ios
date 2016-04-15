@@ -241,6 +241,7 @@
 		AF6E649F1C92A51C0047E2A5 /* btn_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back@3x.png"; sourceTree = "<group>"; };
 		AF6E64A11C92AAAD0047E2A5 /* AdvListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvListCell.h; sourceTree = "<group>"; };
 		AF6E64A21C92AAAD0047E2A5 /* AdvListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvListCell.m; sourceTree = "<group>"; };
+		AF8494E11CC0C6F10069C0AA /* 1.3.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = 1.3.2.xcdatamodel; sourceTree = "<group>"; };
 		AF871DDE1C2BDEE40037AD41 /* tabbar_adv_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_adv_select@2x.png"; sourceTree = "<group>"; };
 		AF871DDF1C2BDEE40037AD41 /* tabbar_adv@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_adv@2x.png"; sourceTree = "<group>"; };
 		AF871DE01C2BDEE40037AD41 /* tabbar_like_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_like_select@2x.png"; sourceTree = "<group>"; };
@@ -1141,9 +1142,10 @@
 		AD4729E61C29AD5100F50EB8 /* SmallPocket.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				AF8494E11CC0C6F10069C0AA /* 1.3.2.xcdatamodel */,
 				AD4729E71C29AD5100F50EB8 /* SmallPocket.xcdatamodel */,
 			);
-			currentVersion = AD4729E71C29AD5100F50EB8 /* SmallPocket.xcdatamodel */;
+			currentVersion = AF8494E11CC0C6F10069C0AA /* 1.3.2.xcdatamodel */;
 			path = SmallPocket.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

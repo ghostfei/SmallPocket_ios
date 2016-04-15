@@ -21,5 +21,6 @@
 @property (nullable, nonatomic, retain) NSString *createtime;
 @property (nullable, nonatomic, retain) NSNumber *addtime;
 @property (nullable, nonatomic, retain) NSString *url;
+@property (nullable, nonatomic, retain) NSNumber *is_del;
 @end
  
